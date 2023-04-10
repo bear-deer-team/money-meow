@@ -9,5 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="background_color_1">#FD9299</color>
     <color name="background_color_2">#FFF5F5</color>
+    <color name="start_btn_color">#FFA0D4</color>
+    <color name="press_btn_color">#F26C8C</color>
     <color name="transparent_white">#80FFFFFF</color>
 </resources>
