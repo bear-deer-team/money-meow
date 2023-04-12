@@ -1,14 +1,14 @@
 package com.example.money_meow.category;
 
-public class category {
+public class Category {
     private String category_name;
     private int category_id;
 
-    public category() {
+    public Category() {
 
     }
 
-    public category(String category_name, int category_id) {
+    public Category(String category_name, int category_id) {
         this.category_id = category_id;
         this.category_name = category_name;
     }
