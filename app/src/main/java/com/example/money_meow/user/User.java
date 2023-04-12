@@ -1,10 +1,13 @@
 package com.example.money_meow.user;
 
+import com.example.money_meow.balance.Balance;
+
 public class User {
     private String name;
     private String userName;
     private String email;
     private String password;
+    private Balance balance;
 
     public User() {
 
@@ -15,6 +18,7 @@ public class User {
         this.userName = userName;
         this.email = email;
         this.password = password;
+        this.balance = new Balance();
     }
 
     public String getName() {
@@ -33,6 +37,10 @@ public class User {
         return password;
     }
 
+    public Balance getBalance() {
+        return balance;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -47,5 +55,9 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void setBalance(Balance balance) {
+        this.balance = balance;
     }
 }
