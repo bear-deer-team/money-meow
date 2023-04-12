@@ -15,6 +15,10 @@ public class MongoDBConnection {
     private static String Appid = "money-meow-iujqj";
     private static App app;
 
+    public static App getApp() {
+        return app;
+    }
+
     public static void connect(Context context) {
         Realm.init(context);
         app = new App(new AppConfiguration.Builder(Appid).build());

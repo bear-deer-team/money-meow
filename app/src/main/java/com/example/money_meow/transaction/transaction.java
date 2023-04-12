@@ -1,6 +1,6 @@
 package com.example.money_meow.transaction;
 
-import com.example.money_meow.category.Category;
+import com.example.money_meow.category.category;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -8,9 +8,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class Transaction {
+public class transaction {
     private int transaction_id;
-    private Category transaction_category;
+    private category transaction_category;
     private double transaction_amount;
     // thoi gian, hien chua nghi cach xu li
     // chac ep kieu
@@ -19,7 +19,7 @@ public class Transaction {
     private String transactionType;
 
     // tạo một transaction
-    public Transaction(int transaction_id, Category transaction_category, double transaction_amount,
+    public transaction(int transaction_id, category transaction_category, double transaction_amount,
                        Date transaction_time, String transaction_note) {
         this.transaction_id = transaction_id;
         this.transaction_category = transaction_category;
@@ -28,7 +28,7 @@ public class Transaction {
         this.transactionType = transaction_category.getCategoryType();
     }
     // lưu transaction vào database
-    public void saveToDatabase(Transaction a) {
+    public void saveToDatabase(transaction a) {
         //ket noi toi CSDl
         try {
             Connection cnt = DriverManager.getConnection("link database", "username", "password");
@@ -43,7 +43,7 @@ public class Transaction {
         }
     }
     //Hien thi thong tin trong transaction
-    public void display(Transaction a) {
+    public void display(transaction a) {
         // Lấy các thành phần giao diện
 
         // Cập nhật thông tin của giao dịch lên các thành phần giao diện
@@ -57,11 +57,11 @@ public class Transaction {
         this.transaction_id = transaction_id;
     }
 
-    public Category getTransaction_category() {
+    public category getTransaction_category() {
         return transaction_category;
     }
 
-    public void setTransaction_category(Category transaction_category) {
+    public void setTransaction_category(category transaction_category) {
         this.transaction_category = transaction_category;
     }
 

@@ -1,17 +1,17 @@
 package com.example.money_meow.category;
 
-public class Category {
+public class category {
     private String category_name;
     private int category_id;
 
     //INCOME or EXPENSE
     private String categoryType;
 
-    public Category() {
+    public category() {
 
     }
 
-    public Category(String category_name, int category_id) {
+    public category(String category_name, int category_id) {
         this.category_id = category_id;
         this.category_name = category_name;
     }
