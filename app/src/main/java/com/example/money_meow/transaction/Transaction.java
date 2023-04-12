@@ -16,6 +16,8 @@ public class Transaction {
     // chac ep kieu
     private Date transaction_time;
     private String transaction_note;
+    private String transactionType;
+
     // tạo một transaction
     public Transaction(int transaction_id, Category transaction_category, double transaction_amount,
                        Date transaction_time, String transaction_note) {
@@ -23,6 +25,7 @@ public class Transaction {
         this.transaction_category = transaction_category;
         this.transaction_time = transaction_time;
         this.transaction_amount = transaction_amount;
+        this.transactionType = transaction_category.getCategoryType();
     }
     // lưu transaction vào database
     public void saveToDatabase(Transaction a) {
@@ -84,5 +87,9 @@ public class Transaction {
 
     public void setTransaction_note(String transaction_note) {
         this.transaction_note = transaction_note;
+    }
+
+    public String getTransactionType() {
+        return transactionType;
     }
 }

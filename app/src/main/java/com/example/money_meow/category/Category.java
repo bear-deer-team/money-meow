@@ -4,6 +4,9 @@ public class Category {
     private String category_name;
     private int category_id;
 
+    //INCOME or EXPENSE
+    private String categoryType;
+
     public Category() {
 
     }
@@ -19,6 +22,10 @@ public class Category {
 
     public String getCategory_name() {
         return category_name;
+    }
+
+    public String getCategoryType() {
+        return categoryType;
     }
 
     @Override
