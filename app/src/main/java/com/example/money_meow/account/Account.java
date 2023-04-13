@@ -79,11 +79,12 @@ public class Account implements AddUserToDB {
     @Override
     public void addNewUserToDB(App app) {
         User user = app.currentUser();
+        System.out.println(user.getId());
         MongoClient mongoClient = user.getMongoClient("mongodb-atlas");
         MongoDatabase mongoDatabase = mongoClient.getDatabase("money-meow-db");
         MongoCollection mongoCollection = mongoDatabase.getCollection("account");
 
-        mongoCollection.insertOne(new Document("id", user.getId())
+        mongoCollection.insertOne(new Document("_id", user.getId())
                         .append("name", this.name)
                         .append("username", this.userName)
                         .append("email", this.email)

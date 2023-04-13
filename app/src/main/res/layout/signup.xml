@@ -48,11 +48,11 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingBottom="15dp"
+                app:errorEnabled="true"
+                android:id="@+id/name"
                 >
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Name"
@@ -63,10 +63,10 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingBottom="15dp">
+                app:errorEnabled="true"
+                android:id="@+id/user_name">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/user_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="User Name" />
@@ -76,10 +76,10 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingBottom="15dp">
+                app:errorEnabled="true"
+                android:id="@+id/email">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Email"
@@ -90,10 +90,12 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingBottom="15dp">
+                app:errorEnabled="true"
+                app:passwordToggleEnabled="true"
+                android:id="@+id/password"
+                >
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="8"
@@ -104,10 +106,13 @@
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                app:errorEnabled="true"
+                app:passwordToggleEnabled="true"
+                android:id="@+id/cf_password"
+                >
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/cf_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="8"

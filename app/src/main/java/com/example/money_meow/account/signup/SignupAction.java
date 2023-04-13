@@ -11,16 +11,17 @@ import com.example.money_meow.R;
 import com.example.money_meow.database.MongoDBConnection;
 import com.example.money_meow.account.Account;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import io.realm.mongodb.mongo.MongoCollection;
 
 public class SignupAction extends AppCompatActivity {
     private Account account;
-    TextInputEditText name;
-    TextInputEditText userName;
-    TextInputEditText password;
-    TextInputEditText confirmPassword;
-    TextInputEditText email;
+    TextInputLayout name;
+    TextInputLayout userName;
+    TextInputLayout password;
+    TextInputLayout confirmPassword;
+    TextInputLayout email;
 
 
     Button signUpBtn;
@@ -32,11 +33,11 @@ public class SignupAction extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signup);
 
-        name = (TextInputEditText) findViewById(R.id.name);
-        userName = (TextInputEditText) findViewById(R.id.user_name);
-        password = (TextInputEditText) findViewById(R.id.password);
-        confirmPassword = (TextInputEditText) findViewById(R.id.cf_password);
-        email = (TextInputEditText) findViewById(R.id.email);
+        name = (TextInputLayout) findViewById(R.id.name);
+        userName = (TextInputLayout) findViewById(R.id.user_name);
+        password = (TextInputLayout) findViewById(R.id.password);
+        confirmPassword = (TextInputLayout) findViewById(R.id.cf_password);
+        email = (TextInputLayout) findViewById(R.id.email);
 
 
         signUpBtn = (Button) findViewById(R.id.signup_btn);
@@ -47,11 +48,22 @@ public class SignupAction extends AppCompatActivity {
         signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                account = new Account(name.getText().toString(), userName.getText().toString(), email.getText().toString(), password.getText().toString());
+                System.out.println(name.getEditText().getText().toString());
+                if(AccountValidation.isNameInvalid(name)
+                | AccountValidation.isUserNameInvalid(userName)
+                | AccountValidation.isEmailInvalid(email)
+                | AccountValidation.isPasswordInvalid(password)
+                | AccountValidation.isConfirmPasswordInvalid(confirmPassword, password)) {
+                    return;
+                }
+
+                account = new Account(name.getEditText().getText().toString(), userName.getEditText().getText().toString(),
+                        email.getEditText().getText().toString(), password.getEditText().getText().toString());
                 MongoDBConnection.connect(SignupAction.this);
                 account.addNewUserToDB(MongoDBConnection.getApp());
             }
         });
+
 
 
     }

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">money-meow</string>
+    <string name="required">Required</string>
 </resources>
