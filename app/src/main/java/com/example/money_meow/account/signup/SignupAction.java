@@ -60,7 +60,7 @@ public class SignupAction extends AppCompatActivity {
                 account = new Account(name.getEditText().getText().toString(), userName.getEditText().getText().toString(),
                         email.getEditText().getText().toString(), password.getEditText().getText().toString());
                 MongoDBConnection.connect(SignupAction.this);
-                account.addNewUserToDB(MongoDBConnection.getApp());
+                account.addNewUserToDB();
             }
         });
 

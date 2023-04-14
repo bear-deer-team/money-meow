@@ -1,21 +1,12 @@
 package com.example.money_meow.account;
 
 import android.util.Log;
-import android.widget.Toast;
 
-import com.example.money_meow.account.signup.SignupAction;
 import com.example.money_meow.balance.Balance;
 import com.example.money_meow.database.AddUserToDB;
-import com.example.money_meow.database.MongoDBConnection;
+import com.example.money_meow.database.MongoDBInsert;
 
 import org.bson.Document;
-
-import io.realm.mongodb.App;
-import io.realm.mongodb.User;
-import io.realm.mongodb.mongo.MongoClient;
-import io.realm.mongodb.mongo.MongoCollection;
-import io.realm.mongodb.mongo.MongoDatabase;
-
 
 public class Account implements AddUserToDB {
     private String name;
@@ -77,28 +68,14 @@ public class Account implements AddUserToDB {
     }
 
     @Override
-    public void addNewUserToDB(App app) {
-        User user = app.currentUser();
-        MongoClient mongoClient = user.getMongoClient("mongodb-atlas");
-        MongoDatabase mongoDatabase = mongoClient.getDatabase("MoneyMeow");
-        MongoCollection mongoCollection = mongoDatabase.getCollection("users");
-
-        mongoCollection.insertOne(new Document()
+    public void addNewUserToDB() {
+        MongoDBInsert.insertOne("MoneyMeow",
+                        "users",
+                        new Document()
                         .append("name", this.name)
                         .append("username", this.userName)
                         .append("email", this.email)
                         .append("password", this.password)
-                        .append("balance", this.balance.getAmount()))
-                        .getAsync(result -> {
-            if(result.isSuccess())
-            {
-                Log.v("Data","Data Inserted Successfully");
-            }
-            else
-            {
-                Log.v("Data","Error:"+result.getError().toString());
-            }
-        });
-        //Toast.makeText(getApplicationContext(),"Login Succesful",Toast.LENGTH_LONG).show();
+                        .append("balance", this.balance.getAmount()));
     }
 }
