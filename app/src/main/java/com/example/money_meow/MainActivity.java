@@ -7,8 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.money_meow.account.signup.SignupAction;
-
+import com.example.money_meow.account.login.LoginAction;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         start_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, SignupAction.class);
+                Intent intent = new Intent(MainActivity.this, LoginAction.class);
                 startActivity(intent);
             }
         });

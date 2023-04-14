@@ -79,12 +79,11 @@ public class Account implements AddUserToDB {
     @Override
     public void addNewUserToDB(App app) {
         User user = app.currentUser();
-        System.out.println(user.getId());
         MongoClient mongoClient = user.getMongoClient("mongodb-atlas");
-        MongoDatabase mongoDatabase = mongoClient.getDatabase("money-meow-db");
-        MongoCollection mongoCollection = mongoDatabase.getCollection("account");
+        MongoDatabase mongoDatabase = mongoClient.getDatabase("MoneyMeow");
+        MongoCollection mongoCollection = mongoDatabase.getCollection("users");
 
-        mongoCollection.insertOne(new Document("_id", user.getId())
+        mongoCollection.insertOne(new Document()
                         .append("name", this.name)
                         .append("username", this.userName)
                         .append("email", this.email)
@@ -101,6 +100,5 @@ public class Account implements AddUserToDB {
             }
         });
         //Toast.makeText(getApplicationContext(),"Login Succesful",Toast.LENGTH_LONG).show();
-
     }
 }

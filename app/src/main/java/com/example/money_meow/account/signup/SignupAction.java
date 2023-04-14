@@ -1,5 +1,6 @@
 package com.example.money_meow.account.signup;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -7,13 +8,13 @@ import android.widget.Button;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.money_meow.MainActivity;
 import com.example.money_meow.R;
+import com.example.money_meow.account.login.LoginAction;
 import com.example.money_meow.database.MongoDBConnection;
 import com.example.money_meow.account.Account;
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
-import io.realm.mongodb.mongo.MongoCollection;
 
 public class SignupAction extends AppCompatActivity {
     private Account account;
@@ -48,14 +49,13 @@ public class SignupAction extends AppCompatActivity {
         signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println(name.getEditText().getText().toString());
-                if(AccountValidation.isNameInvalid(name)
-                | AccountValidation.isUserNameInvalid(userName)
-                | AccountValidation.isEmailInvalid(email)
-                | AccountValidation.isPasswordInvalid(password)
-                | AccountValidation.isConfirmPasswordInvalid(confirmPassword, password)) {
-                    return;
-                }
+//                if(AccountValidation.isNameInvalid(name)
+//                | AccountValidation.isUserNameInvalid(userName)
+//                | AccountValidation.isEmailInvalid(email)
+//                | AccountValidation.isPasswordInvalid(password)
+//                | AccountValidation.isConfirmPasswordInvalid(confirmPassword, password)) {
+//                    return;
+//                }
 
                 account = new Account(name.getEditText().getText().toString(), userName.getEditText().getText().toString(),
                         email.getEditText().getText().toString(), password.getEditText().getText().toString());
@@ -64,6 +64,13 @@ public class SignupAction extends AppCompatActivity {
             }
         });
 
+        loginNavig.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SignupAction.this, LoginAction.class);
+                startActivity(intent);
+            }
+        });
 
 
     }

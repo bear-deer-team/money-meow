@@ -12,8 +12,9 @@ import io.realm.mongodb.Credentials;
 import io.realm.mongodb.User;
 
 public class MongoDBConnection {
-    private static final String Appid = "money-meow-rloen";
+    private static final String Appid = "money-meow-jufwk";
     private static App app;
+    private static User user;
 
     public static App getApp() {
         return app;
