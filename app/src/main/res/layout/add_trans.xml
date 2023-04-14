@@ -1,6 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/background_color_1">
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:src="@drawable/main_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="142dp"
+        tools:ignore="MissingConstraints" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/imageView3"
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/task_bar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent">
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:background="@drawable/circle"
+        app:layout_constraintBottom_toBottomOf="@+id/AcptTransBtn"
+        app:layout_constraintEnd_toEndOf="@+id/AcptTransBtn"
+        app:layout_constraintStart_toStartOf="@+id/AcptTransBtn"
+        app:layout_constraintTop_toTopOf="@+id/AcptTransBtn"
+        app:layout_constraintVertical_bias="0.986" />
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/AcptTransBtn"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:background="@drawable/done"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.472"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.466" />
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/ReturnHomeBtn"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/undo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.04"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.466" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ChooseCategoryBtn"
+        android:layout_width="272dp"
+        android:layout_height="67dp"
+        android:background="@drawable/rectangle"
+        android:layout_below="@id/ChooseCategoryView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.45">
+<!--        <ListView-->
+<!--            android:id="@+id/listView"-->
+<!--            android:layout_width="272dp"-->
+<!--            android:layout_height="100dp"-->
+<!--            android:layout_marginTop="8dp"-->
+<!--            android:layout_marginBottom="8dp"-->
+<!--            android:scrollbars="vertical" />-->
+        <TextView
+            android:id="@+id/ChooseCategoryView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Chọn phân loại:"
+            android:textSize="15dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/ChooseTimeBtn"
+        android:layout_width="272dp"
+        android:layout_height="67dp"
+        android:background="@drawable/rectangle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.6" />
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/EnterAmountBtn"
+        android:layout_width="272dp"
+        android:layout_height="67dp"
+        android:background="@drawable/rectangle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.75" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
