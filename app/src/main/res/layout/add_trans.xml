@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_color_1">
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="fill_parent"
@@ -13,8 +14,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="142dp"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="142dp" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/imageView3"
@@ -59,53 +60,140 @@
         app:layout_constraintVertical_bias="0.466" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <TextView
+        android:id="@+id/ChooseCategoryView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Chọn phân loại"
+        android:textSize="15dp"
+        app:layout_constraintStart_toStartOf = "@id/ChooseCategoryBtn"
+        app:layout_constraintBottom_toTopOf = "@id/ChooseCategoryBtn" />
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/ChooseCategoryBtn"
-        android:layout_width="272dp"
-        android:layout_height="67dp"
-        android:background="@drawable/rectangle"
-        android:layout_below="@id/ChooseCategoryView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.45">
-<!--        <ListView-->
-<!--            android:id="@+id/listView"-->
-<!--            android:layout_width="272dp"-->
-<!--            android:layout_height="100dp"-->
-<!--            android:layout_marginTop="8dp"-->
-<!--            android:layout_marginBottom="8dp"-->
-<!--            android:scrollbars="vertical" />-->
-        <TextView
-            android:id="@+id/ChooseCategoryView"
-            android:layout_width="wrap_content"
+            android:id="@+id/ChooseCategoryBtn"
+            android:layout_width="272dp"
+            android:layout_height="67dp"
+            android:background="@drawable/rectangle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.45" >
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/job"
+            app:layout_constraintStart_toStartOf="@id/ChooseCategoryBtn"
+            tools:layout_editor_absoluteY="15dp"/>
+        <ListView
+            android:id="@+id/list_view_category"
+            android:layout_width="272dp"
             android:layout_height="wrap_content"
-            android:text="Chọn phân loại:"
-            android:textSize="15dp" />
+            android:scrollbarStyle="outsideOverlay"
+            android:scrollbars="vertical"
+            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/ChooseTimeBtn"
-        android:layout_width="272dp"
-        android:layout_height="67dp"
-        android:background="@drawable/rectangle"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.6" />
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/EnterAmountBtn"
-        android:layout_width="272dp"
-        android:layout_height="67dp"
-        android:background="@drawable/rectangle"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.75" />
 
+
+    <TextView
+        android:id="@+id/ChooseCategoryView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Chọn thời gian"
+        android:textSize="15dp"
+        app:layout_constraintStart_toStartOf = "@id/ChooseTimeBtn"
+        app:layout_constraintBottom_toTopOf = "@id/ChooseTimeBtn" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ChooseTimeBtn"
+            android:layout_width="272dp"
+            android:layout_height="67dp"
+            android:background="@drawable/rectangle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.6">
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/clock"
+            app:layout_constraintStart_toStartOf="@id/ChooseTimeBtn"
+            tools:layout_editor_absoluteY="15dp"/>
+        <EditText
+            android:id="@+id/edit_text_amount"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginLeft="60dp"
+            android:hint="DD/MM/YY"
+            android:inputType="datetime"
+            android:backgroundTint="@android:color/transparent"
+            android:maxLines="1"
+            android:textSize="20dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="@id/ChooseTimeBtn"
+            tools:layout_editor_absoluteY="7dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    <TextView
+        android:id="@+id/ChooseCategoryView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nhập số tiền"
+        android:textSize="15dp"
+        app:layout_constraintStart_toStartOf = "@id/EnterAmountBtn"
+        app:layout_constraintBottom_toTopOf = "@id/EnterAmountBtn" />
+    <TextView
+        android:id="@+id/ChooseCategoryView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="*Lưu ý: Số tiền nhập không quá số dư"
+        android:textColor="#F51010"
+        android:textSize="12dp"
+        android:layout_marginStart="20dp"
+        app:layout_constraintStart_toStartOf = "@id/EnterAmountBtn"
+        app:layout_constraintTop_toBottomOf = "@id/EnterAmountBtn" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/EnterAmountBtn"
+            android:layout_width="272dp"
+            android:layout_height="67dp"
+            android:background="@drawable/rectangle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.75">
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/currency"
+            app:layout_constraintStart_toStartOf="@id/EnterAmountBtn"
+            tools:layout_editor_absoluteY="15dp"/>
+        <EditText
+            android:id="@+id/edit_text_amount"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginLeft="60dp"
+            android:hint="0.000.000"
+            android:inputType="number"
+            android:backgroundTint="@android:color/transparent"
+            android:maxLines="1"
+            android:textSize="20dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="@id/EnterAmountBtn"
+            tools:layout_editor_absoluteY="7dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
