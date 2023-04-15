@@ -69,6 +69,7 @@ public class Account implements AddUserToDB {
 
     @Override
     public void addNewUserToDB() {
+
         MongoDBInsert.insertOne("MoneyMeow",
                         "users",
                         new Document()
