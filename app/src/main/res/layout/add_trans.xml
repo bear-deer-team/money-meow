@@ -61,7 +61,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
-        android:id="@+id/ChooseCategoryView"
+        android:id="@+id/ChooseCategoryTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Chọn phân loại"
@@ -84,21 +84,22 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
             android:background="@drawable/job"
             app:layout_constraintStart_toStartOf="@id/ChooseCategoryBtn"
             tools:layout_editor_absoluteY="15dp"/>
-        <ListView
-            android:id="@+id/list_view_category"
-            android:layout_width="272dp"
-            android:layout_height="wrap_content"
-            android:scrollbarStyle="outsideOverlay"
-            android:scrollbars="vertical"
-            app:layout_constraintStart_toStartOf="parent" />
+<!--        <ListView-->
+<!--            android:id="@+id/list_view_category"-->
+<!--            android:layout_width="272dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:scrollbarStyle="outsideOverlay"-->
+<!--            android:scrollbars="vertical"-->
+<!--            app:layout_constraintStart_toStartOf="parent" />-->
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <TextView
-        android:id="@+id/ChooseCategoryView"
+        android:id="@+id/ChooseTimeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Chọn thời gian"
@@ -117,15 +118,16 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.6">
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/imageView5"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
             android:background="@drawable/clock"
             app:layout_constraintStart_toStartOf="@id/ChooseTimeBtn"
-            tools:layout_editor_absoluteY="15dp"/>
+            tools:layout_editor_absoluteY="15dp" />
         <EditText
-            android:id="@+id/edit_text_amount"
+            android:id="@+id/edit_text_date"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="60dp"
@@ -144,7 +146,7 @@
 
 
     <TextView
-        android:id="@+id/ChooseCategoryView"
+        android:id="@+id/EnterAmountTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Nhập số tiền"
@@ -159,6 +161,7 @@
         android:textColor="#F51010"
         android:textSize="12dp"
         android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
         app:layout_constraintStart_toStartOf = "@id/EnterAmountBtn"
         app:layout_constraintTop_toBottomOf = "@id/EnterAmountBtn" />
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -173,13 +176,14 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.75">
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/imageView6"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
             android:background="@drawable/currency"
             app:layout_constraintStart_toStartOf="@id/EnterAmountBtn"
-            tools:layout_editor_absoluteY="15dp"/>
+            tools:layout_editor_absoluteY="15dp" />
         <EditText
             android:id="@+id/edit_text_amount"
             android:layout_width="150dp"
