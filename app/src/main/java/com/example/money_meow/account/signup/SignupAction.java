@@ -49,17 +49,18 @@ public class SignupAction extends AppCompatActivity {
         signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                if(AccountValidation.isNameInvalid(name)
-//                | AccountValidation.isUserNameInvalid(userName)
-//                | AccountValidation.isEmailInvalid(email)
-//                | AccountValidation.isPasswordInvalid(password)
-//                | AccountValidation.isConfirmPasswordInvalid(confirmPassword, password)) {
-//                    return;
-//                }
+                MongoDBConnection.connect(SignupAction.this);
+
+                if(AccountValidation.isNameInvalid(name)
+                | AccountValidation.isUserNameInvalid(userName)
+                | AccountValidation.isEmailInvalid(email)
+                | AccountValidation.isPasswordInvalid(password)
+                | AccountValidation.isConfirmPasswordInvalid(confirmPassword, password)) {
+                    return;
+                }
 
                 account = new Account(name.getEditText().getText().toString(), userName.getEditText().getText().toString(),
                         email.getEditText().getText().toString(), password.getEditText().getText().toString());
-                MongoDBConnection.connect(SignupAction.this);
                 account.addNewUserToDB();
             }
         });
