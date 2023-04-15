@@ -49,7 +49,7 @@ public class SignupAction extends AppCompatActivity {
         signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MongoDBConnection.connect(SignupAction.this);
+                MongoDBConnection.connect();
 
                 if(AccountValidation.isNameInvalid(name)
                 | AccountValidation.isUserNameInvalid(userName)

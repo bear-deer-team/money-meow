@@ -12,6 +12,7 @@ public class AccountValidation {
             valInput.setError("This field mustn't be empty!");
             return true;
         } else {
+            valInput.setError(null);
             return false;
         }
     }
@@ -39,13 +40,14 @@ public class AccountValidation {
             valInput.setError("User name has existed!");
             return true;
         } else {
+            valInput.setError(null);
             return false;
         }
     }
 
     public static boolean isEmailInvalid(TextInputLayout valInput) {
         String val = valInput.getEditText().getText().toString();
-        String emailRegex = "^[a-z0-9]+@[a-z]+\\.[a-z]{2,3}S";
+        String emailRegex = "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$";
 
         if (val.isEmpty()) {
             valInput.setError("This field mustn't be empty!");
@@ -54,6 +56,7 @@ public class AccountValidation {
             valInput.setError("Email format is invalid!");
             return true;
         } else {
+            valInput.setError(null);
             return false;
         }
     }
@@ -71,6 +74,7 @@ public class AccountValidation {
                     "and uppercase letters and special characters");
             return true;
         } else {
+            valInput.setError(null);
             return false;
         }
     }
@@ -86,6 +90,7 @@ public class AccountValidation {
             cfPwdInput.setError("Confirm Password doesn't match password.");
             return true;
         } else {
+            cfPwdInput.setError(null);
             return false;
         }
     }
