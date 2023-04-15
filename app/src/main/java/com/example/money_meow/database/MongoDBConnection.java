@@ -22,7 +22,7 @@ public class MongoDBConnection {
     public static void connect() {
 
         app = new App(new AppConfiguration.Builder(Appid).build());
-        app.loginAsync(Credentials.emailPassword("haibaraaicute@gmail.com", "123456"), new App.Callback<User>() {
+        app.loginAsync(Credentials.anonymous(), new App.Callback<User>() {
             @Override
             public void onResult(App.Result<User> result) {
                 if(result.isSuccess())

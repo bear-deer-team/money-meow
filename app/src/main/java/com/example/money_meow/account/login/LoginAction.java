@@ -13,6 +13,7 @@ import com.example.money_meow.R;
 import com.example.money_meow.account.Account;
 import com.example.money_meow.account.signup.SignupAction;
 import com.example.money_meow.database.MongoDBConnection;
+import com.example.money_meow.home.Home;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class LoginAction extends AppCompatActivity {
@@ -52,7 +53,8 @@ public class LoginAction extends AppCompatActivity {
                     }
                 }
 
-                System.out.println("Login!");
+                Intent intent = new Intent(LoginAction.this, Home.class);
+                startActivity(intent);
             }
         });
 

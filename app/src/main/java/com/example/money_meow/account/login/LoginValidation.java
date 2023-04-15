@@ -1,5 +1,6 @@
 package com.example.money_meow.account.login;
 
+import com.example.money_meow.account.PasswordEncryption;
 import com.example.money_meow.database.MongoDBQuery;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -23,7 +24,7 @@ public class LoginValidation {
 
         Document userInfor = MongoDBQuery.queryOne("MoneyMeow", "users", new Document("username", username.getEditText().getText().toString()));
 
-        if (!val.equals(userInfor.getString("password"))) {
+        if (!PasswordEncryption.encrypt(val).equals(userInfor.getString("password"))) {
             valInput.setError("Password is incorrect!");
             return true;
         } else {

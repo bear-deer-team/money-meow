@@ -2,6 +2,7 @@ package com.example.money_meow.account.signup;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.View;
 import android.widget.Button;
 
@@ -10,9 +11,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.money_meow.MainActivity;
 import com.example.money_meow.R;
+import com.example.money_meow.account.PasswordEncryption;
 import com.example.money_meow.account.login.LoginAction;
 import com.example.money_meow.database.MongoDBConnection;
 import com.example.money_meow.account.Account;
+import com.example.money_meow.home.Home;
 import com.google.android.material.textfield.TextInputLayout;
 
 
@@ -45,6 +48,8 @@ public class SignupAction extends AppCompatActivity {
         loginNavig = (Button) findViewById(R.id.login_btn);
 
 
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
 
         signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,8 +65,11 @@ public class SignupAction extends AppCompatActivity {
                 }
 
                 account = new Account(name.getEditText().getText().toString(), userName.getEditText().getText().toString(),
-                        email.getEditText().getText().toString(), password.getEditText().getText().toString());
+                        email.getEditText().getText().toString(), PasswordEncryption.encrypt(password.getEditText().getText().toString()));
                 account.addNewUserToDB();
+
+                Intent intent = new Intent(SignupAction.this, Home.class);
+                startActivity(intent);
             }
         });
 
