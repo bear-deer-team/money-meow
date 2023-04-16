@@ -5,6 +5,7 @@ import android.os.Build;
 import androidx.annotation.RequiresApi;
 
 import com.example.money_meow.category.Category;
+import com.example.money_meow.database.CategoryQuery;
 import com.example.money_meow.database.MongoDBInsert;
 
 import org.bson.Document;
@@ -29,6 +30,7 @@ public class Transaction {
 
     public Transaction(String name, double transactionAmount, String userName, Date transactionTime, String transactionNote, String transactionType) {
         this.name = name;
+        this.transactionCategory = CategoryQuery.FindByName(name);
         this.transactionAmount = transactionAmount;
         this.userName = userName;
         this.transactionTime = transactionTime;

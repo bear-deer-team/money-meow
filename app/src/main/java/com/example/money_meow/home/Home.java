@@ -24,7 +24,7 @@ public class Home extends AppCompatActivity {
         rcvHistory = findViewById(R.id.historylist);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this,1);
         rcvHistory.setLayoutManager(gridLayoutManager);
-        HistoryList historyList = new HistoryList(getHistoryList(),this);
+        HistoryList historyList = new HistoryList(TransactionQuery.FindByUserName("test"),this);
         rcvHistory.setAdapter(historyList);
         addTransBtn = findViewById(R.id.AddTransBtn);
         infoBtn = findViewById(R.id.InfoBtn);
@@ -35,13 +35,4 @@ public class Home extends AppCompatActivity {
 
     }
 
-    private List<Transaction> getHistoryList() {
-        //List<Transaction> list1 = new ArrayList<>(TransactionQuery.FindByUserName("test"));
-        List<Transaction> list2 = new ArrayList<>();
-//        for(int i=0;i<5;i++){
-//            list2.add(list1.get(i));
-//        }
-        list2.add(new Transaction("test", CategoryQuery.FindByName("food"),12,""));
-        return list2;
-    }
 }
