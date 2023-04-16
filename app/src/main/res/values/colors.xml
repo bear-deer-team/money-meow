@@ -13,4 +13,5 @@
     <color name="press_btn_color">#F26C8C</color>
     <color name="transparent_white">#80FFFFFF</color>
     <color name="helper_text">#FF000000</color>
+    <color name="red">#FA4848</color>
 </resources>

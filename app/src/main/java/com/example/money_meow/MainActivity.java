@@ -10,6 +10,7 @@ import android.widget.Button;
 
 import com.example.money_meow.account.login.LoginAction;
 import com.example.money_meow.account.signup.SignupAction;
+import com.example.money_meow.home.Home;
 
 import io.realm.Realm;
 
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         start_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, SignupAction.class);
+                Intent intent = new Intent(MainActivity.this, Home.class);
                 startActivity(intent);
             }
         });

@@ -1,46 +1,63 @@
 package com.example.money_meow.transaction;
 
-import com.example.money_meow.category.Category;
+import android.os.Build;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import androidx.annotation.RequiresApi;
+
+import com.example.money_meow.category.Category;
+import com.example.money_meow.database.MongoDBInsert;
+
+import org.bson.Document;
+
+
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 public class Transaction {
-    private int transactionID;
+
     private Category transactionCategory;
+
     private double transactionAmount;
+    private String userName;
+    private String name;
     // thoi gian, hien chua nghi cach xu li
     // chac ep kieu
     private Date transactionTime;
     private String transactionNote;
     private String transactionType;
 
-    // tạo một transaction
-    public Transaction(int transactionID, Category transactionCategory, double transactionAmount,
-                       Date transactionTime, String transactionNote) {
-        this.transactionID = transactionID;
-        this.transactionCategory = transactionCategory;
-        this.transactionTime = transactionTime;
+    public Transaction(String name, double transactionAmount, String userName, Date transactionTime, String transactionNote, String transactionType) {
+        this.name = name;
         this.transactionAmount = transactionAmount;
+        this.userName = userName;
+        this.transactionTime = transactionTime;
+        this.transactionNote = transactionNote;
+        this.transactionType = transactionType;
+    }
+
+    // tạo một transaction
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public Transaction(String userName,Category transactionCategory, double transactionAmount, String transactionNote) {
+        this.transactionCategory = transactionCategory;
+        this.transactionTime = new Date();
+        this.userName = userName;
+        this.transactionAmount = transactionAmount;
+        this.transactionNote = transactionNote;
         this.transactionType = transactionCategory.getCategoryType();
     }
     // lưu transaction vào database
     public void saveToDatabase(Transaction a) {
         //ket noi toi CSDl
-        try {
-            Connection cnt = DriverManager.getConnection("link database", "username", "password");
-            PreparedStatement stmt = cnt.prepareStatement("INSERT INTO transactions (transactionID, transactionCategory, transactionAmount, transactionTime, transactionNote) VALUES (?, ?, ?, ?, ?)");
-            stmt.setInt(1, a.getTransactionID());
-            stmt.setString(2, a.getTransactionCategory().getCategoryName());
-            stmt.setDouble(3, a.getTransactionAmount());
-            stmt.setDate(4, a.getTransactionTime());
-            stmt.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+
+        MongoDBInsert.insertOne("MoneyMeow","transactions",new Document()
+                .append("userName",a.userName)
+                .append("name",a.transactionCategory)
+                .append("type",a.transactionType)
+                .append("amount",a.transactionAmount)
+                .append("note",a.transactionNote)
+                .append("date", a.transactionTime));
+
     }
     //Hien thi thong tin trong transaction
     public void display(Transaction a) {
@@ -49,13 +66,9 @@ public class Transaction {
         // Cập nhật thông tin của giao dịch lên các thành phần giao diện
 
     }
-    public int getTransactionID() {
-        return transactionID;
-    }
 
-    public void setTransactionID(int transactionID) {
-        this.transactionID = transactionID;
-    }
+
+
 
     public Category getTransactionCategory() {
         return transactionCategory;
@@ -67,6 +80,11 @@ public class Transaction {
 
     public Date getTransactionTime() {
         return transactionTime;
+    }
+    public String formatDate(){
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String formattedDate = formatter.format(this.transactionTime);
+        return formattedDate;
     }
 
     public void setTransactionTime(Date transactionTime) {
