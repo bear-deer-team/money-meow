@@ -43,6 +43,7 @@ public class LoginAction extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 MongoDBConnection.connect();
+                System.out.println(MongoDBConnection.getApp().currentUser());
 
                 if (LoginValidation.isUsernameValid(username) ) {
                     password.getEditText().setText("");

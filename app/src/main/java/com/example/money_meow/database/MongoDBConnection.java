@@ -45,6 +45,7 @@ public class MongoDBConnection {
 
     public static MongoCollection<Document> accessDatabase(String database, String collection) {
         if (!MongoDBConnection.getApp().currentUser().isLoggedIn()) {
+            Log.v("User", "User is automaticly logout");
             MongoDBConnection.connect();
         }
 
