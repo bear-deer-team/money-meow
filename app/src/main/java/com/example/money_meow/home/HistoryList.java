@@ -1,6 +1,7 @@
 package com.example.money_meow.home;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,7 +44,17 @@ public class HistoryList extends RecyclerView.Adapter<HistoryList.TransactionVie
             holder.categoryImg.setImageResource(transaction.getTransactionCategory().getImage(this.context));
             holder.name.setText(transaction.getTransactionCategory().getCategoryName());
             holder.date.setText(transaction.formatDate());
-            holder.amount.setText(Double.toString(transaction.getTransactionAmount()));
+            String amountColor = new String();
+            if(transaction.getTransactionType().equals("income")){
+                amountColor += "+$" + Double.toString(transaction.getTransactionAmount());
+                holder.amount.setText(amountColor);
+                holder.amount.setTextColor(Color.rgb(0,255,0));
+            }
+            else {
+                amountColor += "-$" + Double.toString(transaction.getTransactionAmount());
+                holder.amount.setText(amountColor);
+                holder.amount.setTextColor(Color.rgb(255,0,0));
+            }
         }
     }
 

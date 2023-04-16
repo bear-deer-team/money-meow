@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="15dp"
-    android:layout_margin="15dp"
+    android:layout_margin="5dp"
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -63,7 +63,7 @@
             android:gravity="right"
             android:text="-$ 90"
             android:textColor="@color/red"
-            android:textSize="40dp"
+            android:textSize="30dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"

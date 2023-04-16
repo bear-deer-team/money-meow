@@ -9,7 +9,7 @@ public class CategoryQuery {
     //lấy kết quả tìm kiếm là document chuyển sang Category
     public static Category FindByName(String name){
        Document categoryDoc = new Document(MongoDBQuery.queryOne("MoneyMeow","category",new Document("name",name)));
-       Category category = new Category(categoryDoc.get("name",String.class),categoryDoc.get("type",String.class));
+       Category category = new Category(categoryDoc.getString("name"),categoryDoc.getString("type"));
        return category;
     }
 }
