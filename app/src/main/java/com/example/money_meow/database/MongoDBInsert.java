@@ -13,10 +13,7 @@ import io.realm.mongodb.mongo.MongoDatabase;
 
 public class MongoDBInsert {
     public static void insertOne(String database, String collection, Document document) {
-        User user = MongoDBConnection.getApp().currentUser();
-        MongoClient mongoClient = user.getMongoClient("mongodb-atlas");
-        MongoDatabase mongoDatabase = mongoClient.getDatabase(database);
-        MongoCollection mongoCollection = mongoDatabase.getCollection(collection);
+        MongoCollection<Document> mongoCollection = MongoDBConnection.accessDatabase(database, collection);
 
         mongoCollection.insertOne(document)
                 .getAsync(result -> {
@@ -33,10 +30,7 @@ public class MongoDBInsert {
     }
 
     public static void insertMany(String database, String collection, List<Document> document) {
-        User user = MongoDBConnection.getApp().currentUser();
-        MongoClient mongoClient = user.getMongoClient("mongodb-atlas");
-        MongoDatabase mongoDatabase = mongoClient.getDatabase(database);
-        MongoCollection mongoCollection = mongoDatabase.getCollection(collection);
+        MongoCollection<Document> mongoCollection = MongoDBConnection.accessDatabase(database, collection);
 
         mongoCollection.insertMany(document)
                 .getAsync(result -> {

@@ -19,12 +19,8 @@ public class MongoDBQuery {
         }
     }
     public static Document queryOne(String database, String collection, Document document) {
-        User user = MongoDBConnection.getApp().currentUser();
-        MongoClient mongoClient = user.getMongoClient("mongodb-atlas");
-        MongoDatabase mongoDatabase = mongoClient.getDatabase(database);
-        MongoCollection<Document> mongoCollection = mongoDatabase.getCollection(collection);
+        MongoCollection<Document> mongoCollection = MongoDBConnection.accessDatabase(database, collection);
 
-        System.out.println(mongoCollection.findOne(document).get());
         return mongoCollection.findOne(document).get();
     }
 

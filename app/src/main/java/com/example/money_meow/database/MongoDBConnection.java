@@ -1,15 +1,18 @@
 package com.example.money_meow.database;
 
 
-import android.content.Context;
 import android.util.Log;
 
 
-import io.realm.Realm;
+import org.bson.Document;
+
 import io.realm.mongodb.App;
 import io.realm.mongodb.AppConfiguration;
 import io.realm.mongodb.Credentials;
 import io.realm.mongodb.User;
+import io.realm.mongodb.mongo.MongoClient;
+import io.realm.mongodb.mongo.MongoCollection;
+import io.realm.mongodb.mongo.MongoDatabase;
 
 public class MongoDBConnection {
     private static final String Appid = "money-meow-jufwk";
@@ -22,7 +25,7 @@ public class MongoDBConnection {
     public static void connect() {
 
         app = new App(new AppConfiguration.Builder(Appid).build());
-        app.loginAsync(Credentials.anonymous(), new App.Callback<User>() {
+        app.loginAsync(Credentials.emailPassword("haibaraaicute@gmail.com", "123456"), new App.Callback<User>() {
             @Override
             public void onResult(App.Result<User> result) {
                 if(result.isSuccess())
@@ -36,5 +39,20 @@ public class MongoDBConnection {
                 }
             }
         });
+
+
     }
+
+    public static MongoCollection<Document> accessDatabase(String database, String collection) {
+        if (!MongoDBConnection.getApp().currentUser().isLoggedIn()) {
+            MongoDBConnection.connect();
+        }
+
+        User user = MongoDBConnection.getApp().currentUser();
+        MongoClient mongoClient = user.getMongoClient("mongodb-atlas");
+        MongoDatabase mongoDatabase = mongoClient.getDatabase(database);
+        MongoCollection<Document> mongoCollection = mongoDatabase.getCollection(collection);
+        return mongoCollection;
+    }
+
 }

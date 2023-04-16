@@ -48,8 +48,8 @@ public class SignupAction extends AppCompatActivity {
         loginNavig = (Button) findViewById(R.id.login_btn);
 
 
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
+//        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+//        StrictMode.setThreadPolicy(policy);
 
         signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
