@@ -54,7 +54,7 @@ public class LoginAction extends AppCompatActivity {
                 }
 
                 Toast.makeText(getApplicationContext(), "Login Successfully!", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(LoginAction.this, Home.class);
+                Intent intent = new Intent(LoginAction.this, Home.class).putExtra("from", "Login");
                 startActivity(intent);
                 LoginAccount.getAcc(username.getEditText().getText().toString());
             }

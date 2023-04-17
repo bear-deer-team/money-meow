@@ -68,7 +68,7 @@ public class SignupAction extends AppCompatActivity {
                 account.addNewUserToDB();
 
                 Toast.makeText(getApplicationContext(), "Sign Up Successfully!", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(SignupAction.this, Home.class);
+                Intent intent = new Intent(SignupAction.this, Home.class).putExtra("from", "Signup");
                 startActivity(intent);
             }
         });

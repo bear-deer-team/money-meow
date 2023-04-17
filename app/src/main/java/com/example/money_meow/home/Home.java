@@ -13,8 +13,11 @@ import com.example.money_meow.account.LoginAccount;
 import com.example.money_meow.database.TransactionQuery;
 import com.example.money_meow.information.Information;
 
+import java.util.ArrayList;
+
 public class Home extends AppCompatActivity {
     private RecyclerView rcvHistory;
+    private HistoryList historyList;
     private Button addTransBtn,infoBtn,historyBtn,searchBtn,settingBtn;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,13 +25,18 @@ public class Home extends AppCompatActivity {
         rcvHistory = findViewById(R.id.historylist);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this,1);
         rcvHistory.setLayoutManager(gridLayoutManager);
-        HistoryList historyList = new HistoryList(TransactionQuery.FindByUserName(LoginAccount.account.getUserName()),this);
-        rcvHistory.setAdapter(historyList);
         addTransBtn = findViewById(R.id.AddTransBtn);
         infoBtn = findViewById(R.id.InfoBtn);
         historyBtn = findViewById(R.id.HistoryBtn);
         searchBtn = findViewById(R.id.SearchBtn);
         settingBtn = findViewById(R.id.SettingBtn);
+
+        if (getIntent().getStringExtra("from").equals("Login")) {
+            historyList = new HistoryList(TransactionQuery.FindByUserName(LoginAccount.account.getUserName()),this);
+        } else {
+            historyList = new HistoryList(new ArrayList<>(),this);
+        }
+        rcvHistory.setAdapter(historyList);
         infoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

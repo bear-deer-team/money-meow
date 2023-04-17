@@ -36,7 +36,7 @@ public class AccountValidation {
         } else if (!val.matches(nameRegex)) {
             valInput.setError("User Name must only contain a-z, A-Z, 0-9, '.' and '_'");
             return true;
-        } else if (MongoDBQuery.isExist("MoneyMeow", "users", new Document().append("username", val))) {
+        } else if (MongoDBQuery.isExist("MoneyMeow", "users", new Document().append("userName", val))) {
             valInput.setError("User name has existed!");
             return true;
         } else {

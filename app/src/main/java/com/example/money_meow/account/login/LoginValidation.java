@@ -10,7 +10,7 @@ public class LoginValidation {
     public static boolean isUsernameValid (TextInputLayout valInput) {
         String val = valInput.getEditText().getText().toString();
 
-        if (!MongoDBQuery.isExist("MoneyMeow", "users", new Document().append("username", val))) {
+        if (!MongoDBQuery.isExist("MoneyMeow", "users", new Document().append("userName", val))) {
             valInput.setError("User Name is not existed!");
             return true;
         } else {
@@ -22,7 +22,7 @@ public class LoginValidation {
     public static boolean isPasswordValid (TextInputLayout valInput, TextInputLayout username) {
         String val = valInput.getEditText().getText().toString();
 
-        Document userInfor = MongoDBQuery.queryOne("MoneyMeow", "users", new Document("username", username.getEditText().getText().toString()));
+        Document userInfor = MongoDBQuery.queryOne("MoneyMeow", "users", new Document("userName", username.getEditText().getText().toString()));
 
         if (!PasswordEncryption.encrypt(val).equals(userInfor.getString("password"))) {
             valInput.setError("Password is incorrect!");

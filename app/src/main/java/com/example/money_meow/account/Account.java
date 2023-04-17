@@ -81,7 +81,7 @@ public class  Account implements AddUserToDB{
                         "users",
                         new Document()
                         .append("name", this.name)
-                        .append("username", this.userName)
+                        .append("userName", this.userName)
                         .append("email", this.email)
                         .append("password", this.password)
                         .append("balance", this.balance.getAmount()));

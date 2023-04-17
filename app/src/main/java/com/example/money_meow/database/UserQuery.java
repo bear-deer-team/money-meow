@@ -7,8 +7,8 @@ import org.bson.Document;
 
 public class UserQuery {
     public static Account FindByUserName(String userName){
-        Document userDoc = new Document(MongoDBQuery.queryOne("MoneyMeow","users",new Document("username",userName)));
-        Account account = new Account(userDoc.getString("name"),userDoc.getString("username"),userDoc.getString("email"),userDoc.getString("password"), userDoc.getDouble("balance"));
+        Document userDoc = new Document(MongoDBQuery.queryOne("MoneyMeow","users",new Document("userName",userName)));
+        Account account = new Account(userDoc.getString("name"),userDoc.getString("userName"),userDoc.getString("email"),userDoc.getString("password"), userDoc.getDouble("balance"));
         return account;
     }
 }
