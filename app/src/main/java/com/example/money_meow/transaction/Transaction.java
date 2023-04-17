@@ -84,7 +84,7 @@ public class Transaction {
         return transactionTime;
     }
     public String formatDate(){
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
         String formattedDate = formatter.format(this.transactionTime);
         return formattedDate;
     }
