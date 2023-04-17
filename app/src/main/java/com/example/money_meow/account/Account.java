@@ -7,7 +7,7 @@ import com.example.money_meow.database.MongoDBInsert;
 
 import org.bson.Document;
 
-public class Account implements AddUserToDB{
+public class  Account implements AddUserToDB{
     private String name;
     private String userName;
     private String email;

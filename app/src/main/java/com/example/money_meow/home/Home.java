@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.money_meow.R;
+import com.example.money_meow.account.LoginAccount;
 import com.example.money_meow.category.Category;
 import com.example.money_meow.database.CategoryQuery;
 import com.example.money_meow.database.TransactionQuery;
@@ -24,7 +25,7 @@ public class Home extends AppCompatActivity {
         rcvHistory = findViewById(R.id.historylist);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this,1);
         rcvHistory.setLayoutManager(gridLayoutManager);
-        HistoryList historyList = new HistoryList(TransactionQuery.FindByUserName("test"),this);
+        HistoryList historyList = new HistoryList(TransactionQuery.FindByUserName(LoginAccount.userName),this);
         rcvHistory.setAdapter(historyList);
         addTransBtn = findViewById(R.id.AddTransBtn);
         infoBtn = findViewById(R.id.InfoBtn);
