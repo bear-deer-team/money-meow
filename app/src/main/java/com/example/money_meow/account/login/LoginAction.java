@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.money_meow.MainActivity;
 import com.example.money_meow.R;
 import com.example.money_meow.account.Account;
+import com.example.money_meow.account.LoginAccount;
 import com.example.money_meow.account.signup.SignupAction;
 import com.example.money_meow.database.MongoDBConnection;
 import com.example.money_meow.home.Home;
@@ -55,6 +56,7 @@ public class LoginAction extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Login Successfully!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(LoginAction.this, Home.class);
                 startActivity(intent);
+                LoginAccount.userName = username.getEditText().getText().toString();
             }
         });
 
