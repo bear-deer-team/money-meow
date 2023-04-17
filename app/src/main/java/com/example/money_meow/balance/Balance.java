@@ -7,12 +7,12 @@ public class Balance {
         amount = 0;
     }
 
-    public double getAmount() {
-        return amount;
-    }
-
     public Balance(double amount) {
         this.amount = amount;
+    }
+
+    public double getAmount() {
+        return amount;
     }
 
     public void add(double amount) {

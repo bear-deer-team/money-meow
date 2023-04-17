@@ -26,6 +26,14 @@ public class  Account implements AddUserToDB{
         this.balance = new Balance();
     }
 
+    public Account(String name, String userName, String email, String password,double amount ) {
+        this.name = name;
+        this.userName = userName;
+        this.email = email;
+        this.password = password;
+        this.balance = new Balance(amount);
+    }
+
     public String getName() {
         return name;
     }

@@ -22,7 +22,7 @@ public class Home extends AppCompatActivity {
         rcvHistory = findViewById(R.id.historylist);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this,1);
         rcvHistory.setLayoutManager(gridLayoutManager);
-        HistoryList historyList = new HistoryList(TransactionQuery.FindByUserName(LoginAccount.userName),this);
+        HistoryList historyList = new HistoryList(TransactionQuery.FindByUserName(LoginAccount.account.getUserName()),this);
         rcvHistory.setAdapter(historyList);
         addTransBtn = findViewById(R.id.AddTransBtn);
         infoBtn = findViewById(R.id.InfoBtn);
