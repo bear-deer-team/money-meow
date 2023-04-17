@@ -23,6 +23,7 @@
         android:id="@+id/historylist"
         android:layout_width="373dp"
         android:layout_height="416dp"
+        app:layout_constraintHorizontal_weight=""
         android:background="@drawable/history_in_home_layout"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
