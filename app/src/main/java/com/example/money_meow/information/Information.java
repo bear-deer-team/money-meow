@@ -17,7 +17,8 @@ public class Information extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        homeBtn = findViewById(R.id.HomeBtn);
+        setContentView(R.layout.info);
+        homeBtn = (Button) findViewById(R.id.HomeBtn);
         homeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
