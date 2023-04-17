@@ -1,5 +1,7 @@
 package com.example.money_meow.home;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.money_meow.R;
 import com.example.money_meow.account.LoginAccount;
 import com.example.money_meow.database.TransactionQuery;
+import com.example.money_meow.information.Information;
 
 public class Home extends AppCompatActivity {
     private RecyclerView rcvHistory;
@@ -26,7 +29,13 @@ public class Home extends AppCompatActivity {
         historyBtn = findViewById(R.id.HistoryBtn);
         searchBtn = findViewById(R.id.SearchBtn);
         settingBtn = findViewById(R.id.SettingBtn);
-
+        infoBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Home.this, Information.class);
+                startActivity(intent);
+            }
+        });
 
     }
 

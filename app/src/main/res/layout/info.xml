@@ -21,30 +21,33 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="264dp"
-        android:text="Bear Deer <3 "
-        android:textSize="45dp"
-        android:textStyle="italic"
         android:fontFamily="@font/markerfelt"
+        android:text="Bear Deer :3 "
+        android:textSize="55dp"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.389" />
 
     <TextView
+        android:id="@+id/textView"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="340dp"
         android:justificationMode="inter_word"
         android:text="Money Meow là ứng dụng quản lí chi tiêu nhằm hỗ trợ người dùng theo dõi các khoản thu nhập chi tiêu của mình. Các khoản thu chi được phân loại và ghi lại thời gian hỗ trợ người dùng tìm kiếm và liệt kê các khoản đã chi theo nhu cầu."
         android:textSize="25dp"
         android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.709" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
