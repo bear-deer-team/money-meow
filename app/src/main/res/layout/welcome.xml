@@ -6,29 +6,45 @@
     android:layout_height="match_parent"
     android:background="@color/background_color_1">
 
-    <ImageView
-        android:id="@+id/wellcome_image"
-        android:layout_width="274dp"
-        android:layout_height="546dp"
-        android:src="@drawable/logo_welcome"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.377"></ImageView>
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/start_button"
-        android:layout_width="274dp"
-        android:layout_height="52dp"
-        android:background="@drawable/start_btn"
-        android:text="start"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.83"></androidx.appcompat.widget.AppCompatButton>
+        app:layout_constraintVertical_bias="0.3">
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
+            <ImageView
+                android:id="@+id/wellcome_image"
+                android:layout_width="274dp"
+                android:layout_height="546dp"
+                android:src="@drawable/logo_welcome"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.503"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"></ImageView>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/start_button"
+                android:layout_width="274dp"
+                android:layout_height="52dp"
+                android:background="@drawable/start_btn"
+                android:text="start"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+
+                ></androidx.appcompat.widget.AppCompatButton>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
