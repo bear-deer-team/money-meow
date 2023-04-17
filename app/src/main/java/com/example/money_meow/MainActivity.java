@@ -10,6 +10,7 @@ import android.widget.Button;
 
 import com.example.money_meow.account.login.LoginAction;
 import com.example.money_meow.account.signup.SignupAction;
+import com.example.money_meow.database.MongoDBConnection;
 
 import io.realm.Realm;
 
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.welcome);
 
         Realm.init(this);
+        MongoDBConnection.connect();
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);

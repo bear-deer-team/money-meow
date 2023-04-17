@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -54,8 +55,6 @@ public class SignupAction extends AppCompatActivity {
         signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MongoDBConnection.connect();
-
                 if(AccountValidation.isNameInvalid(name)
                 | AccountValidation.isUserNameInvalid(userName)
                 | AccountValidation.isEmailInvalid(email)
@@ -68,6 +67,7 @@ public class SignupAction extends AppCompatActivity {
                         email.getEditText().getText().toString(), PasswordEncryption.encrypt(password.getEditText().getText().toString()));
                 account.addNewUserToDB();
 
+                Toast.makeText(getApplicationContext(), "Sign Up Successfully!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(SignupAction.this, Home.class);
                 startActivity(intent);
             }

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -36,13 +37,10 @@ public class LoginAction extends AppCompatActivity {
         signinBtn = (Button) findViewById(R.id.login_btn);
         signupBtn = (Button) findViewById(R.id.signup_btn);
 
-//        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-//        StrictMode.setThreadPolicy(policy);
 
         signinBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MongoDBConnection.connect();
                 System.out.println(MongoDBConnection.getApp().currentUser());
 
                 if (LoginValidation.isUsernameValid(username) ) {
@@ -54,6 +52,7 @@ public class LoginAction extends AppCompatActivity {
                     }
                 }
 
+                Toast.makeText(getApplicationContext(), "Login Successfully!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(LoginAction.this, Home.class);
                 startActivity(intent);
             }
