@@ -12,7 +12,6 @@ import org.bson.Document;
 
 
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class Transaction {
@@ -40,7 +39,7 @@ public class Transaction {
 
     // tạo một transaction
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public Transaction(String userName,Category transactionCategory, double transactionAmount, String transactionNote) {
+    public Transaction(String userName, Category transactionCategory, double transactionAmount, String transactionNote) {
         this.transactionCategory = transactionCategory;
         this.transactionTime = new Date();
         this.userName = userName;

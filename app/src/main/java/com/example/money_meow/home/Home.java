@@ -8,13 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.money_meow.R;
 import com.example.money_meow.account.LoginAccount;
-import com.example.money_meow.category.Category;
-import com.example.money_meow.database.CategoryQuery;
 import com.example.money_meow.database.TransactionQuery;
-import com.example.money_meow.transaction.Transaction;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Home extends AppCompatActivity {
     private RecyclerView rcvHistory;
