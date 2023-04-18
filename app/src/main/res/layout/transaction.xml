@@ -36,23 +36,23 @@
             android:textSize="25dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.218"
+            app:layout_constraintHorizontal_bias="0.2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.25" />
+            app:layout_constraintVertical_bias="0.233" />
 
         <TextView
             android:id="@+id/date"
-            android:layout_width="64dp"
+            android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:text="10/9/2023"
-            android:textSize="14dp"
+            android:textSize="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.231"
+            app:layout_constraintHorizontal_bias="0.211"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.587" />
+            app:layout_constraintVertical_bias="0.611" />
 
         <TextView
             android:id="@+id/amount"
