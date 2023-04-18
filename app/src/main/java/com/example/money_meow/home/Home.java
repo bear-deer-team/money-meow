@@ -31,11 +31,7 @@ public class Home extends AppCompatActivity {
         searchBtn = findViewById(R.id.SearchBtn);
         settingBtn = findViewById(R.id.SettingBtn);
 
-        if (getIntent().getStringExtra("from").equals("Login")) {
-            historyList = new HistoryList(TransactionQuery.FindByUserName(LoginAccount.account.getUserName()),this);
-        } else {
-            historyList = new HistoryList(new ArrayList<>(),this);
-        }
+        historyList = new HistoryList(TransactionQuery.FindByUserName(LoginAccount.account.getUserName()),this);
         rcvHistory.setAdapter(historyList);
         infoBtn.setOnClickListener(new View.OnClickListener() {
             @Override

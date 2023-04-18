@@ -1,6 +1,8 @@
 package com.example.money_meow.account.login;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
@@ -52,11 +54,15 @@ public class LoginAction extends AppCompatActivity {
                         return;
                     }
                 }
-
-                Toast.makeText(getApplicationContext(), "Login Successfully!", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(LoginAction.this, Home.class).putExtra("from", "Login");
-                startActivity(intent);
                 LoginAccount.getAcc(username.getEditText().getText().toString());
+                SharedPreferences sharedPreferences = getSharedPreferences("login", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putBoolean("isLoggedIn", true);
+                editor.putString("userName", username.getEditText().getText().toString());
+                editor.apply();
+                Toast.makeText(getApplicationContext(), "Login Successfully!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(LoginAction.this, Home.class);
+                startActivity(intent);
             }
         });
 
