@@ -23,7 +23,7 @@ public class Category {
     }
 
     public Category(String categoryName){
-        this.categoryName=categoryName;
+        this.categoryName = categoryName;
         this.categoryType = CategoryQuery.FindByName(categoryName).getCategoryType();
     }
 

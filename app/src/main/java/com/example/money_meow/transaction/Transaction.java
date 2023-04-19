@@ -27,6 +27,7 @@ public class Transaction {
     private String transactionNote;
     private String transactionType;
 
+    // constructor used in TransactionQuery
     public Transaction(String name, double transactionAmount, String userName, Date transactionTime, String transactionNote, String transactionType) {
         this.name = name;
         this.transactionCategory = CategoryQuery.FindByName(name);
@@ -37,6 +38,16 @@ public class Transaction {
         this.transactionType = transactionType;
     }
 
+    // constructor used in TransactionAction
+    public Transaction(Category category, double transactionAmount, String userName, Date transactionTime, String transactionNote) {
+        this.name = category.getCategoryName();
+        this.transactionCategory = category;
+        this.transactionAmount = transactionAmount;
+        this.userName = userName;
+        this.transactionTime = transactionTime;
+        this.transactionNote = transactionNote;
+        this.transactionType = category.getCategoryType();
+    }
     // tạo một transaction
     @RequiresApi(api = Build.VERSION_CODES.O)
     public Transaction(String userName, Category transactionCategory, double transactionAmount, String transactionNote) {

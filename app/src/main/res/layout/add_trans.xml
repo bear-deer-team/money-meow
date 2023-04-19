@@ -192,7 +192,7 @@
             android:layout_marginStart="60dp"
             android:layout_marginLeft="60dp"
             android:hint="0.000.000"
-            android:inputType="number"
+            android:inputType="numberDecimal"
             android:backgroundTint="@android:color/transparent"
             android:maxLines="1"
             android:textSize="20dp"
