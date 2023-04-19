@@ -59,16 +59,16 @@ public class Transaction {
         this.transactionType = transactionCategory.getCategoryType();
     }
     // lưu transaction vào database
-    public void saveToDatabase(Transaction a) {
+    public void saveToDatabase() {
         //ket noi toi CSDl
 
         MongoDBInsert.insertOne("MoneyMeow","transactions",new Document()
-                .append("userName",a.userName)
-                .append("name",a.transactionCategory)
-                .append("type",a.transactionType)
-                .append("amount",a.transactionAmount)
-                .append("note",a.transactionNote)
-                .append("date", a.transactionTime));
+                .append("userName",userName)
+                .append("name",name)
+                .append("type",transactionType)
+                .append("amount",transactionAmount)
+                .append("note",transactionNote)
+                .append("date", transactionTime));
 
     }
     //Hien thi thong tin trong transaction

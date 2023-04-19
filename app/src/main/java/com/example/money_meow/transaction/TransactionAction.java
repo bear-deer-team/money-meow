@@ -56,7 +56,7 @@ public class TransactionAction extends AppCompatActivity {
                 }
                 transaction = new Transaction(category, Double.parseDouble(amount.getEditableText().toString()),
                         LoginAccount.account.getUserName(), date, "demo");
-                // missing: add new transaction to database
+                // transaction.saveToDatabase();
 
                 Toast.makeText(getApplicationContext(), "Add Transaction Successfully!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(TransactionAction.this, Home.class);
