@@ -133,7 +133,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="60dp"
             android:layout_marginLeft="60dp"
-            android:hint="DD/MM/YY"
+            android:hint="DD/MM/YYYY"
             android:inputType="datetime"
             android:backgroundTint="@android:color/transparent"
             android:maxLines="1"

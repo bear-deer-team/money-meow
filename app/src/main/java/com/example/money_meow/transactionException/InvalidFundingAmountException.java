@@ -1,4 +1,4 @@
-package com.example.money_meow.TransactionException;
+package com.example.money_meow.transactionException;
 
 public class InvalidFundingAmountException extends TransactionException {
     public InvalidFundingAmountException(Double number) {
