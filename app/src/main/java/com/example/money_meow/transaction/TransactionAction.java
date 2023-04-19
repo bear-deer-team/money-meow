@@ -54,9 +54,16 @@ public class TransactionAction extends AppCompatActivity {
                 | date == null) {
                     return;
                 }
-                transaction = new Transaction(category, Double.parseDouble(amount.getEditableText().toString()),
+                double transactionAmount = Double.parseDouble(amount.getEditableText().toString());
+                transaction = new Transaction(category, transactionAmount,
                         LoginAccount.account.getUserName(), date, "demo");
                 // transaction.saveToDatabase();
+
+                if(category.getCategoryType().equals("extense")) {
+                    LoginAccount.account.getBalance().subtract(transactionAmount);
+                } else {
+                    LoginAccount.account.getBalance().add(transactionAmount);
+                }
 
                 Toast.makeText(getApplicationContext(), "Add Transaction Successfully!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(TransactionAction.this, Home.class);
