@@ -16,6 +16,7 @@ import java.util.Date;
 
 public class Transaction {
 
+    private String id;
     private Category transactionCategory;
 
     private double transactionAmount;
@@ -28,7 +29,8 @@ public class Transaction {
     private String transactionType;
 
     // constructor used in TransactionQuery
-    public Transaction(String name, double transactionAmount, String userName, Date transactionTime, String transactionNote, String transactionType) {
+    public Transaction(String id,String name, double transactionAmount, String userName, Date transactionTime, String transactionNote, String transactionType) {
+        this.id = id;
         this.name = name;
         this.transactionCategory = CategoryQuery.FindByName(name);
         this.transactionAmount = transactionAmount;
@@ -121,5 +123,9 @@ public class Transaction {
 
     public String getTransactionType() {
         return transactionType;
+    }
+
+    public String getId() {
+        return id;
     }
 }

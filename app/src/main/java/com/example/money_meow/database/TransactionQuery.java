@@ -16,12 +16,13 @@ public class TransactionQuery {
         List<Document> transactionDocs = new ArrayList<>(MongoDBQuery.find("MoneyMeow","transactions",new Document("userName",userName)));
         List<Transaction> transactions = new ArrayList<>();
         for(int i=0;i<transactionDocs.size();i++) {
+            String id = transactionDocs.get(i).getObjectId("_id").toString();
             String name = transactionDocs.get(i).getString("name");
             String type = transactionDocs.get(i).getString("type");
             Double amount = transactionDocs.get(i).getDouble("amount");
             Date date = transactionDocs.get(i).getDate("date");
             String note = transactionDocs.get(i).getString("note");
-            Transaction transaction = new Transaction(name,amount,userName,date,note,type);
+            Transaction transaction = new Transaction(id,name,amount,userName,date,note,type);
             transactions.add(transaction);
         }
         return transactions;
