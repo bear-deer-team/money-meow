@@ -17,12 +17,12 @@ import com.example.money_meow.transaction.Transaction;
 import java.util.List;
 
 
-public class HistoryList extends RecyclerView.Adapter<HistoryList.TransactionViewHolder> {
+public class HistoryListForHome extends RecyclerView.Adapter<HistoryListForHome.TransactionViewHolder> {
 
     List<Transaction> transactionList;
     Context context;
 
-    public HistoryList(List<Transaction> transactionList, Context context) {
+    public HistoryListForHome(List<Transaction> transactionList, Context context) {
         this.context = context;
         this.transactionList = transactionList;
     }

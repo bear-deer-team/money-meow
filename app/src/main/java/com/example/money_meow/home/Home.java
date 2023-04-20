@@ -13,13 +13,16 @@ import com.example.money_meow.account.LoginAccount;
 import com.example.money_meow.database.TransactionQuery;
 import com.example.money_meow.information.Information;
 import com.example.money_meow.setting.AccountSettings;
+import com.example.money_meow.transaction.Transaction;
 import com.example.money_meow.transaction.TransactionAction;
+import com.example.money_meow.transaction.TransactionList;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Home extends AppCompatActivity {
     private RecyclerView rcvHistory;
-    private HistoryList historyList;
+    private HistoryListForHome historyListForHome;
     private Button addTransBtn,infoBtn,historyBtn,searchBtn,settingBtn;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,8 +36,8 @@ public class Home extends AppCompatActivity {
         searchBtn = findViewById(R.id.SearchBtn);
         settingBtn = findViewById(R.id.SettingBtn);
 
-        historyList = new HistoryList(TransactionQuery.FindByUserName(LoginAccount.account.getUserName()),this);
-        rcvHistory.setAdapter(historyList);
+        historyListForHome = new HistoryListForHome(getList(),this);
+        rcvHistory.setAdapter(historyListForHome);
         infoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -57,6 +60,11 @@ public class Home extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private List<Transaction> getList() {
+        List<Transaction> res = TransactionList.mainList.subList(Math.max(TransactionList.mainList.size() - 10, 0), TransactionList.mainList.size());
+        return res;
     }
 
 }

@@ -16,8 +16,12 @@ import com.example.money_meow.R;
 import com.example.money_meow.account.Account;
 import com.example.money_meow.account.LoginAccount;
 import com.example.money_meow.account.signup.SignupAction;
+import com.example.money_meow.database.Json;
 import com.example.money_meow.database.MongoDBConnection;
+import com.example.money_meow.database.TransactionQuery;
 import com.example.money_meow.home.Home;
+import com.example.money_meow.transaction.Transaction;
+import com.example.money_meow.transaction.TransactionList;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class LoginAction extends AppCompatActivity {
@@ -54,13 +58,21 @@ public class LoginAction extends AppCompatActivity {
                         return;
                     }
                 }
-                LoginAccount.getAcc(username.getEditText().getText().toString());
+                String userName = username.getEditText().getText().toString();
+
+                LoginAccount.getAcc(userName);
+
                 SharedPreferences sharedPreferences = getSharedPreferences("login", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putBoolean("isLoggedIn", true);
                 editor.putString("userName", username.getEditText().getText().toString());
                 editor.apply();
                 Toast.makeText(getApplicationContext(), "Login Successfully!", Toast.LENGTH_SHORT).show();
+
+//                Json json = new Json();
+               TransactionList.mainList = TransactionQuery.FindByUserName(userName);
+//                json.addToJson(TransactionList.mainList,userName);
+
                 Intent intent = new Intent(LoginAction.this, Home.class);
                 startActivity(intent);
             }

@@ -14,8 +14,15 @@ import android.widget.Button;
 import com.example.money_meow.account.LoginAccount;
 import com.example.money_meow.account.login.LoginAction;
 import com.example.money_meow.account.signup.SignupAction;
+import com.example.money_meow.database.Json;
 import com.example.money_meow.database.MongoDBConnection;
+import com.example.money_meow.database.TransactionQuery;
 import com.example.money_meow.home.Home;
+import com.example.money_meow.transaction.TransactionList;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import io.realm.Realm;
 
@@ -44,7 +51,10 @@ public class MainActivity extends AppCompatActivity {
                     // Người dùng đã đăng nhập, cho phép truy cập vào các tính năng yêu cầu đăng nhập
                     String userName = sharedPreferences.getString("userName", "");
                     LoginAccount.getAcc(userName);
-                    Log.v("User",userName);
+                    TransactionList.mainList = TransactionQuery.FindByUserName(userName);
+                    //TransactionList.mainList = Json.getTranSactionList(userName);
+
+
                     intent.setClass(MainActivity.this, Home.class);
                 } else {
                     // Người dùng chưa đăng nhập, yêu cầu đăng nhập trước khi truy cập vào các tính năng yêu cầu đăng nhập
