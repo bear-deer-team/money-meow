@@ -22,121 +22,132 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/historylist"
-        android:layout_width="373dp"
-        android:layout_height="416dp"
-
+        android:layout_width="0dp"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.9"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="0.5"
+        android:layout_height="0dp"
         android:background="@drawable/history_in_home_layout"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.578"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/constraintLayout"
-        app:layout_constraintVertical_bias="0.633"></androidx.recyclerview.widget.RecyclerView>
+        app:layout_constraintVertical_bias="0.6">
+
+    </androidx.recyclerview.widget.RecyclerView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout1"
         android:layout_width="fill_parent"
         android:layout_height="100dp"
         android:background="@drawable/task_bar"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent">
 
-        <ImageView
-            android:id="@+id/imageView4"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:background="@drawable/circle"
-            app:layout_constraintBottom_toBottomOf="@+id/AddTransBtn"
-            app:layout_constraintEnd_toEndOf="@+id/AddTransBtn"
-            app:layout_constraintStart_toStartOf="@+id/AddTransBtn"
-            app:layout_constraintTop_toTopOf="@+id/AddTransBtn"
-            app:layout_constraintVertical_bias="0.986" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/AddTransBtn"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:background="@drawable/pen"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.48"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.466" />
+            />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/InfoBtn"
+            android:id="@+id/HomeBtn"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:background="@drawable/about"
+            android:background="@drawable/home"
+
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/AddTransBtn"
-            app:layout_constraintHorizontal_bias="0.109"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.466" />
+            app:layout_constraintEnd_toStartOf="@id/HistoryBtn"
+            app:layout_constraintStart_toStartOf="parent"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/HistoryBtn"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:background="@drawable/pichart"
+
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/AddTransBtn"
-            app:layout_constraintHorizontal_bias="0.978"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/AddTransBtn"
+            app:layout_constraintStart_toEndOf="@id/HomeBtn"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.466" />
+            />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/SearchBtn"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:background="@drawable/search"
+
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.154"
-            app:layout_constraintStart_toEndOf="@+id/AddTransBtn"
+            app:layout_constraintStart_toEndOf="@id/AddTransBtn"
+            app:layout_constraintEnd_toStartOf="@id/SettingBtn"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.533" />
 
+        <ImageView
+            android:id="@+id/show"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:background="@drawable/circle"
+
+            app:layout_constraintBottom_toBottomOf="@+id/HomeBtn"
+            app:layout_constraintEnd_toEndOf="@+id/HomeBtn"
+            app:layout_constraintStart_toStartOf="@+id/HomeBtn"
+            app:layout_constraintTop_toTopOf="@+id/HomeBtn"
+            />
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/SettingBtn"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:background="@drawable/settings"
+
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.854"
-            app:layout_constraintStart_toEndOf="@+id/AddTransBtn"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.533" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/SearchBtn" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
-        android:layout_width="350dp"
-        android:layout_height="120dp"
+        android:layout_width="0dp"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.85"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="0.14"
+        android:layout_height="0dp"
         android:background="@drawable/balance"
         app:layout_constraintBottom_toBottomOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.337">
+        app:layout_constraintVertical_bias="0.35">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="4dp"
             android:text="Balance:"
             android:textSize="20dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.05"
+            app:layout_constraintVertical_bias="0.1"/>
 
         <ImageView
             android:id="@+id/imageView2"
@@ -145,27 +156,26 @@
             android:background="@drawable/dollar"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.051"
+            app:layout_constraintHorizontal_bias="0.05"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.609" />
+            app:layout_constraintVertical_bias="0.6" />
 
         <TextView
             android:id="@+id/balance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
-            android:layout_marginRight="24dp"
             android:gravity="right"
             android:text="0"
+
             android:textColor="@color/black"
             android:textSize="55dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.9"
             app:layout_constraintStart_toEndOf="@+id/imageView2"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.847" />
+            app:layout_constraintVertical_bias="0.6" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

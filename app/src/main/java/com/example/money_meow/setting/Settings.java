@@ -12,45 +12,45 @@ import com.example.money_meow.home.Home;
 import com.example.money_meow.information.Information;
 import com.example.money_meow.transaction.TransactionAction;
 
-public class AccountSettings extends AppCompatActivity {
-    Button account, editAcc, logOut, display, addTransBtn, infoBtn, historyBtn, searchBtn, settingBtn;
+public class Settings extends AppCompatActivity {
+    Button infor, editAcc, logOut, display, addTransBtn, homeBtn, historyBtn, searchBtn, settingBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.setting);
 
-        account = (Button) findViewById(R.id.account);
+        infor = (Button) findViewById(R.id.account);
         editAcc = (Button) findViewById(R.id.editAcc);
         logOut = (Button) findViewById(R.id.logout);
         display = (Button) findViewById(R.id.display);
 
         addTransBtn = findViewById(R.id.AddTransBtn);
-        infoBtn = findViewById(R.id.InfoBtn);
+        homeBtn = findViewById(R.id.HomeBtn);
         historyBtn = findViewById(R.id.HistoryBtn);
         searchBtn = findViewById(R.id.SearchBtn);
         settingBtn = findViewById(R.id.SettingBtn);
 
-        infoBtn.setOnClickListener(new View.OnClickListener() {
+        homeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(AccountSettings.this, Information.class);
+                Intent intent = new Intent(Settings.this, Home.class);
                 startActivity(intent);
             }
         });
         addTransBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(AccountSettings.this, TransactionAction.class);
+                Intent intent = new Intent(Settings.this, TransactionAction.class);
                 startActivity(intent);
             }
         });
 
-        account.setOnClickListener(new View.OnClickListener() {
+        infor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                editAcc.setVisibility(View.VISIBLE);
-                logOut.setVisibility(View.VISIBLE);
+                Intent intent = new Intent(Settings.this, Information.class);
+                startActivity(intent);
             }
         });
 

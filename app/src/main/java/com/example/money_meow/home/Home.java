@@ -9,21 +9,18 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.money_meow.R;
-import com.example.money_meow.account.LoginAccount;
-import com.example.money_meow.database.TransactionQuery;
 import com.example.money_meow.information.Information;
-import com.example.money_meow.setting.AccountSettings;
+import com.example.money_meow.setting.Settings;
 import com.example.money_meow.transaction.Transaction;
 import com.example.money_meow.transaction.TransactionAction;
 import com.example.money_meow.transaction.TransactionList;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Home extends AppCompatActivity {
     private RecyclerView rcvHistory;
     private HistoryListForHome historyListForHome;
-    private Button addTransBtn,infoBtn,historyBtn,searchBtn,settingBtn;
+    private Button addTransBtn,homeBtn,historyBtn,searchBtn,settingBtn;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home);
@@ -31,14 +28,14 @@ public class Home extends AppCompatActivity {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this,1);
         rcvHistory.setLayoutManager(gridLayoutManager);
         addTransBtn = findViewById(R.id.AddTransBtn);
-        infoBtn = findViewById(R.id.InfoBtn);
+        homeBtn = findViewById(R.id.HomeBtn);
         historyBtn = findViewById(R.id.HistoryBtn);
         searchBtn = findViewById(R.id.SearchBtn);
         settingBtn = findViewById(R.id.SettingBtn);
 
         historyListForHome = new HistoryListForHome(getList(),this);
         rcvHistory.setAdapter(historyListForHome);
-        infoBtn.setOnClickListener(new View.OnClickListener() {
+        homeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Home.this, Information.class);
@@ -56,7 +53,7 @@ public class Home extends AppCompatActivity {
         settingBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Home.this, AccountSettings.class);
+                Intent intent = new Intent(Home.this, Settings.class);
                 startActivity(intent);
             }
         });
