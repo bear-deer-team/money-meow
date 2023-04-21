@@ -1,5 +1,7 @@
 package com.example.money_meow.database;
 
+import android.util.Log;
+
 import com.example.money_meow.transaction.Transaction;
 
 import org.bson.Document;
@@ -24,6 +26,7 @@ public class TransactionQuery {
             String note = transactionDocs.get(i).getString("note");
             Transaction transaction = new Transaction(id,name,amount,userName,date,note,type);
             transactions.add(transaction);
+            Log.v("transaction",transactions.get(i).getTransactionCategory().getCategoryName());
         }
         return transactions;
     }

@@ -26,7 +26,7 @@ public class HistoryListForHome extends RecyclerView.Adapter<HistoryListForHome.
         this.context = context;
         this.transactionList = transactionList;
     }
-    // chả biết này để làm gì lun :<<<
+
     @NonNull
     @Override
     public TransactionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -34,7 +34,7 @@ public class HistoryListForHome extends RecyclerView.Adapter<HistoryListForHome.
 
         return new TransactionViewHolder(view);
     }
-    // set các giá trị của history
+    // set các giá trị của historylist
     @Override
     public void onBindViewHolder(@NonNull TransactionViewHolder holder, int position) {
         Transaction transaction = transactionList.get(position);

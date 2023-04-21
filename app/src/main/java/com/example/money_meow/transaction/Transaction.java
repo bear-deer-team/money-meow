@@ -5,6 +5,7 @@ import android.os.Build;
 import androidx.annotation.RequiresApi;
 
 import com.example.money_meow.category.Category;
+import com.example.money_meow.category.CategoryList;
 import com.example.money_meow.database.CategoryQuery;
 import com.example.money_meow.database.MongoDBInsert;
 
@@ -13,6 +14,8 @@ import org.bson.Document;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import io.realm.RealmObject;
 
 public class Transaction {
 
@@ -28,11 +31,35 @@ public class Transaction {
     private String transactionNote;
     private String transactionType;
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setTransactionType(String transactionType) {
+        this.transactionType = transactionType;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public String getName() {
+        return name;
+    }
+
     // constructor used in TransactionQuery
     public Transaction(String id,String name, double transactionAmount, String userName, Date transactionTime, String transactionNote, String transactionType) {
         this.id = id;
         this.name = name;
-        this.transactionCategory = CategoryQuery.FindByName(name);
+        this.transactionCategory = CategoryList.FindByName(this.name);
         this.transactionAmount = transactionAmount;
         this.userName = userName;
         this.transactionTime = transactionTime;

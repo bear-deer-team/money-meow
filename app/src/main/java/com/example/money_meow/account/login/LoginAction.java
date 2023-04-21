@@ -4,23 +4,21 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.money_meow.MainActivity;
 import com.example.money_meow.R;
 import com.example.money_meow.account.Account;
 import com.example.money_meow.account.LoginAccount;
 import com.example.money_meow.account.signup.SignupAction;
-import com.example.money_meow.database.Json;
+import com.example.money_meow.category.CategoryList;
+import com.example.money_meow.database.CategoryQuery;
 import com.example.money_meow.database.MongoDBConnection;
 import com.example.money_meow.database.TransactionQuery;
 import com.example.money_meow.home.Home;
-import com.example.money_meow.transaction.Transaction;
 import com.example.money_meow.transaction.TransactionList;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -64,14 +62,14 @@ public class LoginAction extends AppCompatActivity {
 
                 SharedPreferences sharedPreferences = getSharedPreferences("login", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putBoolean("isLoggedIn", true);
+                editor.putBoolean("isLoggedIn", false);
                 editor.putString("userName", username.getEditText().getText().toString());
                 editor.apply();
                 Toast.makeText(getApplicationContext(), "Login Successfully!", Toast.LENGTH_SHORT).show();
 
-//                Json json = new Json();
+                CategoryList.categories = CategoryQuery.getCategoryList();
                TransactionList.mainList = TransactionQuery.FindByUserName(userName);
-//                json.addToJson(TransactionList.mainList,userName);
+
 
                 Intent intent = new Intent(LoginAction.this, Home.class);
                 startActivity(intent);

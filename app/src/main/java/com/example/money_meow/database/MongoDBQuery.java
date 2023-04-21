@@ -42,4 +42,15 @@ public class MongoDBQuery {
         return res;
     }
 
+    public static List<Document> findAll(String database, String collection) {
+        MongoCollection<Document> mongoCollection = MongoDBConnection.accessDatabase(database, collection);
+        List<Document> res = new ArrayList<>();
+        RealmResultTask<MongoCursor<Document>> findTask = mongoCollection.find().iterator();
+        MongoCursor<Document> results = findTask.get();
+        while (results.hasNext()) {
+            Document result = results.next();
+            res.add(result);
+        }
+        return res;
+    }
 }

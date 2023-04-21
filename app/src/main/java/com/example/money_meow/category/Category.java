@@ -20,11 +20,12 @@ public class Category {
     public Category(String categoryName, String categoryType) {
         this.categoryName = categoryName;
         this.categoryType = categoryType;
+
     }
 
     public Category(String categoryName){
         this.categoryName = categoryName;
-        this.categoryType = CategoryQuery.FindByName(categoryName).getCategoryType();
+        this.categoryType = CategoryList.FindByName(categoryName).getCategoryType();
     }
 
     public String getCategoryName() {
@@ -40,10 +41,10 @@ public class Category {
         return categoryName;
     }
 
-    public void setImage(Context context) {
-        String drawableName = categoryName;
+    private void setImage(Context context) {
+        String drawableName = this.categoryName;
         Resources resources = context.getResources();
-        image = resources.getIdentifier(drawableName, "drawable", context.getPackageName());
+        this.image = resources.getIdentifier(drawableName, "drawable", context.getPackageName());
 
     }
 
