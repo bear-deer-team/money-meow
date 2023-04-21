@@ -8,14 +8,18 @@ import android.content.Context;
 
 import com.example.money_meow.database.CategoryQuery;
 
+import io.realm.RealmObject;
 
-public class Category {
+
+public class Category extends RealmObject {
     private String categoryName;
 
     //INCOME or EXPENSE
     private String categoryType;
     private int image;
 
+    public Category() {
+    }
 
     public Category(String categoryName, String categoryType) {
         this.categoryName = categoryName;

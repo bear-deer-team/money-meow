@@ -26,7 +26,6 @@ public class TransactionQuery {
             String note = transactionDocs.get(i).getString("note");
             Transaction transaction = new Transaction(id,name,amount,userName,date,note,type);
             transactions.add(transaction);
-            Log.v("transaction",transactions.get(i).getTransactionCategory().getCategoryName());
         }
         return transactions;
     }

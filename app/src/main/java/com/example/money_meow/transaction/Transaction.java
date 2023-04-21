@@ -17,7 +17,7 @@ import java.util.Date;
 
 import io.realm.RealmObject;
 
-public class Transaction {
+public class Transaction extends RealmObject {
 
     private String id;
     private Category transactionCategory;
@@ -53,6 +53,9 @@ public class Transaction {
 
     public String getName() {
         return name;
+    }
+
+    public Transaction() {
     }
 
     // constructor used in TransactionQuery

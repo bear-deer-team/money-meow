@@ -17,8 +17,10 @@ import com.example.money_meow.account.signup.SignupAction;
 import com.example.money_meow.category.CategoryList;
 import com.example.money_meow.database.CategoryQuery;
 import com.example.money_meow.database.MongoDBConnection;
+import com.example.money_meow.database.RealmDB;
 import com.example.money_meow.database.TransactionQuery;
 import com.example.money_meow.home.Home;
+import com.example.money_meow.transaction.Transaction;
 import com.example.money_meow.transaction.TransactionList;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -63,14 +65,18 @@ public class LoginAction extends AppCompatActivity {
                 SharedPreferences sharedPreferences = getSharedPreferences("login", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
 
-                editor.putBoolean("isLoggedIn", false);
+                editor.putBoolean("isLoggedIn", true);
                 editor.putString("userName", username.getEditText().getText().toString());
                 editor.apply();
 
                 Toast.makeText(getApplicationContext(), "Login Successfully!", Toast.LENGTH_SHORT).show();
 
+                RealmDB.configFile();
                 CategoryList.categories = CategoryQuery.getCategoryList();
                 TransactionList.mainList = TransactionQuery.FindByUserName(userName);
+                RealmDB.addToRealm(CategoryList.categories);
+                RealmDB.addToRealm(TransactionList.mainList);
+
                 Intent intent = new Intent(LoginAction.this, Home.class);
                 startActivity(intent);
             }

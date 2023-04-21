@@ -12,11 +12,14 @@ import android.widget.Button;
 
 import com.example.money_meow.account.LoginAccount;
 import com.example.money_meow.account.signup.SignupAction;
+import com.example.money_meow.category.Category;
 import com.example.money_meow.category.CategoryList;
 import com.example.money_meow.database.CategoryQuery;
 import com.example.money_meow.database.MongoDBConnection;
+import com.example.money_meow.database.RealmDB;
 import com.example.money_meow.database.TransactionQuery;
 import com.example.money_meow.home.Home;
+import com.example.money_meow.transaction.Transaction;
 import com.example.money_meow.transaction.TransactionList;
 
 import io.realm.Realm;
@@ -46,8 +49,9 @@ public class MainActivity extends AppCompatActivity {
                     // Người dùng đã đăng nhập, cho phép truy cập vào các tính năng yêu cầu đăng nhập
                     String userName = sharedPreferences.getString("userName", "");
                     LoginAccount.getAcc(userName);
-                    CategoryList.categories = CategoryQuery.getCategoryList();
-                    TransactionList.mainList = TransactionQuery.FindByUserName(userName);
+                    // Lấy danh sách các Category từ cơ sở dữ liệu Realm
+                    CategoryList.categories = RealmDB.getDB(Category.class);
+                    TransactionList.mainList = RealmDB.getDB(Transaction.class);
 
                     intent.setClass(MainActivity.this, Home.class);
                 } else {

@@ -11,7 +11,6 @@ public class CategoryList {
     public static Category FindByName(String name){
         for(int i=0;i<categories.size();i++){
             if(categories.get(i).getCategoryName().equals(name)){
-                Log.v("category",categories.get(i).getCategoryName());
                 return categories.get(i);
             }
         }
