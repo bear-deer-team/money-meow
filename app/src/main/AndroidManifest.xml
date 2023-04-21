@@ -30,6 +30,7 @@
         <activity android:name=".information.Information"></activity>
         <activity android:name=".transaction.TransactionAction"></activity>
         <activity android:name=".setting.Settings"></activity>
+        <activity android:name=".setting.AccountSetting"></activity>
     </application>
 
 </manifest>

@@ -62,15 +62,15 @@ public class LoginAction extends AppCompatActivity {
 
                 SharedPreferences sharedPreferences = getSharedPreferences("login", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
+
                 editor.putBoolean("isLoggedIn", false);
                 editor.putString("userName", username.getEditText().getText().toString());
                 editor.apply();
+
                 Toast.makeText(getApplicationContext(), "Login Successfully!", Toast.LENGTH_SHORT).show();
 
                 CategoryList.categories = CategoryQuery.getCategoryList();
-               TransactionList.mainList = TransactionQuery.FindByUserName(userName);
-
-
+                TransactionList.mainList = TransactionQuery.FindByUserName(userName);
                 Intent intent = new Intent(LoginAction.this, Home.class);
                 startActivity(intent);
             }
