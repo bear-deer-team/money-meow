@@ -10,6 +10,7 @@ import android.os.StrictMode;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.money_meow.account.Account;
 import com.example.money_meow.account.LoginAccount;
 import com.example.money_meow.account.signup.SignupAction;
 import com.example.money_meow.category.Category;
@@ -33,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.welcome);
 
         Realm.init(this);
-        MongoDBConnection.connect();
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -48,13 +48,18 @@ public class MainActivity extends AppCompatActivity {
                 if (isLoggedIn) {
                     // Người dùng đã đăng nhập, cho phép truy cập vào các tính năng yêu cầu đăng nhập
                     String userName = sharedPreferences.getString("userName", "");
-                    LoginAccount.getAcc(userName);
+                    String name = sharedPreferences.getString("name", "");
+                    String email = sharedPreferences.getString("email", "");
+                    String password = sharedPreferences.getString("password", "");
+                    Double amount = (double)sharedPreferences.getFloat("balance", 0);
+                    LoginAccount.account = new Account(name,userName,email,password,amount);
                     // Lấy danh sách các Category từ cơ sở dữ liệu Realm
                     CategoryList.categories = RealmDB.getDB(Category.class);
                     TransactionList.mainList = RealmDB.getDB(Transaction.class);
 
                     intent.setClass(MainActivity.this, Home.class);
                 } else {
+                    MongoDBConnection.connect();
                     // Người dùng chưa đăng nhập, yêu cầu đăng nhập trước khi truy cập vào các tính năng yêu cầu đăng nhập
                     intent.setClass(MainActivity.this, SignupAction.class);
                 }

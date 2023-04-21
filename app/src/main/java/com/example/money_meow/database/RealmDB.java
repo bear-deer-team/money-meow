@@ -55,5 +55,46 @@ public class RealmDB {
         return result;
     }
 
+    public static void deleteFromRealm(List<Transaction> transactions) {
+        Realm realm = Realm.getDefaultInstance();
+        for(int i=0;i<transactions.size();i++) {
+            Transaction transaction = realm.where(Transaction.class)
+                    .equalTo("id", transactions.get(i).getId())
+                    .findFirst();
+            realm.executeTransaction(new Realm.Transaction() {
+                @Override
+                public void execute(Realm realm) {
+                    transaction.deleteFromRealm();
+                }
+            });
+            Log.v("delete","deleted" + transactions.get(i).getName());
+        }
+
+        realm.close();
+    }
+
+
+    public static void updateRealm(Transaction trans){
+        Realm realm = Realm.getDefaultInstance();
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                Transaction object = realm.where(Transaction.class).equalTo("id",trans.getId()).findFirst();
+                if (object != null) {
+                    realm.executeTransaction(new Realm.Transaction() {
+                        @Override
+                        public void execute(Realm realm) {
+                            realm.copyToRealmOrUpdate(object);
+                        }
+                    });
+                    Log.d("TAG", "Transaction updated.");
+                } else {
+                    Log.d("TAG", "Transaction not found.");
+                }
+            }
+        });
+        realm.close();
+
+    }
 
 }

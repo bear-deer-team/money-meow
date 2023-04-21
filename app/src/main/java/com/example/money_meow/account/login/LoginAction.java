@@ -66,7 +66,11 @@ public class LoginAction extends AppCompatActivity {
                 SharedPreferences.Editor editor = sharedPreferences.edit();
 
                 editor.putBoolean("isLoggedIn", true);
-                editor.putString("userName", username.getEditText().getText().toString());
+                editor.putString("name",LoginAccount.account.getName());
+                editor.putString("userName",LoginAccount.account.getUserName());
+                editor.putString("email",LoginAccount.account.getEmail());
+                editor.putString("password",LoginAccount.account.getPassword());
+                editor.putFloat("balance",(float)LoginAccount.account.getBalance().getAmount());
                 editor.apply();
 
                 Toast.makeText(getApplicationContext(), "Login Successfully!", Toast.LENGTH_SHORT).show();
