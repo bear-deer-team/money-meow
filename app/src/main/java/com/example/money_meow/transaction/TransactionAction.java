@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -25,13 +26,23 @@ public class TransactionAction extends AppCompatActivity {
     private Category category;
     private Transaction transaction;
 
-    private Button returnBtn;
+    private Button returnBtn,close,open;
     private Button acptTransBtn;
+
+    private LinearLayout categoryLayout;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_trans);
+
+        categoryLayout = findViewById(R.id.categoryLayout);
+        categoryLayout.setVisibility(View.GONE);
+        open = findViewById(R.id.categoryBtn);
+        close = findViewById(R.id.closeBtn);
+
+
+
 
         // tạm thời khởi tạo một category mặc định, chờ Vi hoàn thiện category
         category = new Category("buying", "extense");
@@ -70,5 +81,20 @@ public class TransactionAction extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        open.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view){
+                categoryLayout.setVisibility(View.VISIBLE);
+                close.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        categoryLayout.setVisibility(View.GONE);
+                    }
+                });
+            }
+        });
+
     }
 }
