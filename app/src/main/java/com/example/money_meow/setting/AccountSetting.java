@@ -2,22 +2,30 @@ package com.example.money_meow.setting;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.ContextThemeWrapper;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.money_meow.R;
 import com.example.money_meow.account.LoginAccount;
+import com.example.money_meow.account.PasswordEncryption;
+import com.example.money_meow.account.signup.AccountValidation;
 import com.example.money_meow.home.Home;
 import com.example.money_meow.information.Information;
 import com.example.money_meow.transaction.TransactionAction;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.textfield.TextInputLayout;
 
 public class AccountSetting extends AppCompatActivity {
-    Button addTransBtn, homeBtn, historyBtn, searchBtn, settingBtn;
+    Button addTransBtn, homeBtn, historyBtn, searchBtn, settingBtn, showBtn;
 
     TextView username, name, email, password;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +37,7 @@ public class AccountSetting extends AppCompatActivity {
         historyBtn = findViewById(R.id.HistoryBtn);
         searchBtn = findViewById(R.id.SearchBtn);
         settingBtn = findViewById(R.id.SettingBtn);
+        showBtn = findViewById(R.id.showBtn);
 
         username = (TextView) findViewById(R.id.acc_username);
         name = findViewById(R.id.acc_name);
@@ -51,6 +60,27 @@ public class AccountSetting extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        showBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(AccountSetting.this, R.style.AppBottomSheetDialogTheme);
+                LayoutInflater inflater = LayoutInflater.from(new ContextThemeWrapper(getApplicationContext(), R.style.Theme_Moneymeow));
+                View bottomView = inflater.inflate(R.layout.bottom_setting, null);
+                bottomView.findViewById(R.id.showBtn).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if(!isConfirmed(bottomView)) {
+                            return;
+                        }
+                        bottomSheetDialog.dismiss();
+                    }
+                });
+
+                bottomSheetDialog.setContentView(bottomView);
+                bottomSheetDialog.show();
+            }
+        });
     }
 
     private void setAccInfor() {
@@ -60,4 +90,33 @@ public class AccountSetting extends AppCompatActivity {
         String pwd = "********";
         password.setText(pwd);
     }
+
+    private boolean isConfirmed(View bottomView) {
+        TextInputLayout oldPassword = (TextInputLayout) bottomView.findViewById(R.id.pwd_box);
+        TextInputLayout newPwd = (TextInputLayout) bottomView.findViewById(R.id.newpwd_box);
+        TextInputLayout cfNewPwd = (TextInputLayout) bottomView.findViewById(R.id.cf_newpwd_box);
+
+        if(!isPwdMatched(oldPassword, newPwd.getEditText().getText().toString())
+                | !isPwdMatched(newPwd, cfNewPwd.getEditText().getText().toString())
+                | AccountValidation.isPasswordInvalid(newPwd)) {
+            oldPassword.getEditText().setText("");
+            newPwd.getEditText().setText("");
+            cfNewPwd.getEditText().setText("");
+            return false;
+        }
+        return true;
+
+    }
+
+    private boolean isPwdMatched(TextInputLayout oldPwd, String newPwd) {
+        if (PasswordEncryption.encrypt(oldPwd.getEditText().getText().toString()).equals(newPwd)) {
+            return true;
+        } else {
+            oldPwd.setError("Password's not matched");
+            return false;
+        }
+    }
+
+
+
 }
