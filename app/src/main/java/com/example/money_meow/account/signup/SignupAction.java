@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -32,6 +33,8 @@ public class SignupAction extends AppCompatActivity {
     Button signUpBtn;
     Button loginNavig;
 
+    ProgressBar progressBar;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,28 +51,58 @@ public class SignupAction extends AppCompatActivity {
         signUpBtn = (Button) findViewById(R.id.signup_btn);
         loginNavig = (Button) findViewById(R.id.login_btn);
 
-
-//        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-//        StrictMode.setThreadPolicy(policy);
+        progressBar = (ProgressBar) findViewById(R.id.progress);
 
         signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(AccountValidation.isNameInvalid(name)
-                | AccountValidation.isUserNameInvalid(userName)
-                | AccountValidation.isEmailInvalid(email)
-                | AccountValidation.isPasswordInvalid(password)
-                | AccountValidation.isConfirmPasswordInvalid(confirmPassword, password)) {
-                    return;
+                Thread uiThread = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                progressBar.setVisibility(View.VISIBLE);
+                            }
+                        });
+                    }
+                });
+
+                Thread mainThread = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                if(AccountValidation.isNameInvalid(name)
+                                        | AccountValidation.isUserNameInvalid(userName)
+                                        | AccountValidation.isEmailInvalid(email)
+                                        | AccountValidation.isPasswordInvalid(password)
+                                        | AccountValidation.isConfirmPasswordInvalid(confirmPassword, password)) {
+                                    password.getEditText().setText("");
+                                    confirmPassword.getEditText().setText("");
+                                    progressBar.setVisibility(View.GONE);
+                                    return;
+                                }
+                                progressBar.setVisibility(View.GONE);
+                                account = new Account(name.getEditText().getText().toString(), userName.getEditText().getText().toString(),
+                                        email.getEditText().getText().toString(), PasswordEncryption.encrypt(password.getEditText().getText().toString()));
+                                account.addNewUserToDB();
+
+                                Toast.makeText(getApplicationContext(), "Sign Up Successfully!", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(SignupAction.this, Home.class).putExtra("from", "Signup");
+                                startActivity(intent);
+                            }
+                        });
+                    }
+                });
+                uiThread.start();
+                try {
+                    uiThread.join();
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
                 }
-
-                account = new Account(name.getEditText().getText().toString(), userName.getEditText().getText().toString(),
-                        email.getEditText().getText().toString(), PasswordEncryption.encrypt(password.getEditText().getText().toString()));
-                account.addNewUserToDB();
-
-                Toast.makeText(getApplicationContext(), "Sign Up Successfully!", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(SignupAction.this, Home.class).putExtra("from", "Signup");
-                startActivity(intent);
+                mainThread.start();
             }
         });
 
@@ -82,5 +115,7 @@ public class SignupAction extends AppCompatActivity {
         });
 
 
+
     }
+
 }
