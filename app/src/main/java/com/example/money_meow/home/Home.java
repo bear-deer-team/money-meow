@@ -3,13 +3,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.money_meow.R;
+import com.example.money_meow.account.LoginAccount;
 import com.example.money_meow.information.Information;
+import com.example.money_meow.manageEngine.calculation.Calculation;
 import com.example.money_meow.setting.Settings;
 import com.example.money_meow.transaction.Transaction;
 import com.example.money_meow.transaction.TransactionAction;
@@ -21,6 +24,8 @@ public class Home extends AppCompatActivity {
     private RecyclerView rcvHistory;
     private HistoryListForHome historyListForHome;
     private Button addTransBtn,homeBtn,historyBtn,searchBtn,settingBtn;
+
+    private TextView balanceView;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home);
@@ -32,6 +37,13 @@ public class Home extends AppCompatActivity {
         historyBtn = findViewById(R.id.HistoryBtn);
         searchBtn = findViewById(R.id.SearchBtn);
         settingBtn = findViewById(R.id.SettingBtn);
+
+        balanceView = findViewById(R.id.balance);
+        balanceView.setText(
+                Double.toString(
+                Calculation.balanceCalc(LoginAccount.account.getBalance().getAmount(),TransactionList.mainList)
+                )
+                );
 
         historyListForHome = new HistoryListForHome(getList(),this);
         rcvHistory.setAdapter(historyListForHome);
