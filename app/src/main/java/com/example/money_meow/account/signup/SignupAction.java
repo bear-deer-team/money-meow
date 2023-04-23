@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.money_meow.MainActivity;
 import com.example.money_meow.R;
@@ -34,6 +35,7 @@ public class SignupAction extends AppCompatActivity {
     Button loginNavig;
 
     ProgressBar progressBar;
+    ConstraintLayout loading;
 
 
     @Override
@@ -52,6 +54,7 @@ public class SignupAction extends AppCompatActivity {
         loginNavig = (Button) findViewById(R.id.login_btn);
 
         progressBar = (ProgressBar) findViewById(R.id.progress);
+        loading = (ConstraintLayout) findViewById(R.id.loadingFrame);
 
         signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,6 +66,7 @@ public class SignupAction extends AppCompatActivity {
                             @Override
                             public void run() {
                                 progressBar.setVisibility(View.VISIBLE);
+                                loading.setVisibility(View.VISIBLE);
                             }
                         });
                     }
@@ -82,9 +86,11 @@ public class SignupAction extends AppCompatActivity {
                                     password.getEditText().setText("");
                                     confirmPassword.getEditText().setText("");
                                     progressBar.setVisibility(View.GONE);
+                                    loading.setVisibility(View.GONE);
                                     return;
                                 }
                                 progressBar.setVisibility(View.GONE);
+                                loading.setVisibility(View.GONE);
                                 account = new Account(name.getEditText().getText().toString(), userName.getEditText().getText().toString(),
                                         email.getEditText().getText().toString(), PasswordEncryption.encrypt(password.getEditText().getText().toString()));
                                 account.addNewUserToDB();

@@ -12,6 +12,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.money_meow.R;
 import com.example.money_meow.account.Account;
@@ -41,8 +42,7 @@ public class LoginAction extends AppCompatActivity {
     Button signinBtn;
 
     ProgressBar progressBar;
-    private int progressStatus = 0;
-    private Handler handler = new Handler();
+    ConstraintLayout loading;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +55,7 @@ public class LoginAction extends AppCompatActivity {
         signupBtn = (Button) findViewById(R.id.signup_btn);
 
         progressBar = (ProgressBar) findViewById(R.id.progress);
+        loading = (ConstraintLayout) findViewById(R.id.loadingFrame);
 
 
         signinBtn.setOnClickListener(new View.OnClickListener() {
@@ -68,6 +69,7 @@ public class LoginAction extends AppCompatActivity {
                             @Override
                             public void run() {
                                 progressBar.setVisibility(View.VISIBLE);
+                                loading.setVisibility(View.VISIBLE);
                             }
                         });
                     }
@@ -82,14 +84,17 @@ public class LoginAction extends AppCompatActivity {
                                 if (LoginValidation.isUsernameValid(username) ) {
                                     password.getEditText().setText("");
                                     progressBar.setVisibility(View.GONE);
+                                    loading.setVisibility(View.GONE);
                                     return;
                                 } else {
                                     if (LoginValidation.isPasswordValid(password, username)) {
                                         progressBar.setVisibility(View.GONE);
+                                        loading.setVisibility(View.GONE);
                                         return;
                                     }
                                 }
                                 progressBar.setVisibility(View.GONE);
+                                loading.setVisibility(View.GONE);
                                 String userName = username.getEditText().getText().toString();
 
                                 LoginAccount.getAcc(userName);

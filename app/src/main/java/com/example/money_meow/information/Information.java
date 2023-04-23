@@ -12,13 +12,18 @@ import com.example.money_meow.R;
 import com.example.money_meow.home.Home;
 
 public class Information extends AppCompatActivity {
-    private Button homeBtn;
+    private Button addTransBtn, homeBtn, historyBtn, searchBtn, settingBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.info);
         homeBtn = (Button) findViewById(R.id.HomeBtn);
+        historyBtn = (Button) findViewById(R.id.HistoryBtn);
+        addTransBtn = (Button) findViewById(R.id.AddTransBtn);
+        searchBtn = (Button) findViewById(R.id.SearchBtn);
+        settingBtn = (Button) findViewById(R.id.SettingBtn);
+
         homeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

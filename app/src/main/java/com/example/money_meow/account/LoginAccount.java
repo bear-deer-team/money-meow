@@ -11,4 +11,8 @@ public class LoginAccount {
     public static void getAcc(String userName){
         account = UserQuery.FindByUserName(userName);
     }
+
+    public static void logout() {
+        account = null;
+    }
 }

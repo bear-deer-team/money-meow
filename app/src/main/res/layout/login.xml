@@ -7,8 +7,12 @@
     android:background="@color/background_color_2">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/loadingFrame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:elevation="10dp"
+        android:background="@color/transparent_black"
+        android:visibility="invisible"
         >
         <ProgressBar
             android:id="@+id/progress"
@@ -24,6 +28,8 @@
             app:layout_constraintVertical_bias="0.5">
 
         </ProgressBar>
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
