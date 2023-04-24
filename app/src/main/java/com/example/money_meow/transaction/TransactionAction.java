@@ -1,8 +1,10 @@
 package com.example.money_meow.transaction;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -39,8 +41,8 @@ public class TransactionAction extends AppCompatActivity {
 
     private RecyclerView rcvCategory;
 
-    public static ImageView cateImg;
-    public static TextView cateName;
+    private static ImageView cateImg;
+    private static TextView cateName;
 
 
 
@@ -72,8 +74,8 @@ public class TransactionAction extends AppCompatActivity {
 
         cateImg = findViewById(R.id.imageView2);
         cateName = findViewById(R.id.categoryText);
-        cateImg.setImageResource(category.getImage(this));
-        cateName.setText(category.getCategoryName());
+
+        setCategory(category,this);
 
 
 
@@ -93,16 +95,16 @@ public class TransactionAction extends AppCompatActivity {
                     return;
                 }
                 double transactionAmount = Double.parseDouble(amount.getEditableText().toString());
-                transaction = new Transaction(category, transactionAmount,
-                        LoginAccount.account.getUserName(), date, "demo");
-                // transaction.saveToDatabase();
 
+                // transaction.saveToDatabase();
                 if(category.getCategoryType().equals("extense")) {
                     LoginAccount.account.getBalance().subtract(transactionAmount);
                 } else {
                     LoginAccount.account.getBalance().add(transactionAmount);
                 }
-
+                transaction = new Transaction(category, transactionAmount,
+                        LoginAccount.account.getUserName(), date, "demo");
+                TransactionList.add(transaction);
                 Toast.makeText(getApplicationContext(), "Add Transaction Successfully!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(TransactionAction.this, Home.class);
                 startActivity(intent);
@@ -123,5 +125,12 @@ public class TransactionAction extends AppCompatActivity {
             }
         });
 
+    }
+
+    public static void setCategory(Category _category, Context context) {
+        category = _category;
+        cateImg.setImageResource(category.getImage(context));
+        cateName.setText(category.getCategoryName());
+        Log.v("category",category.getCategoryName());
     }
 }

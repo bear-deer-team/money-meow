@@ -16,9 +16,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 public class Transaction extends RealmObject {
-
+    @PrimaryKey
     private String id;
     private Category transactionCategory;
 
