@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color_2">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/statisticsFrame"
+        android:layout_width="fill_parent"
+        android:layout_height="90dp"
+        android:background="@drawable/frame_bar"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <ViewFlipper
+            android:id="@+id/view_flipper1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/frameByCategory"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/frame_highlight"
+
+
+                app:layout_constraintBottom_toBottomOf="@+id/ByCategoryBtn"
+                app:layout_constraintEnd_toEndOf="@+id/ByCategoryBtn"
+                app:layout_constraintStart_toStartOf="@+id/ByCategoryBtn"
+                app:layout_constraintTop_toTopOf="@+id/ByCategoryBtn" />
+
+            <ImageView
+                android:id="@+id/frameByTime"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/frame_highlight"
+                android:layout_gravity="center"
+
+                app:layout_constraintBottom_toBottomOf="@+id/ByTimeBtn"
+                app:layout_constraintEnd_toEndOf="@+id/ByTimeBtn"
+                app:layout_constraintStart_toStartOf="@+id/ByTimeBtn"
+                app:layout_constraintTop_toTopOf="@+id/ByTimeBtn" />
+
+            <ImageView
+                android:id="@+id/frameByBoth"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/frame_highlight"
+                android:layout_gravity="right"
+
+                app:layout_constraintBottom_toBottomOf="@+id/ByBothBtn"
+                app:layout_constraintEnd_toEndOf="@+id/ByBothBtn"
+                app:layout_constraintStart_toStartOf="@+id/ByBothBtn"
+                app:layout_constraintTop_toTopOf="@+id/ByBothBtn"
+                tools:layout_conversion_absoluteHeight="0dp"
+                tools:layout_editor_absoluteY="0dp"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_conversion_absoluteWidth="0dp" />
+
+        </ViewFlipper>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/ByTimeBtn"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:background="@drawable/linechart"
+            app:layout_constraintBottom_toBottomOf="parent"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/ByCategoryBtn"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:background="@drawable/pichart"
+            app:layout_constraintBottom_toBottomOf="parent"
+
+            app:layout_constraintEnd_toStartOf="@+id/ByTimeBtn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/ByBothBtn"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:background="@drawable/calendar"
+            app:layout_constraintBottom_toBottomOf="parent"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ByTimeBtn"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/task_bar"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/AddTransBtn"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:background="@drawable/pen"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/HomeBtn"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:background="@drawable/home"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/HistoryBtn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/HistoryBtn"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:background="@drawable/pichart"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/AddTransBtn"
+            app:layout_constraintStart_toEndOf="@id/HomeBtn"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/SearchBtn"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:background="@drawable/search"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/SettingBtn"
+            app:layout_constraintStart_toEndOf="@id/AddTransBtn"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.533" />
+
+        <ImageView
+            android:id="@+id/show"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:background="@drawable/circle"
+
+            app:layout_constraintBottom_toBottomOf="@+id/HistoryBtn"
+            app:layout_constraintEnd_toEndOf="@+id/HistoryBtn"
+            app:layout_constraintStart_toStartOf="@+id/HistoryBtn"
+            app:layout_constraintTop_toTopOf="@+id/HistoryBtn" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/SettingBtn"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:background="@drawable/settings"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/SearchBtn"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
