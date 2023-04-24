@@ -41,6 +41,15 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
             }else {
                 holder.imgCate.setImageResource(category.getImage(this.context));
                 holder.nameCate.setText(category.getCategoryName());
+                holder.item.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        TransactionAction.category = category;
+                        TransactionAction.cateName.setText(TransactionAction.category.getCategoryName());
+                        TransactionAction.cateImg.setImageResource(TransactionAction.category.getImage(context));
+                        TransactionAction.categoryLayout.setVisibility(View.GONE);
+                    }
+                });
             }
     }
 
@@ -57,10 +66,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         private ImageView imgCate;
         private TextView nameCate;
 
+        private CardView item;
+
         public CategoryViewHolder(@NonNull View itemView) {
             super(itemView);
             imgCate = itemView.findViewById(R.id.categoryItemImage);
             nameCate = itemView.findViewById(R.id.categoryItemName);
+            item = itemView.findViewById(R.id.categotyItem);
         }
     }
 }

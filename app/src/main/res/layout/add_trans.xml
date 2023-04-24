@@ -97,7 +97,6 @@
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:layout_marginStart="4dp"
-            android:background="@drawable/another"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@id/ChooseCategoryBtn"
             app:layout_constraintTop_toTopOf="parent"

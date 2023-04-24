@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -24,17 +26,21 @@ import java.util.Date;
 
 
 public class TransactionAction extends AppCompatActivity {
+
     private EditText datetime;
     private EditText amount;
-    private Category category;
+    public static Category category;
     private Transaction transaction;
 
     private Button returnBtn,close,open;
     private Button acptTransBtn;
 
-    private LinearLayout categoryLayout;
+    public static LinearLayout categoryLayout;
 
     private RecyclerView rcvCategory;
+
+    public static ImageView cateImg;
+    public static TextView cateName;
 
 
 
@@ -63,6 +69,13 @@ public class TransactionAction extends AppCompatActivity {
         amount = (EditText) findViewById(R.id.edit_text_amount);
         returnBtn = (Button) findViewById(R.id.ReturnHomeBtn);
         acptTransBtn = (Button) findViewById(R.id.AcptTransBtn);
+
+        cateImg = findViewById(R.id.imageView2);
+        cateName = findViewById(R.id.categoryText);
+        cateImg.setImageResource(category.getImage(this));
+        cateName.setText(category.getCategoryName());
+
+
 
         returnBtn.setOnClickListener(new View.OnClickListener() {
             @Override
