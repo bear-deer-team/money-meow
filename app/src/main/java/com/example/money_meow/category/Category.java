@@ -7,7 +7,6 @@ import android.content.res.Resources;
 import android.content.Context;
 
 import io.realm.RealmObject;
-import io.realm.annotations.PrimaryKey;
 
 
 public class Category extends RealmObject {

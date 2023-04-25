@@ -44,7 +44,9 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
                 holder.item.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        TransactionAction.setCategory(category,context);
+                        TransactionAction.category = category;
+                        TransactionAction.cateName.setText(TransactionAction.category.getCategoryName());
+                        TransactionAction.cateImg.setImageResource(TransactionAction.category.getImage(context));
                         TransactionAction.categoryLayout.setVisibility(View.GONE);
                     }
                 });
