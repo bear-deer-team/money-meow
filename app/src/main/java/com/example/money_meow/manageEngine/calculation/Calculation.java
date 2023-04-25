@@ -3,6 +3,8 @@ package com.example.money_meow.manageEngine.calculation;
 import com.example.money_meow.account.Account;
 import com.example.money_meow.transaction.Transaction;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class Calculation {
@@ -15,6 +17,7 @@ public class Calculation {
                 balance-=transactions.get(i).getTransactionAmount();
             }
         }
+       balance = (double) Math.round(balance * 100) / 100;
         return balance;
     }
 }
