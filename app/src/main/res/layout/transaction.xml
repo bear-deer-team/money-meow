@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="92dp"
         android:background="@drawable/rectangle"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -36,8 +37,8 @@
             android:textSize="25dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.2"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.05"
+            app:layout_constraintStart_toEndOf="@+id/categoryImg"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.233" />
 
@@ -47,12 +48,13 @@
             android:layout_height="20dp"
             android:text="10/9/2023"
             android:textSize="15dp"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.211"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.05"
+            app:layout_constraintStart_toEndOf="@+id/categoryImg"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.611" />
+            app:layout_constraintVertical_bias="0.67" />
 
         <TextView
             android:id="@+id/amount"
@@ -62,12 +64,16 @@
             android:layout_marginRight="16dp"
             android:gravity="right"
             android:text="-$ 90"
+            android:maxLines="1"
             android:textColor="@color/red"
             android:textSize="30dp"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.361" />
+            app:layout_constraintVertical_bias="0.35"
+            app:layout_constraintStart_toEndOf="@id/name"
+            app:layout_constraintHorizontal_bias="1"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

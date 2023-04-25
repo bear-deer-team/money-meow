@@ -20,7 +20,7 @@ import com.example.money_meow.transaction.TransactionAction;
 
 public class Settings extends BaseActivity {
     Button infor, editAcc, logOut, display;
-    Button addTransBtn, homeBtn, historyBtn, searchBtn, settingBtn;
+    Button addTransBtn, homeBtn, historyBtn, transactionBtn, settingBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +35,7 @@ public class Settings extends BaseActivity {
         addTransBtn = findViewById(R.id.AddTransBtn);
         homeBtn = findViewById(R.id.HomeBtn);
         historyBtn = findViewById(R.id.HistoryBtn);
-        searchBtn = findViewById(R.id.SearchBtn);
+        transactionBtn = findViewById(R.id.transactionBtn);
         settingBtn = findViewById(R.id.SettingBtn);
 
         homeBtn.setOnClickListener(new View.OnClickListener() {

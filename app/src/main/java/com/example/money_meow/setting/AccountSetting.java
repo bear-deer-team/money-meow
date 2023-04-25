@@ -23,7 +23,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class AccountSetting extends BaseActivity {
-    Button addTransBtn, homeBtn, historyBtn, searchBtn, settingBtn;
+    Button addTransBtn, homeBtn, historyBtn, transactionBtn, settingBtn;
     Button returnBtn, showBtn;
 
     TextView username, name, email, password;
@@ -38,7 +38,7 @@ public class AccountSetting extends BaseActivity {
         addTransBtn = findViewById(R.id.AddTransBtn);
         homeBtn = findViewById(R.id.HomeBtn);
         historyBtn = findViewById(R.id.HistoryBtn);
-        searchBtn = findViewById(R.id.SearchBtn);
+        transactionBtn = findViewById(R.id.transactionBtn);
         settingBtn = findViewById(R.id.SettingBtn);
         showBtn = findViewById(R.id.showBtn);
         returnBtn = findViewById(R.id.returnBtn);

@@ -28,9 +28,7 @@ import java.util.List;
 public class Home extends BaseActivity {
     private RecyclerView rcvHistory;
     private HistoryListForHome historyListForHome;
-    private Button addTransBtn,homeBtn,historyBtn,searchBtn,settingBtn;
-    ImageView showEff;
-    Animation show;
+    private Button addTransBtn,homeBtn,historyBtn,transactionBtn,settingBtn;
 
     private TextView balanceView;
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +42,9 @@ public class Home extends BaseActivity {
         addTransBtn = findViewById(R.id.AddTransBtn);
         homeBtn = findViewById(R.id.HomeBtn);
         historyBtn = findViewById(R.id.HistoryBtn);
-        searchBtn = findViewById(R.id.SearchBtn);
+        transactionBtn = findViewById(R.id.transactionBtn);
         settingBtn = findViewById(R.id.SettingBtn);
 
-        showEff = findViewById(R.id.show);
-        show = AnimationUtils.loadAnimation(this, R.anim.click_navi_anim);
-        show.setRepeatMode(Animation.INFINITE);
 
         balanceView = findViewById(R.id.balance);
         balanceView.setText(
@@ -60,14 +55,6 @@ public class Home extends BaseActivity {
 
         historyListForHome = new HistoryListForHome(getList(),this);
         rcvHistory.setAdapter(historyListForHome);
-
-        showEff.postDelayed(new Runnable() {
-            public void run() {
-                showEff.setVisibility(View.VISIBLE);
-                showEff.setAnimation(show);
-            }
-        }, 0);
-
 
         homeBtn.setOnClickListener(new View.OnClickListener() {
             @Override

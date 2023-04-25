@@ -61,30 +61,77 @@
 
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/HomeBtn"
+            android:id="@+id/AddTransBtn"
             android:layout_width="70dp"
             android:layout_height="70dp"
+            android:background="@drawable/pen"
 
-            android:background="@drawable/home"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/show"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:background="@drawable/circle"
-
-            app:layout_constraintBottom_toBottomOf="@+id/HomeBtn"
-            app:layout_constraintEnd_toEndOf="@+id/HomeBtn"
-            app:layout_constraintStart_toStartOf="@+id/HomeBtn"
-            app:layout_constraintTop_toTopOf="@+id/HomeBtn"
+            app:layout_constraintTop_toTopOf="parent"
             />
 
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/HomeBtn"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:background="@drawable/home"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/HistoryBtn"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/HistoryBtn"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:background="@drawable/pichart"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/AddTransBtn"
+            app:layout_constraintStart_toEndOf="@id/HomeBtn"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/transactionBtn"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:background="@drawable/wallet_2"
+
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/AddTransBtn"
+            app:layout_constraintEnd_toStartOf="@id/SettingBtn"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.533" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/SettingBtn"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:background="@drawable/settings"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/transactionBtn" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/returnBtn"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/undo"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.01"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.01" />
 
 
 

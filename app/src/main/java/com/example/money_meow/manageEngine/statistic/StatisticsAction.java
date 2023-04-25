@@ -16,7 +16,7 @@ import com.example.money_meow.setting.Settings;
 import com.example.money_meow.transaction.TransactionAction;
 
 public class StatisticsAction extends BaseActivity {
-    private Button addTransBtn, homeBtn, historyBtn, searchBtn, settingBtn;
+    private Button addTransBtn, homeBtn, historyBtn, transactionBtn, settingBtn;
     private Button byTimeBtn, byCategoryBtn, byBothBtn;
 
     ViewFlipper viewFlipper1;
@@ -28,7 +28,7 @@ public class StatisticsAction extends BaseActivity {
         homeBtn = (Button) findViewById(R.id.HomeBtn);
         historyBtn = (Button) findViewById(R.id.HistoryBtn);
         addTransBtn = (Button) findViewById(R.id.AddTransBtn);
-        searchBtn = (Button) findViewById(R.id.SearchBtn);
+        transactionBtn = (Button) findViewById(R.id.transactionBtn);
         settingBtn = (Button) findViewById(R.id.SettingBtn);
 
         byTimeBtn = (Button) findViewById(R.id.ByTimeBtn);
