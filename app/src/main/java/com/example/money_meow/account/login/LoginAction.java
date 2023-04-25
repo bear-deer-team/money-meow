@@ -3,9 +3,7 @@ package com.example.money_meow.account.login;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -19,17 +17,13 @@ import com.example.money_meow.account.Account;
 import com.example.money_meow.account.LoginAccount;
 import com.example.money_meow.account.signup.SignupAction;
 import com.example.money_meow.category.CategoryList;
-import com.example.money_meow.database.CategoryQuery;
+import com.example.money_meow.database.query.CategoryQuery;
 import com.example.money_meow.database.MongoDBConnection;
 import com.example.money_meow.database.RealmDB;
-import com.example.money_meow.database.TransactionQuery;
+import com.example.money_meow.database.query.TransactionQuery;
 import com.example.money_meow.home.Home;
-import com.example.money_meow.transaction.Transaction;
 import com.example.money_meow.transaction.TransactionList;
 import com.google.android.material.textfield.TextInputLayout;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class LoginAction extends AppCompatActivity {
 

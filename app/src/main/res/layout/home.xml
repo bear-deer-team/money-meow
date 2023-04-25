@@ -90,6 +90,7 @@
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:background="@drawable/search"
+            
 
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/AddTransBtn"
@@ -99,9 +100,11 @@
 
         <ImageView
             android:id="@+id/show"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:background="@drawable/circle"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/show"
+            android:visibility="invisible"
+
 
             app:layout_constraintBottom_toBottomOf="@+id/HomeBtn"
             app:layout_constraintEnd_toEndOf="@+id/HomeBtn"

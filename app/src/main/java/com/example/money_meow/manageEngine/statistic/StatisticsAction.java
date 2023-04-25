@@ -9,10 +9,11 @@ import android.widget.ViewFlipper;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.money_meow.BaseActivity;
 import com.example.money_meow.R;
 import com.example.money_meow.home.Home;
 
-public class StatisticsAction extends AppCompatActivity {
+public class StatisticsAction extends BaseActivity {
     private Button addTransBtn, homeBtn, historyBtn, searchBtn, settingBtn;
     private Button byTimeBtn, byCategoryBtn, byBothBtn;
 

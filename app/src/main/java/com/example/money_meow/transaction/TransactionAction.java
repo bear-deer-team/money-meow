@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.money_meow.BaseActivity;
 import com.example.money_meow.R;
 import com.example.money_meow.account.LoginAccount;
 import com.example.money_meow.category.Category;
@@ -25,7 +26,7 @@ import com.example.money_meow.home.Home;
 import java.util.Date;
 
 
-public class TransactionAction extends AppCompatActivity {
+public class TransactionAction extends BaseActivity {
 
     private EditText datetime;
     private EditText amount;
@@ -92,7 +93,7 @@ public class TransactionAction extends AppCompatActivity {
                         | date == null) {
                     return;
                 }
-                double transactionAmount = Double.parseDouble(amount.getEditableText().toString());
+                double transactionAmount = Double.parseDouble(amount.getText().toString());
                 transaction = new Transaction(category, transactionAmount,
                         LoginAccount.account.getUserName(), date, "demo");
                 // transaction.saveToDatabase();
@@ -102,6 +103,7 @@ public class TransactionAction extends AppCompatActivity {
                 } else {
                     LoginAccount.account.getBalance().add(transactionAmount);
                 }
+                TransactionList.add(transaction);
 
                 Toast.makeText(getApplicationContext(), "Add Transaction Successfully!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(TransactionAction.this, Home.class);

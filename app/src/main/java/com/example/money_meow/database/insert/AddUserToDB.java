@@ -1,4 +1,4 @@
-package com.example.money_meow.database;
+package com.example.money_meow.database.insert;
 
 import io.realm.mongodb.App;
 

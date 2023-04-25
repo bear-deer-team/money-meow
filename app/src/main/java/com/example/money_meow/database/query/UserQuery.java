@@ -1,7 +1,7 @@
-package com.example.money_meow.database;
+package com.example.money_meow.database.query;
 
 import com.example.money_meow.account.Account;
-import com.example.money_meow.balance.Balance;
+import com.example.money_meow.database.query.MongoDBQuery;
 
 import org.bson.Document;
 

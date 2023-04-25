@@ -15,10 +15,8 @@ import com.example.money_meow.account.LoginAccount;
 import com.example.money_meow.account.signup.SignupAction;
 import com.example.money_meow.category.Category;
 import com.example.money_meow.category.CategoryList;
-import com.example.money_meow.database.CategoryQuery;
 import com.example.money_meow.database.MongoDBConnection;
 import com.example.money_meow.database.RealmDB;
-import com.example.money_meow.database.TransactionQuery;
 import com.example.money_meow.home.Home;
 import com.example.money_meow.transaction.Transaction;
 import com.example.money_meow.transaction.TransactionList;
@@ -39,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         StrictMode.setThreadPolicy(policy);
 
         Button start_btn = findViewById(R.id.start_button);
+        MongoDBConnection.connect();
         start_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -59,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
 
                     intent.setClass(MainActivity.this, Home.class);
                 } else {
-                    MongoDBConnection.connect();
                     // Người dùng chưa đăng nhập, yêu cầu đăng nhập trước khi truy cập vào các tính năng yêu cầu đăng nhập
                     intent.setClass(MainActivity.this, SignupAction.class);
                 }

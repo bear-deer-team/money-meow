@@ -6,8 +6,7 @@ import androidx.annotation.RequiresApi;
 
 import com.example.money_meow.category.Category;
 import com.example.money_meow.category.CategoryList;
-import com.example.money_meow.database.CategoryQuery;
-import com.example.money_meow.database.MongoDBInsert;
+import com.example.money_meow.database.insert.MongoDBInsert;
 
 import org.bson.Document;
 
@@ -59,7 +58,7 @@ public class Transaction extends RealmObject {
     }
 
     // constructor used in TransactionQuery
-    public Transaction(String id,String name, double transactionAmount, String userName, Date transactionTime, String transactionNote, String transactionType) {
+    public Transaction(String id, String name, double transactionAmount, String userName, Date transactionTime, String transactionNote, String transactionType) {
         this.id = id;
         this.name = name;
         this.transactionCategory = CategoryList.FindByName(this.name);
@@ -80,6 +79,7 @@ public class Transaction extends RealmObject {
         this.transactionNote = transactionNote;
         this.transactionType = category.getCategoryType();
     }
+
     // tạo một transaction
     @RequiresApi(api = Build.VERSION_CODES.O)
     public Transaction(String userName, Category transactionCategory, double transactionAmount, String transactionNote) {
@@ -90,19 +90,7 @@ public class Transaction extends RealmObject {
         this.transactionNote = transactionNote;
         this.transactionType = transactionCategory.getCategoryType();
     }
-    // lưu transaction vào database
-    public void saveToDatabase() {
-        //ket noi toi CSDl
 
-        MongoDBInsert.insertOne("MoneyMeow","transactions",new Document()
-                .append("userName",userName)
-                .append("name",name)
-                .append("type",transactionType)
-                .append("amount",transactionAmount)
-                .append("note",transactionNote)
-                .append("date", transactionTime));
-
-    }
     //Hien thi thong tin trong transaction
     public void display(Transaction a) {
         // Lấy các thành phần giao diện
@@ -110,8 +98,6 @@ public class Transaction extends RealmObject {
         // Cập nhật thông tin của giao dịch lên các thành phần giao diện
 
     }
-
-
 
 
     public Category getTransactionCategory() {
@@ -157,5 +143,16 @@ public class Transaction extends RealmObject {
 
     public String getId() {
         return id;
+    }
+
+    public Document toDocument() {
+        return new Document()
+                .append("id", id)
+                .append("userName",userName)
+                .append("name",name)
+                .append("type",transactionType)
+                .append("amount",transactionAmount)
+                .append("note",transactionNote)
+                .append("date", transactionTime);
     }
 }

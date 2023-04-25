@@ -1,6 +1,8 @@
-package com.example.money_meow.database;
+package com.example.money_meow.database.insert;
 
 import android.util.Log;
+
+import com.example.money_meow.database.MongoDBConnection;
 
 import org.bson.Document;
 

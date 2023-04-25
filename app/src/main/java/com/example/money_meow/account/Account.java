@@ -2,8 +2,8 @@ package com.example.money_meow.account;
 
 
 import com.example.money_meow.balance.Balance;
-import com.example.money_meow.database.AddUserToDB;
-import com.example.money_meow.database.MongoDBInsert;
+import com.example.money_meow.database.insert.AddUserToDB;
+import com.example.money_meow.database.insert.MongoDBInsert;
 
 import org.bson.Document;
 

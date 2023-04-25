@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.example.money_meow.BaseActivity;
 import com.example.money_meow.R;
 import com.example.money_meow.account.LoginAccount;
 import com.example.money_meow.account.PasswordEncryption;
@@ -21,10 +22,12 @@ import com.example.money_meow.transaction.TransactionAction;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.textfield.TextInputLayout;
 
-public class AccountSetting extends AppCompatActivity {
-    Button addTransBtn, homeBtn, historyBtn, searchBtn, settingBtn, showBtn;
+public class AccountSetting extends BaseActivity {
+    Button addTransBtn, homeBtn, historyBtn, searchBtn, settingBtn;
+    Button returnBtn, showBtn;
 
     TextView username, name, email, password;
+
 
 
     @Override
@@ -38,6 +41,7 @@ public class AccountSetting extends AppCompatActivity {
         searchBtn = findViewById(R.id.SearchBtn);
         settingBtn = findViewById(R.id.SettingBtn);
         showBtn = findViewById(R.id.showBtn);
+        returnBtn = findViewById(R.id.returnBtn);
 
         username = (TextView) findViewById(R.id.acc_username);
         name = findViewById(R.id.acc_name);
@@ -79,6 +83,14 @@ public class AccountSetting extends AppCompatActivity {
 
                 bottomSheetDialog.setContentView(bottomView);
                 bottomSheetDialog.show();
+            }
+        });
+
+        returnBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AccountSetting.this, Settings.class);
+                startActivity(intent);
             }
         });
     }

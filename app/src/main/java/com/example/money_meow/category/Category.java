@@ -6,8 +6,6 @@ package com.example.money_meow.category;
 import android.content.res.Resources;
 import android.content.Context;
 
-import com.example.money_meow.database.CategoryQuery;
-
 import io.realm.RealmObject;
 
 
@@ -49,7 +47,6 @@ public class Category extends RealmObject {
         String drawableName = this.categoryName;
         Resources resources = context.getResources();
         this.image = resources.getIdentifier(drawableName, "drawable", context.getPackageName());
-
     }
 
     public int getImage(Context context) {

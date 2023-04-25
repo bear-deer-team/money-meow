@@ -1,6 +1,8 @@
-package com.example.money_meow.database;
+package com.example.money_meow.database.update;
 
 import android.util.Log;
+
+import com.example.money_meow.database.MongoDBConnection;
 
 import org.bson.Document;
 import org.bson.conversions.Bson;
@@ -8,7 +10,7 @@ import org.bson.conversions.Bson;
 import io.realm.mongodb.mongo.MongoCollection;
 
 public class MongoDBUpdate {
-    public static void update(String database, String collection, Bson filter, Bson update) {
+    public static void update(String database, String collection, Document filter, Document update) {
         MongoCollection<Document> mongoCollection = MongoDBConnection.accessDatabase(database, collection);
 
         mongoCollection.updateMany(filter, update).getAsync(task -> {

@@ -1,6 +1,6 @@
 package com.example.money_meow.account.signup;
 
-import com.example.money_meow.database.MongoDBQuery;
+import com.example.money_meow.database.query.MongoDBQuery;
 import com.google.android.material.textfield.TextInputLayout;
 
 import org.bson.Document;

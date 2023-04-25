@@ -8,6 +8,7 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.money_meow.BaseActivity;
 import com.example.money_meow.MainActivity;
 import com.example.money_meow.R;
 import com.example.money_meow.account.LoginAccount;
@@ -16,7 +17,7 @@ import com.example.money_meow.home.Home;
 import com.example.money_meow.information.Information;
 import com.example.money_meow.transaction.TransactionAction;
 
-public class Settings extends AppCompatActivity {
+public class Settings extends BaseActivity {
     Button infor, editAcc, logOut, display;
     Button addTransBtn, homeBtn, historyBtn, searchBtn, settingBtn;
 

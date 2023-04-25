@@ -75,16 +75,16 @@
         app:layout_constraintStart_toStartOf = "@id/ChooseCategoryBtn"
         app:layout_constraintBottom_toTopOf = "@id/ChooseCategoryBtn" />
     <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/ChooseCategoryBtn"
-            android:layout_width="272dp"
-            android:layout_height="67dp"
-            android:background="@drawable/rectangle"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.45" >
+        android:id="@+id/ChooseCategoryBtn"
+        android:layout_width="272dp"
+        android:layout_height="67dp"
+        android:background="@drawable/rectangle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.45" >
 
         <Button
             android:id="@+id/categoryBtn"
@@ -125,16 +125,16 @@
         app:layout_constraintStart_toStartOf = "@id/ChooseTimeBtn"
         app:layout_constraintBottom_toTopOf = "@id/ChooseTimeBtn" />
     <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/ChooseTimeBtn"
-            android:layout_width="272dp"
-            android:layout_height="67dp"
-            android:background="@drawable/rectangle"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.6">
+        android:id="@+id/ChooseTimeBtn"
+        android:layout_width="272dp"
+        android:layout_height="67dp"
+        android:background="@drawable/rectangle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.6">
 
         <ImageView
             android:id="@+id/imageView5"
@@ -186,16 +186,16 @@
         app:layout_constraintStart_toStartOf = "@id/EnterAmountBtn"
         app:layout_constraintTop_toBottomOf = "@id/EnterAmountBtn" />
     <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/EnterAmountBtn"
-            android:layout_width="272dp"
-            android:layout_height="67dp"
-            android:background="@drawable/rectangle"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.75">
+        android:id="@+id/EnterAmountBtn"
+        android:layout_width="272dp"
+        android:layout_height="67dp"
+        android:background="@drawable/rectangle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.75">
 
         <ImageView
             android:id="@+id/imageView6"
