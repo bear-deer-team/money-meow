@@ -1,6 +1,8 @@
 package com.example.money_meow.transaction;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class TransactionList {
@@ -35,5 +37,14 @@ public class TransactionList {
         updateList.clear();
         deleteList.clear();
         addList.clear();
+    }
+
+    public void sortDatesDescending() {
+        Collections.sort(mainList, new Comparator<Transaction>() {
+            @Override
+            public int compare(Transaction t1, Transaction t2) {
+                return t2.getTransactionTime().compareTo(t1.getTransactionTime());
+            }
+        });
     }
 }
