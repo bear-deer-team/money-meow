@@ -96,14 +96,17 @@ public class TransactionAction extends BaseActivity {
                 double transactionAmount = Double.parseDouble(amount.getText().toString());
                 transaction = new Transaction(category, transactionAmount,
                         LoginAccount.account.getUserName(), date, "demo");
-                // transaction.saveToDatabase();
 
-                if(category.getCategoryType().equals("extense")) {
-                    LoginAccount.account.getBalance().subtract(transactionAmount);
-                } else {
-                    LoginAccount.account.getBalance().add(transactionAmount);
+                if(transaction.getTransactionType().equals("income")){
+                    LoginAccount.account.setBalance(
+                            LoginAccount.account.getBalance()+transactionAmount);
+                }else{
+                    LoginAccount.account.setBalance(
+                            LoginAccount.account.getBalance()-transactionAmount);
                 }
+                // transaction.saveToDatabase();
                 TransactionList.add(transaction);
+                TransactionList.sortDatesDescending();
 
                 Toast.makeText(getApplicationContext(), "Add Transaction Successfully!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(TransactionAction.this, Home.class);

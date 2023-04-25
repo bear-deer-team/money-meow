@@ -39,7 +39,7 @@ public class TransactionList {
         addList.clear();
     }
 
-    public void sortDatesDescending() {
+    public static void sortDatesDescending() {
         Collections.sort(mainList, new Comparator<Transaction>() {
             @Override
             public int compare(Transaction t1, Transaction t2) {

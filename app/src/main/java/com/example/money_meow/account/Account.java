@@ -1,7 +1,6 @@
 package com.example.money_meow.account;
 
 
-import com.example.money_meow.balance.Balance;
 import com.example.money_meow.database.insert.AddUserToDB;
 import com.example.money_meow.database.insert.MongoDBInsert;
 
@@ -12,7 +11,7 @@ public class  Account implements AddUserToDB{
     private String userName;
     private String email;
     private String password;
-    private Balance balance;
+    private Double balance;
 
     public Account() {
 
@@ -23,7 +22,7 @@ public class  Account implements AddUserToDB{
         this.userName = userName;
         this.email = email;
         this.password = password;
-        this.balance = new Balance();
+        this.balance = new Double(0);
     }
 
     public Account(String name, String userName, String email, String password, double amount) {
@@ -31,7 +30,7 @@ public class  Account implements AddUserToDB{
         this.userName = userName;
         this.email = email;
         this.password = password;
-        this.balance = new Balance(amount);
+        this.balance = amount;
     }
 
     public String getName() {
@@ -50,8 +49,8 @@ public class  Account implements AddUserToDB{
         return password;
     }
 
-    public Balance getBalance() {
-        return balance;
+    public Double getBalance() {
+        return this.balance;
     }
 
     public void setName(String name) {
@@ -70,7 +69,7 @@ public class  Account implements AddUserToDB{
         this.password = password;
     }
 
-    public void setBalance(Balance balance) {
+    public void setBalance(Double balance) {
         this.balance = balance;
     }
 
@@ -84,6 +83,6 @@ public class  Account implements AddUserToDB{
                         .append("userName", this.userName)
                         .append("email", this.email)
                         .append("password", this.password)
-                        .append("balance", this.balance.getAmount()));
+                        .append("balance", this.balance));
     }
 }

@@ -16,9 +16,6 @@ public class TransactionValidation {
         if (amount < 0) {
             throw new InvalidFundingAmountException(new Double(amount));
         }
-        if (amount > LoginAccount.account.getBalance().getAmount() && category.getCategoryType().equals("extense")) {
-            throw new InsufficientFundsException(new Double(amount));
-        }
     }
 
     public static boolean isTransactionAmountInvalid(EditText valInput, Category category) {

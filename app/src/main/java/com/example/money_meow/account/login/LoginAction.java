@@ -22,6 +22,7 @@ import com.example.money_meow.database.MongoDBConnection;
 import com.example.money_meow.database.RealmDB;
 import com.example.money_meow.database.query.TransactionQuery;
 import com.example.money_meow.home.Home;
+import com.example.money_meow.manageEngine.calculation.Calculation;
 import com.example.money_meow.transaction.TransactionList;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -101,7 +102,7 @@ public class LoginAction extends AppCompatActivity {
                                 editor.putString("userName",LoginAccount.account.getUserName());
                                 editor.putString("email",LoginAccount.account.getEmail());
                                 editor.putString("password",LoginAccount.account.getPassword());
-                                editor.putFloat("balance",(float)LoginAccount.account.getBalance().getAmount());
+                                editor.putFloat("balance",LoginAccount.account.getBalance().floatValue());
                                 editor.apply();
 
                                 Toast.makeText(getApplicationContext(), "Login Successfully!", Toast.LENGTH_SHORT).show();
@@ -109,8 +110,10 @@ public class LoginAction extends AppCompatActivity {
                                 RealmDB.configFile();
                                 CategoryList.categories = CategoryQuery.getCategoryList();
                                 TransactionList.mainList = TransactionQuery.FindByUserName(userName);
+                                TransactionList.sortDatesDescending();
                                 RealmDB.addToRealm(CategoryList.categories);
                                 RealmDB.addToRealm(TransactionList.mainList);
+                                LoginAccount.account.setBalance(Calculation.balanceCalc(LoginAccount.account.getBalance(),TransactionList.mainList));
 
                                 Intent intent = new Intent(LoginAction.this, Home.class);
                                 startActivity(intent);

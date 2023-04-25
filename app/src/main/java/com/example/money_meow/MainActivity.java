@@ -18,6 +18,7 @@ import com.example.money_meow.category.CategoryList;
 import com.example.money_meow.database.MongoDBConnection;
 import com.example.money_meow.database.RealmDB;
 import com.example.money_meow.home.Home;
+import com.example.money_meow.manageEngine.calculation.Calculation;
 import com.example.money_meow.transaction.Transaction;
 import com.example.money_meow.transaction.TransactionList;
 
@@ -55,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
                     // Lấy danh sách các Category từ cơ sở dữ liệu Realm
                     CategoryList.categories = RealmDB.getDB(Category.class);
                     TransactionList.mainList = RealmDB.getDB(Transaction.class);
+                    TransactionList.sortDatesDescending();
+                    LoginAccount.account.setBalance(Calculation.balanceCalc(LoginAccount.account.getBalance(),TransactionList.mainList));
 
                     intent.setClass(MainActivity.this, Home.class);
                 } else {

@@ -49,7 +49,7 @@ public class Home extends BaseActivity {
         balanceView = findViewById(R.id.balance);
         balanceView.setText(
                 Double.toString(
-                Calculation.balanceCalc(LoginAccount.account.getBalance().getAmount(),TransactionList.mainList)
+                LoginAccount.account.getBalance()
                 )
                 );
 
