@@ -8,7 +8,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/statisticsFrame"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="90dp"
         android:background="@drawable/frame_bar"
 
@@ -25,54 +25,95 @@
             android:layout_height="match_parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
-                android:id="@+id/frameByCategory"
-                android:layout_width="100dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/frame_highlight"
+                android:orientation="horizontal">
 
+                <ImageView
+                    android:id="@+id/frameByCategory"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:src="@drawable/frame_highlight"
+                    android:scaleType="fitCenter"
+                    android:adjustViewBounds="true" />
 
-                app:layout_constraintBottom_toBottomOf="@+id/ByCategoryBtn"
-                app:layout_constraintEnd_toEndOf="@+id/ByCategoryBtn"
-                app:layout_constraintStart_toStartOf="@+id/ByCategoryBtn"
-                app:layout_constraintTop_toTopOf="@+id/ByCategoryBtn" />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2" />
 
-            <ImageView
-                android:id="@+id/frameByTime"
-                android:layout_width="100dp"
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/frame_highlight"
-                android:layout_gravity="center"
+                android:orientation="horizontal">
 
-                app:layout_constraintBottom_toBottomOf="@+id/ByTimeBtn"
-                app:layout_constraintEnd_toEndOf="@+id/ByTimeBtn"
-                app:layout_constraintStart_toStartOf="@+id/ByTimeBtn"
-                app:layout_constraintTop_toTopOf="@+id/ByTimeBtn" />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
 
-            <ImageView
-                android:id="@+id/frameByBoth"
-                android:layout_width="100dp"
+                <ImageView
+                    android:id="@+id/frameByTime"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:src="@drawable/frame_highlight"
+                    android:scaleType="fitCenter"
+                    android:adjustViewBounds="true" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/frame_highlight"
-                android:layout_gravity="right"
+                android:orientation="horizontal">
 
-                app:layout_constraintBottom_toBottomOf="@+id/ByBothBtn"
-                app:layout_constraintEnd_toEndOf="@+id/ByBothBtn"
-                app:layout_constraintStart_toStartOf="@+id/ByBothBtn"
-                app:layout_constraintTop_toTopOf="@+id/ByBothBtn"
-                tools:layout_conversion_absoluteHeight="0dp"
-                tools:layout_editor_absoluteY="0dp"
-                tools:layout_editor_absoluteX="0dp"
-                tools:layout_conversion_absoluteWidth="0dp" />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2" />
+
+                <ImageView
+                    android:id="@+id/frameByBoth"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:src="@drawable/frame_highlight"
+                    android:scaleType="fitCenter"
+                    android:adjustViewBounds="true" />
+
+            </LinearLayout>
 
         </ViewFlipper>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.33"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.67"/>
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/ByTimeBtn"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:background="@drawable/linechart"
-            app:layout_constraintBottom_toBottomOf="parent"
 
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -83,9 +124,9 @@
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:background="@drawable/pichart"
-            app:layout_constraintBottom_toBottomOf="parent"
 
-            app:layout_constraintEnd_toStartOf="@+id/ByTimeBtn"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="MissingConstraints" />
@@ -95,10 +136,10 @@
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:background="@drawable/calendar"
-            app:layout_constraintBottom_toBottomOf="parent"
 
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/ByTimeBtn"
+            app:layout_constraintStart_toEndOf="@+id/guideline2"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="MissingConstraints" />
 

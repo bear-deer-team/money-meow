@@ -12,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.money_meow.BaseActivity;
 import com.example.money_meow.R;
 import com.example.money_meow.home.Home;
+import com.example.money_meow.setting.Settings;
+import com.example.money_meow.transaction.TransactionAction;
 
 public class StatisticsAction extends BaseActivity {
     private Button addTransBtn, homeBtn, historyBtn, searchBtn, settingBtn;
@@ -61,6 +63,22 @@ public class StatisticsAction extends BaseActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(StatisticsAction.this, Home.class);
+                startActivity(intent);
+            }
+        });
+
+        addTransBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(StatisticsAction.this, TransactionAction.class);
+                startActivity(intent);
+            }
+        });
+
+        settingBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(StatisticsAction.this, Settings.class);
                 startActivity(intent);
             }
         });
