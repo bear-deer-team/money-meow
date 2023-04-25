@@ -14,19 +14,13 @@ import com.example.money_meow.home.Home;
 import com.example.money_meow.setting.Settings;
 
 public class Information extends BaseActivity {
-    private Button addTransBtn, homeBtn, historyBtn, searchBtn, settingBtn;
-    private Button returnBtn;
+    private Button  homeBtn ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.info);
         homeBtn = (Button) findViewById(R.id.HomeBtn);
-        historyBtn = (Button) findViewById(R.id.HistoryBtn);
-        addTransBtn = (Button) findViewById(R.id.AddTransBtn);
-        searchBtn = (Button) findViewById(R.id.SearchBtn);
-        settingBtn = (Button) findViewById(R.id.SettingBtn);
-        returnBtn = (Button) findViewById(R.id.returnBtn);
 
         homeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,13 +30,7 @@ public class Information extends BaseActivity {
             }
         });
 
-        returnBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Information.this, Settings.class);
-                startActivity(intent);
-            }
-        });
+
     }
 
 }

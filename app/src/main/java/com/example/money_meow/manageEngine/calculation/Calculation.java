@@ -15,6 +15,7 @@ public class Calculation {
                 balance-=transactions.get(i).getTransactionAmount();
             }
         }
+        balance = (double) Math.round(balance * 100) / 100;
         return balance;
     }
 }
