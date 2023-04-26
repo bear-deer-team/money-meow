@@ -13,6 +13,7 @@ public class TransactionDelete {
     public static void deleteUptoDB() {
         if (!TransactionList.deleteList.isEmpty()) {
             List< Transaction> deleteList = TransactionList.deleteList;
+            RealmDBDelete.deleteFromRealm(deleteList);
             for (int i = 0; i < deleteList.size(); i++) {
                 MongoDBDelete.deleteOne("MoneyMeow","transactions", new Document().append("id", deleteList.get(i).getId()));
             }
