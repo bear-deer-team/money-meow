@@ -46,6 +46,7 @@
         app:layout_constraintHeight_default="percent"
         app:layout_constraintHeight_percent="0.6"
         android:layout_height="0dp"
+        android:padding="10dp"
         android:background="@drawable/history_in_home_layout"
 
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout1"
