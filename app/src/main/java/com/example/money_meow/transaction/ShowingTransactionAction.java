@@ -34,6 +34,12 @@ public class ShowingTransactionAction extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.transaction_list);
 
+        addTransBtn = findViewById(R.id.AddTransBtn);
+        homeBtn = findViewById(R.id.HomeBtn);
+        historyBtn = findViewById(R.id.HistoryBtn);
+        transactionBtn = findViewById(R.id.transactionBtn);
+        settingBtn = findViewById(R.id.SettingBtn);
+
         rcvHistory = findViewById(R.id.historylist);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this,1);
         rcvHistory.setLayoutManager(gridLayoutManager);
