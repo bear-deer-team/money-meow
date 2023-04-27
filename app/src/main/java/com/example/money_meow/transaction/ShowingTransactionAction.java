@@ -1,10 +1,12 @@
 package com.example.money_meow.transaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -13,6 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.money_meow.BaseActivity;
 import com.example.money_meow.R;
 import com.example.money_meow.home.HistoryListForHome;
+import com.example.money_meow.home.Home;
+import com.example.money_meow.information.Information;
+import com.example.money_meow.manageEngine.statistic.StatisticsAction;
+import com.example.money_meow.setting.Settings;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,6 +27,8 @@ import java.util.List;
 public class ShowingTransactionAction extends BaseActivity {
     private RecyclerView rcvHistory;
     private HistoryListForHome historyListForHome;
+    private Button addTransBtn,homeBtn,historyBtn,transactionBtn,settingBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +65,37 @@ public class ShowingTransactionAction extends BaseActivity {
 
             }
         });
+
+        homeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ShowingTransactionAction.this, Information.class);
+                startActivity(intent);
+            }
+        });
+        addTransBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ShowingTransactionAction.this, TransactionAction.class);
+                startActivity(intent);
+            }
+        });
+
+        settingBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ShowingTransactionAction.this, Settings.class);
+                startActivity(intent);
+            }
+        });
+        historyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ShowingTransactionAction.this, StatisticsAction.class);
+                startActivity(intent);
+            }
+        });
+
 
     }
 
