@@ -2,6 +2,8 @@ package com.example.money_meow.manageEngine.searchEngine;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -30,11 +32,9 @@ import java.util.List;
 
 public class SearchEngine extends BaseActivity {
     private RecyclerView rcvTransList;
-
-    private String searchValue;
-    public static LinearLayout searchTransLayout;
-
     private TransactionAdapter transactionAdapter;
+
+    private  String searchValue;
     private EditText searchText;
     private Button returnBtn;
     public static ImageView searchImg;
@@ -43,17 +43,15 @@ public class SearchEngine extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.searching);
 
-        //searchTransLayout = findViewById(R.id.searchTransLayout);
-
         rcvTransList = findViewById(R.id.TransactionList);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this,1);
         rcvTransList.setLayoutManager(gridLayoutManager);
 
-//        transactionAdapter = new TransactionAdapter(getList(searchValue),this);
-//        rcvTransList.setAdapter(transactionAdapter);
+        transactionAdapter = new TransactionAdapter(getList(searchValue),this);
+        rcvTransList.setAdapter(transactionAdapter);
 
         searchText = (EditText) findViewById(R.id.edit_text_search);
-
+        searchText.addTextChangedListener(searchValueWatcher);
         searchImg = findViewById(R.id.imageSearch);
 
         returnBtn = findViewById(R.id.ReturnHomeBtn);
@@ -64,37 +62,41 @@ public class SearchEngine extends BaseActivity {
                 startActivity(intent);
             }
         });
-        // Lắng nghe sự kiện nhập từ khóa tìm kiếm vào EditText
-//        searchText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-//            @Override
-//            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-//                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-//                    searchValue = searchText.getText().toString().trim();
-//                    transactionAdapter.updateList(getList(searchValue));
-//                    return true;
-//                }
-//                return false;
-//            }
-//        });
     }
-//    private List<Transaction> getList(String keyword) {
-//        List<Transaction> res = new ArrayList<>();
-//        for (Transaction transaction : TransactionList.mainList) {
-//            if (transaction.getTransactionCategory().getCategoryName().contains(keyword)) {
-//                res.add(transaction);
-//            }
-//        }
-//        return res;
-//    }
+    private List<Transaction> getList(String keyword) {
+        List<Transaction> res = new ArrayList<>();
+        if (keyword != null && !keyword.isEmpty()) {
+            for (Transaction transaction : TransactionList.mainList) {
+                if (transaction.getTransactionCategory() != null &&
+                        transaction.getTransactionCategory().getCategoryName() != null &&
+                        transaction.getTransactionCategory().getCategoryName().contains(keyword)) {
+                    res.add(transaction);
+                }
+            }
+        } else {
+            res = getAll();
+        }
+        return res;
+    }
 
-//    private List<Transaction> filterList(List<Transaction> transactionList, String keyword) {
-//        List<Transaction> res = new ArrayList<>();
-//        for (Transaction transaction : transactionList) {
-//            if (transaction.getTransactionCategory().getCategoryName().contains(keyword)) {
-//                res.add(transaction);
-//            }
-//        }
-//        return res;
-//    }
+    private List<Transaction> getAll() {
+        List<Transaction> res = TransactionList.mainList.subList(Math.max(TransactionList.mainList.size() - 10, 0), TransactionList.mainList.size());
+        return res;
+    }
+    private TextWatcher searchValueWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            searchValue = s.toString();
+            transactionAdapter.updateList(getList(searchValue));
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+        }
+    };
 
 }
