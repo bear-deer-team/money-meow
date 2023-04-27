@@ -57,13 +57,7 @@ public class Home extends BaseActivity {
         historyListForHome = new HistoryListForHome(getList(),this);
         rcvHistory.setAdapter(historyListForHome);
 
-        homeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Home.this, Information.class);
-                startActivity(intent);
-            }
-        });
+
         addTransBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
