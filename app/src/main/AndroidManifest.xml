@@ -28,6 +28,7 @@
         <activity android:name=".account.signup.SignupAction"></activity>
         <activity android:name=".home.Home"></activity>
         <activity android:name=".information.Information"></activity>
+        <activity android:name=".manageEngine.searchEngine.SearchEngine"></activity>
         <activity android:name=".transaction.TransactionAction"></activity>
         <activity android:name=".setting.Settings"></activity>
         <activity android:name=".setting.AccountSetting"></activity>

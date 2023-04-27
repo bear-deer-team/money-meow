@@ -17,6 +17,7 @@ import com.example.money_meow.R;
 import com.example.money_meow.account.LoginAccount;
 import com.example.money_meow.information.Information;
 import com.example.money_meow.manageEngine.calculation.Calculation;
+import com.example.money_meow.manageEngine.searchEngine.SearchEngine;
 import com.example.money_meow.manageEngine.statistic.StatisticsAction;
 import com.example.money_meow.setting.Settings;
 import com.example.money_meow.transaction.Transaction;
@@ -82,6 +83,14 @@ public class Home extends BaseActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Home.this, StatisticsAction.class);
+                startActivity(intent);
+            }
+        });
+
+        transactionBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Home.this, SearchEngine.class);
                 startActivity(intent);
             }
         });
