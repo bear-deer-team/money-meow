@@ -13,11 +13,12 @@ import org.bson.Document;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
-public class Transaction extends RealmObject {
+public class Transaction extends RealmObject implements Comparable{
 
     @PrimaryKey
     private String id;
@@ -157,4 +158,11 @@ public class Transaction extends RealmObject {
                 .append("note",transactionNote)
                 .append("date", transactionTime);
     }
+
+    @Override
+    public int compareTo(Object o) {
+        Transaction another = (Transaction) o;
+        return another.getTransactionTime().compareTo(this.transactionTime);
+    }
+
 }

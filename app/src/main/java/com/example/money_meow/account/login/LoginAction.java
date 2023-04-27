@@ -17,6 +17,7 @@ import com.example.money_meow.account.Account;
 import com.example.money_meow.account.LoginAccount;
 import com.example.money_meow.account.signup.SignupAction;
 import com.example.money_meow.category.CategoryList;
+import com.example.money_meow.database.insert.RealmInsert;
 import com.example.money_meow.database.query.CategoryQuery;
 import com.example.money_meow.database.MongoDBConnection;
 import com.example.money_meow.database.RealmDB;
@@ -111,8 +112,8 @@ public class LoginAction extends AppCompatActivity {
                                 CategoryList.categories = CategoryQuery.getCategoryList();
                                 TransactionList.mainList = TransactionQuery.FindByUserName(userName);
                                 TransactionList.sortDatesDescending();
-                                RealmDB.addToRealm(CategoryList.categories);
-                                RealmDB.addToRealm(TransactionList.mainList);
+                                RealmInsert.insertMany(CategoryList.categories);
+                                RealmInsert.insertMany(TransactionList.mainList);
                                 LoginAccount.account.setBalance(Calculation.balanceCalc(LoginAccount.account.getBalance(),TransactionList.mainList));
 
                                 Intent intent = new Intent(LoginAction.this, Home.class);

@@ -1,44 +1,38 @@
-package com.example.money_meow.home;
+package com.example.money_meow.transaction;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.Spinner;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.money_meow.BaseActivity;
 import com.example.money_meow.R;
-import com.example.money_meow.account.LoginAccount;
+import com.example.money_meow.home.HistoryListForHome;
+import com.example.money_meow.home.Home;
 import com.example.money_meow.information.Information;
-import com.example.money_meow.manageEngine.calculation.Calculation;
 import com.example.money_meow.manageEngine.statistic.StatisticsAction;
 import com.example.money_meow.setting.Settings;
-import com.example.money_meow.transaction.ShowingTransactionAction;
-import com.example.money_meow.transaction.Transaction;
-import com.example.money_meow.transaction.TransactionAction;
-import com.example.money_meow.transaction.TransactionList;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-public class Home extends BaseActivity {
+public class ShowingTransactionAction extends BaseActivity {
     private RecyclerView rcvHistory;
     private HistoryListForHome historyListForHome;
     private Button addTransBtn,homeBtn,historyBtn,transactionBtn,settingBtn;
 
-    private TextView balanceView;
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.home);
-
-        rcvHistory = findViewById(R.id.historylist);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this,1);
-        rcvHistory.setLayoutManager(gridLayoutManager);
+        setContentView(R.layout.transaction_list);
 
         addTransBtn = findViewById(R.id.AddTransBtn);
         homeBtn = findViewById(R.id.HomeBtn);
@@ -46,28 +40,49 @@ public class Home extends BaseActivity {
         transactionBtn = findViewById(R.id.transactionBtn);
         settingBtn = findViewById(R.id.SettingBtn);
 
-
-        balanceView = findViewById(R.id.balance);
-        balanceView.setText(
-                Double.toString(
-                LoginAccount.account.getBalance()
-                )
-                );
+        rcvHistory = findViewById(R.id.historylist);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this,1);
+        rcvHistory.setLayoutManager(gridLayoutManager);
 
         historyListForHome = new HistoryListForHome(getList(),this);
         rcvHistory.setAdapter(historyListForHome);
 
+        Spinner timeList = (Spinner) findViewById(R.id.timeList);
+
+        List<String> items = new ArrayList<>();
+        items.add("Choose your time");
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                R.layout.time_list_item, items);
+
+        timeList.setAdapter(adapter);
+        timeList.setSelection(0);
+
+        timeList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // TODO Auto-generated method stub
+
+            }
+        });
+
         homeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Home.this, Information.class);
+                Intent intent = new Intent(ShowingTransactionAction.this, Information.class);
                 startActivity(intent);
             }
         });
         addTransBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Home.this, TransactionAction.class);
+                Intent intent = new Intent(ShowingTransactionAction.this, TransactionAction.class);
                 startActivity(intent);
             }
         });
@@ -75,29 +90,24 @@ public class Home extends BaseActivity {
         settingBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Home.this, Settings.class);
+                Intent intent = new Intent(ShowingTransactionAction.this, Settings.class);
                 startActivity(intent);
             }
         });
         historyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Home.this, StatisticsAction.class);
+                Intent intent = new Intent(ShowingTransactionAction.this, StatisticsAction.class);
                 startActivity(intent);
             }
         });
-        transactionBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Home.this, SearchEngine.class);
-                startActivity(intent);
-            }
-        });
+
+
     }
 
     private List<Transaction> getList() {
-        List<Transaction> res = TransactionList.mainList.subList(Math.max(TransactionList.mainList.size() - 10, 0), TransactionList.mainList.size());
+        List<Transaction> res = TransactionList.mainList;
+        Collections.sort(res);
         return res;
     }
-
 }

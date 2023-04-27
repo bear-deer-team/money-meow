@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -36,7 +37,7 @@ public class TransactionAction extends BaseActivity {
     private Button returnBtn,close,open;
     private Button acptTransBtn;
 
-    public static LinearLayout categoryLayout;
+    public static ConstraintLayout categoryLayout;
 
     private RecyclerView rcvCategory;
 

@@ -17,6 +17,7 @@ import com.example.money_meow.category.Category;
 import com.example.money_meow.category.CategoryList;
 import com.example.money_meow.database.MongoDBConnection;
 import com.example.money_meow.database.RealmDB;
+import com.example.money_meow.database.query.RealmQuery;
 import com.example.money_meow.home.Home;
 import com.example.money_meow.manageEngine.calculation.Calculation;
 import com.example.money_meow.transaction.Transaction;
@@ -54,8 +55,8 @@ public class MainActivity extends AppCompatActivity {
                     Double amount = (double)sharedPreferences.getFloat("balance", 0);
                     LoginAccount.account = new Account(name,userName,email,password,amount);
                     // Lấy danh sách các Category từ cơ sở dữ liệu Realm
-                    CategoryList.categories = RealmDB.getDB(Category.class);
-                    TransactionList.mainList = RealmDB.getDB(Transaction.class);
+                    CategoryList.categories = RealmQuery.getDB(Category.class);
+                    TransactionList.mainList = RealmQuery.getDB(Transaction.class);
                     TransactionList.sortDatesDescending();
                     LoginAccount.account.setBalance(Calculation.balanceCalc(LoginAccount.account.getBalance(),TransactionList.mainList));
 
