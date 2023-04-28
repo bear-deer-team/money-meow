@@ -12,6 +12,7 @@ import com.example.money_meow.BaseActivity;
 import com.example.money_meow.R;
 import com.example.money_meow.account.LoginAccount;
 import com.example.money_meow.information.Information;
+import com.example.money_meow.manageEngine.calculation.Calculation;
 import com.example.money_meow.manageEngine.searchEngine.SearchEngine;
 import com.example.money_meow.manageEngine.statistic.StatisticsAction;
 import com.example.money_meow.setting.Settings;
@@ -22,6 +23,7 @@ import com.example.money_meow.transaction.TransactionList;
 import java.util.List;
 
 public class Home extends BaseActivity {
+
     private RecyclerView rcvHistory;
     private HistoryListForHome historyListForHome;
     private Button addTransBtn,homeBtn,historyBtn,transactionBtn,settingBtn;
@@ -41,11 +43,10 @@ public class Home extends BaseActivity {
         transactionBtn = findViewById(R.id.transactionBtn);
         settingBtn = findViewById(R.id.SettingBtn);
 
-
         balanceView = findViewById(R.id.balance);
         balanceView.setText(
                 Double.toString(
-                LoginAccount.account.getBalance()
+                Calculation.balanceCalc(0.0,TransactionList.mainList)
                 )
                 );
 

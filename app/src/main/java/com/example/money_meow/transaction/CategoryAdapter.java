@@ -1,6 +1,7 @@
 package com.example.money_meow.transaction;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,6 +42,9 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
             }else {
                 holder.imgCate.setImageResource(category.getImage(this.context));
                 holder.nameCate.setText(category.getCategoryName());
+                if(category.getCategoryType().equals("income")){
+                    holder.item.setCardBackgroundColor(Color.rgb(142,246,146));
+                }
                 holder.item.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

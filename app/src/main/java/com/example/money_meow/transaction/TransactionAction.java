@@ -112,7 +112,7 @@ public class TransactionAction extends BaseActivity {
             @Override
             public void onClick(View view) {
                 Date date = TransactionValidation.getDatetime(datetime);
-                String note = NoteView.toString();
+                String note = NoteView.getText().toString();
                 if(TransactionValidation.isTransactionAmountInvalid(amount, category)
                         | date == null) {
                     return;

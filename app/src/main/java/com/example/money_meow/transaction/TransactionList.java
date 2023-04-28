@@ -30,8 +30,6 @@ public class TransactionList {
         for (int i = 0; i < mainList.size(); i++) {
             if (mainList.get(i).getId().equals(transaction.getId())) {
                 mainList.set(i,transaction);
-                Log.v("id",mainList.get(i).getId());
-                Log.v("amount",Double.toString(mainList.get(i).getTransactionAmount()));
                 break;
             }
         }

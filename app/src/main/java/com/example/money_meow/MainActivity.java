@@ -57,11 +57,11 @@ public class MainActivity extends AppCompatActivity {
                     LoginAccount.account = new Account(name,userName,email,password,amount);
                     // Lấy danh sách các Category từ cơ sở dữ liệu Realm
                     CategoryList.categories = RealmQuery.getDB(Category.class);
-                    TransactionList.mainList = RealmQuery.getDB(Transaction.class);
-                    for(int i=0;i<TransactionList.mainList.size();i++){
-                        String id = "test " + TransactionList.mainList.get(i).getId();
-                        Log.d("id",id);
+                    CategoryList.categories = CategoryList.removeDuplicate();
+                    for(int i=0;i<CategoryList.categories.size();i++){
+                        Log.v(CategoryList.categories.get(i).getCategoryName(),CategoryList.categories.get(i).getCategoryType());
                     }
+                    TransactionList.mainList = RealmQuery.getDB(Transaction.class);
                     TransactionList.sortDatesDescending();
                     LoginAccount.account.setBalance(Calculation.balanceCalc(LoginAccount.account.getBalance(),TransactionList.mainList));
 
