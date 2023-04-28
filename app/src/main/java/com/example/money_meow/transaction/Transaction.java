@@ -113,7 +113,7 @@ public class Transaction extends RealmObject implements Comparable{
         return transactionTime;
     }
     public String formatDate(){
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         String formattedDate = formatter.format(this.transactionTime);
         return formattedDate;
     }
