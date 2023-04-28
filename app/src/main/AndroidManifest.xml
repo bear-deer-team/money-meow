@@ -33,7 +33,6 @@
         <activity android:name=".setting.Settings"></activity>
         <activity android:name=".setting.AccountSetting"></activity>
         <activity android:name=".manageEngine.statistic.StatisticsAction"></activity>
-        <activity android:name=".transaction.ShowingTransactionAction"></activity>
     </application>
 
 </manifest>

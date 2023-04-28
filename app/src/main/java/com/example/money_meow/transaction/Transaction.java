@@ -14,6 +14,7 @@ import org.bson.Document;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
@@ -21,7 +22,7 @@ import io.realm.annotations.PrimaryKey;
 public class Transaction extends RealmObject implements Comparable{
 
     @PrimaryKey
-    private String id;
+    private String id = UUID.randomUUID().toString();
     private Category transactionCategory;
 
     private double transactionAmount;
@@ -33,9 +34,6 @@ public class Transaction extends RealmObject implements Comparable{
     private String transactionNote;
     private String transactionType;
 
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public void setUserName(String userName) {
         this.userName = userName;

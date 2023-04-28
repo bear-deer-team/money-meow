@@ -2,13 +2,9 @@ package com.example.money_meow.home;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,11 +12,9 @@ import com.example.money_meow.BaseActivity;
 import com.example.money_meow.R;
 import com.example.money_meow.account.LoginAccount;
 import com.example.money_meow.information.Information;
-import com.example.money_meow.manageEngine.calculation.Calculation;
 import com.example.money_meow.manageEngine.searchEngine.SearchEngine;
 import com.example.money_meow.manageEngine.statistic.StatisticsAction;
 import com.example.money_meow.setting.Settings;
-import com.example.money_meow.transaction.ShowingTransactionAction;
 import com.example.money_meow.transaction.Transaction;
 import com.example.money_meow.transaction.TransactionAction;
 import com.example.money_meow.transaction.TransactionList;
