@@ -92,7 +92,7 @@ public class Home extends BaseActivity {
     }
 
     private List<Transaction> getList() {
-        List<Transaction> res = TransactionList.mainList.subList(Math.max(TransactionList.mainList.size() - 10, 0), TransactionList.mainList.size());
+        List<Transaction> res = TransactionList.mainList.subList(0, Math.min(10, TransactionList.mainList.size()));
         return res;
     }
 

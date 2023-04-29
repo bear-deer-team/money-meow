@@ -74,15 +74,11 @@ public class SearchEngine extends BaseActivity {
                 }
             }
         } else {
-            res = getAll();
+            res = TransactionList.mainList;
         }
         return res;
     }
 
-    private List<Transaction> getAll() {
-        List<Transaction> res = TransactionList.mainList.subList(Math.max(TransactionList.mainList.size() - 10, 0), TransactionList.mainList.size());
-        return res;
-    }
     private TextWatcher searchValueWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
