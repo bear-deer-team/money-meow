@@ -22,6 +22,9 @@ import com.example.money_meow.R;
 import com.example.money_meow.category.CategoryList;
 import com.example.money_meow.home.HistoryListForHome;
 import com.example.money_meow.home.Home;
+import com.example.money_meow.information.Information;
+import com.example.money_meow.manageEngine.statistic.StatisticsAction;
+import com.example.money_meow.setting.Settings;
 import com.example.money_meow.transaction.CategoryAdapter;
 import com.example.money_meow.transaction.Transaction;
 import com.example.money_meow.transaction.TransactionAction;
@@ -36,7 +39,7 @@ public class SearchEngine extends BaseActivity {
 
     private  String searchValue;
     private EditText searchText;
-    private Button returnBtn;
+    private Button homeBtn, historyBtn, settingBtn,addTransBtn;
     public static ImageView searchImg;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,15 +53,42 @@ public class SearchEngine extends BaseActivity {
         transactionAdapter = new TransactionAdapter(getList(searchValue),this);
         rcvTransList.setAdapter(transactionAdapter);
 
+        homeBtn = findViewById(R.id.HomeBtn);
+        historyBtn = findViewById(R.id.HistoryBtn);
+        addTransBtn = findViewById(R.id.AddTransBtn);
+        settingBtn = findViewById(R.id.SettingBtn);
+
         searchText = (EditText) findViewById(R.id.edit_text_search);
         searchText.addTextChangedListener(searchValueWatcher);
         searchImg = findViewById(R.id.imageSearch);
-
-        returnBtn = findViewById(R.id.ReturnHomeBtn);
-        returnBtn.setOnClickListener(new View.OnClickListener() {
+        homeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(SearchEngine.this, Home.class);
+                startActivity(intent);
+            }
+        });
+
+        historyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SearchEngine.this, StatisticsAction.class);
+                startActivity(intent);
+            }
+        });
+
+        addTransBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SearchEngine.this, TransactionAction.class);
+                startActivity(intent);
+            }
+        });
+
+        settingBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SearchEngine.this, Settings.class);
                 startActivity(intent);
             }
         });
