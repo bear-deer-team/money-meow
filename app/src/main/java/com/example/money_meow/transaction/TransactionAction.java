@@ -23,6 +23,7 @@ import com.example.money_meow.account.LoginAccount;
 import com.example.money_meow.category.Category;
 import com.example.money_meow.category.CategoryList;
 import com.example.money_meow.home.Home;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.util.Date;
 
@@ -32,7 +33,6 @@ import io.realm.com_example_money_meow_transaction_TransactionRealmProxy;
 public class TransactionAction extends BaseActivity {
 
     private EditText datetime;
-    private EditText NoteView;
     private EditText amount;
     public static Category category;
     private Transaction transaction;
@@ -42,6 +42,7 @@ public class TransactionAction extends BaseActivity {
     private Button open;
     private Button deleteBtn;
     private Button acptTransBtn;
+    private Button note;
 
     public static ConstraintLayout categoryLayout;
 
@@ -76,12 +77,14 @@ public class TransactionAction extends BaseActivity {
         // tạm thời khởi tạo một category mặc định, chờ Vi hoàn thiện category
         category = new Category("buying", "extense");
         datetime = (EditText) findViewById(R.id.edit_text_date);
-        NoteView = (EditText) findViewById(R.id.edit_text_note);
         amount = (EditText) findViewById(R.id.edit_text_amount);
         returnBtn = (Button) findViewById(R.id.ReturnHomeBtn);
         acptTransBtn = (Button) findViewById(R.id.AcptTransBtn);
         deleteBtn = (Button) findViewById(R.id.DeleteBtn);
         deleteBtn.setVisibility(View.GONE);
+
+        note = (Button) findViewById(R.id.note);
+        note.setTransformationMethod(null);
 
         cateImg = findViewById(R.id.imageView2);
         cateName = findViewById(R.id.categoryText);
@@ -95,7 +98,7 @@ public class TransactionAction extends BaseActivity {
             category = trans.getTransactionCategory();
             datetime.setText(trans.formatDate());
             amount.setText(Double.toString(trans.getTransactionAmount()));
-            NoteView.setText(trans.getTransactionNote());
+            note.setText(trans.getTransactionNote());
         }
 
 
@@ -108,11 +111,30 @@ public class TransactionAction extends BaseActivity {
 
             }
         });
+
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(TransactionAction.this, R.style.AppBottomSheetDialogTheme);
+        bottomSheetDialog.setContentView(R.layout.transaction_note);
+        EditText noteText = bottomSheetDialog.findViewById(R.id.note);
+        Button submit = bottomSheetDialog.findViewById(R.id.showBtn);
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                note.setText(noteText.getText());
+                bottomSheetDialog.dismiss();
+            }
+        });
+        note.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                bottomSheetDialog.show();
+            }
+        });
+
         acptTransBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Date date = TransactionValidation.getDatetime(datetime);
-                String note = NoteView.getText().toString();
+                String note = noteText.getText().toString();
                 if(TransactionValidation.isTransactionAmountInvalid(amount, category)
                         | date == null) {
                     return;

@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
                     CategoryList.categories = RealmQuery.getDB(Category.class);
                     CategoryList.categories = CategoryList.removeDuplicate();
                     for(int i=0;i<CategoryList.categories.size();i++){
-                        Log.v(CategoryList.categories.get(i).getCategoryName(),CategoryList.categories.get(i).getCategoryType());
+                        //Log.v(CategoryList.categories.get(i).getCategoryName(),CategoryList.categories.get(i).getCategoryType());
                     }
                     TransactionList.mainList = RealmQuery.getDB(Transaction.class);
                     TransactionList.sortDatesDescending();

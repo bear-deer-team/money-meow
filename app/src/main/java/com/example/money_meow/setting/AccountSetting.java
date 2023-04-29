@@ -6,6 +6,7 @@ import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,11 +17,14 @@ import com.example.money_meow.R;
 import com.example.money_meow.account.LoginAccount;
 import com.example.money_meow.account.PasswordEncryption;
 import com.example.money_meow.account.signup.AccountValidation;
+import com.example.money_meow.database.update.MongoDBUpdate;
 import com.example.money_meow.home.Home;
 import com.example.money_meow.information.Information;
 import com.example.money_meow.transaction.TransactionAction;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.textfield.TextInputLayout;
+
+import org.bson.Document;
 
 public class AccountSetting extends BaseActivity {
     Button addTransBtn, homeBtn, historyBtn, transactionBtn, settingBtn;
@@ -65,23 +69,26 @@ public class AccountSetting extends BaseActivity {
             }
         });
 
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(AccountSetting.this, R.style.AppBottomSheetDialogTheme);
+        bottomSheetDialog.setContentView(R.layout.bottom_setting);
+        TextInputLayout newPassword = bottomSheetDialog.findViewById(R.id.newpwd_box);
+        Button submit = bottomSheetDialog.findViewById(R.id.sumbitBtn);
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!isConfirmed(view)) {
+                    return;
+                }
+                MongoDBUpdate.update("MoneyMeow", "users",
+                        new Document("password", LoginAccount.account.getPassword()),
+                        new Document("password", newPassword.getEditText().getText().toString()));
+                LoginAccount.account.setPassword(newPassword.getEditText().getText().toString());
+                bottomSheetDialog.dismiss();
+            }
+        });
         showBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(AccountSetting.this, R.style.AppBottomSheetDialogTheme);
-                LayoutInflater inflater = LayoutInflater.from(new ContextThemeWrapper(getApplicationContext(), R.style.Theme_Moneymeow));
-                View bottomView = inflater.inflate(R.layout.bottom_setting, null);
-                bottomView.findViewById(R.id.showBtn).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if(!isConfirmed(bottomView)) {
-                            return;
-                        }
-                        bottomSheetDialog.dismiss();
-                    }
-                });
-
-                bottomSheetDialog.setContentView(bottomView);
                 bottomSheetDialog.show();
             }
         });
