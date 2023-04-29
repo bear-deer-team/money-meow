@@ -71,18 +71,29 @@ public class AccountSetting extends BaseActivity {
 
         BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(AccountSetting.this, R.style.AppBottomSheetDialogTheme);
         bottomSheetDialog.setContentView(R.layout.bottom_setting);
-        TextInputLayout newPassword = bottomSheetDialog.findViewById(R.id.newpwd_box);
+        TextInputLayout oldPassword = (TextInputLayout) bottomSheetDialog.findViewById(R.id.pwd_box);
+        TextInputLayout newPwd = (TextInputLayout) bottomSheetDialog.findViewById(R.id.newpwd_box);
+        TextInputLayout cfNewPwd = (TextInputLayout) bottomSheetDialog.findViewById(R.id.cf_newpwd_box);
         Button submit = bottomSheetDialog.findViewById(R.id.sumbitBtn);
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!isConfirmed(view)) {
+                if(!isConfirmed(oldPassword, newPwd, cfNewPwd)) {
                     return;
                 }
                 MongoDBUpdate.update("MoneyMeow", "users",
                         new Document("password", LoginAccount.account.getPassword()),
-                        new Document("password", newPassword.getEditText().getText().toString()));
-                LoginAccount.account.setPassword(newPassword.getEditText().getText().toString());
+                        new Document()
+                                .append("name", LoginAccount.account.getName())
+                                .append("userName", LoginAccount.account.getUserName())
+                                .append("email", LoginAccount.account.getEmail())
+                                .append("password", PasswordEncryption.encrypt(newPwd.getEditText().getText().toString()))
+                                .append("balance", LoginAccount.account.getBalance()));
+                LoginAccount.account.setPassword(newPwd.getEditText().getText().toString());
+                oldPassword.getEditText().setText("");
+                newPwd.getEditText().setText("");
+                cfNewPwd.getEditText().setText("");
+
                 bottomSheetDialog.dismiss();
             }
         });
@@ -110,13 +121,10 @@ public class AccountSetting extends BaseActivity {
         password.setText(pwd);
     }
 
-    private boolean isConfirmed(View bottomView) {
-        TextInputLayout oldPassword = (TextInputLayout) bottomView.findViewById(R.id.pwd_box);
-        TextInputLayout newPwd = (TextInputLayout) bottomView.findViewById(R.id.newpwd_box);
-        TextInputLayout cfNewPwd = (TextInputLayout) bottomView.findViewById(R.id.cf_newpwd_box);
+    private boolean isConfirmed(TextInputLayout oldPassword, TextInputLayout newPwd, TextInputLayout cfNewPwd) {
 
-        if(!isPwdMatched(oldPassword, newPwd.getEditText().getText().toString())
-                | !isPwdMatched(newPwd, cfNewPwd.getEditText().getText().toString())
+        if(!isPwdMatched(oldPassword, LoginAccount.account.getPassword())
+                | !isPwdMatched(newPwd, PasswordEncryption.encrypt(cfNewPwd.getEditText().getText().toString()))
                 | AccountValidation.isPasswordInvalid(newPwd)) {
             oldPassword.getEditText().setText("");
             newPwd.getEditText().setText("");
