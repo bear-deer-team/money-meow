@@ -42,9 +42,6 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
             }else {
                 holder.imgCate.setImageResource(category.getImage(this.context));
                 holder.nameCate.setText(category.getCategoryName());
-                if(category.getCategoryType().equals("income")){
-                    holder.item.setCardBackgroundColor(Color.rgb(142,246,146));
-                }
                 holder.item.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
