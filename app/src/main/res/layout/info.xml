@@ -96,10 +96,10 @@
             />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/transactionBtn"
+            android:id="@+id/searchBtn"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:background="@drawable/wallet_2"
+            android:background="@drawable/search"
 
 
             app:layout_constraintBottom_toBottomOf="parent"
@@ -117,7 +117,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/transactionBtn" />
+            app:layout_constraintStart_toEndOf="@id/searchBtn" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

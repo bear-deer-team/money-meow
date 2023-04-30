@@ -26,7 +26,7 @@ public class Home extends BaseActivity {
 
     private RecyclerView rcvHistory;
     private HistoryListForHome historyListForHome;
-    private Button addTransBtn,homeBtn,historyBtn,transactionBtn,settingBtn;
+    private Button addTransBtn,homeBtn,historyBtn,searchBtn,settingBtn;
 
     private TextView balanceView;
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +40,7 @@ public class Home extends BaseActivity {
         addTransBtn = findViewById(R.id.AddTransBtn);
         homeBtn = findViewById(R.id.HomeBtn);
         historyBtn = findViewById(R.id.HistoryBtn);
-        transactionBtn = findViewById(R.id.transactionBtn);
+        searchBtn = findViewById(R.id.searchBtn);
         settingBtn = findViewById(R.id.SettingBtn);
 
         balanceView = findViewById(R.id.balance);
@@ -82,7 +82,7 @@ public class Home extends BaseActivity {
                 startActivity(intent);
             }
         });
-        transactionBtn.setOnClickListener(new View.OnClickListener() {
+        searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Home.this, SearchEngine.class);
