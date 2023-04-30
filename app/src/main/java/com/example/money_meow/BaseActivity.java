@@ -1,6 +1,11 @@
 package com.example.money_meow;
 
+import android.app.ActivityOptions;
+import android.util.Pair;
+import android.view.View;
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.money_meow.database.delete.TransactionDelete;
 import com.example.money_meow.database.insert.TransactionInsert;
@@ -16,7 +21,7 @@ public class BaseActivity extends AppCompatActivity {
         TransactionInsert.insertUptoDB();
         TransactionUpdate.insertUptoDB();
         TransactionList.destroy();
-        System.out.println("Flags");
         overridePendingTransition(0, 0);
     }
+
 }

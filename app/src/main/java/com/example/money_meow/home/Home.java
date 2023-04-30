@@ -96,4 +96,10 @@ public class Home extends BaseActivity {
         return res;
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        overridePendingTransition(R.anim.slide_in_from_right, R.anim.slide_out_to_left);
+    }
+
 }

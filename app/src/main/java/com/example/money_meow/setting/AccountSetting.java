@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -93,6 +94,7 @@ public class AccountSetting extends BaseActivity {
                 oldPassword.getEditText().setText("");
                 newPwd.getEditText().setText("");
                 cfNewPwd.getEditText().setText("");
+                Toast.makeText(getApplicationContext(), "Change password successfully!", Toast.LENGTH_SHORT).show();
 
                 bottomSheetDialog.dismiss();
             }

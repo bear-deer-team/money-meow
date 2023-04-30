@@ -24,12 +24,12 @@ public class AccountValidation {
         if (val.isEmpty()) {
             valInput.setError("This field mustn't be empty!");
             return true;
-//        } else if (val.length() > 20) {
-//            valInput.setError("User Name is too long!");
-//            return true;
-//        } else if (val.length() < 6) {
-//            valInput.setError("User Name is too short!");
-//            return true;
+        } else if (val.length() > 20) {
+            valInput.setError("User Name is too long!");
+            return true;
+        } else if (val.length() < 6) {
+            valInput.setError("User Name is too short!");
+            return true;
         } else if (val.startsWith("_") || val.startsWith(".")) {
             valInput.setError("No _ or . at the beginning");
             return true;

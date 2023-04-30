@@ -63,7 +63,6 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
                 @Override
                 public void onClick(View view) {
                     onClickGoToTransactionAction(transaction);
-
                 }
             });
         }
