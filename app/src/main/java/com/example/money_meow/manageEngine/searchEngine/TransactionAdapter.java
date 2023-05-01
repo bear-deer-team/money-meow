@@ -27,6 +27,10 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         this.transactionListSearch = transactionListSearch;
     }
 
+    public TransactionAdapter() {
+
+    }
+
     public void updateList(List<Transaction> transactionListSearch) {
         this.transactionListSearch = transactionListSearch;
         notifyDataSetChanged();

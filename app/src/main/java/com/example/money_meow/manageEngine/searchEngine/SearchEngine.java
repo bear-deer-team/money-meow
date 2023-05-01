@@ -5,29 +5,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.money_meow.BaseActivity;
 import com.example.money_meow.R;
-import com.example.money_meow.category.CategoryList;
-import com.example.money_meow.home.HistoryListForHome;
 import com.example.money_meow.home.Home;
-import com.example.money_meow.information.Information;
+import com.example.money_meow.manageEngine.filter.Filter;
 import com.example.money_meow.manageEngine.statistic.StatisticsAction;
 import com.example.money_meow.setting.Settings;
-import com.example.money_meow.transaction.CategoryAdapter;
 import com.example.money_meow.transaction.Transaction;
 import com.example.money_meow.transaction.TransactionAction;
 import com.example.money_meow.transaction.TransactionList;
@@ -46,8 +37,13 @@ public class SearchEngine extends BaseActivity {
 
     private  String searchValue;
     private EditText searchText, startDayText, endDayText;
+
+    private Filter filter = new Filter();
     private Button homeBtn, historyBtn, settingBtn,addTransBtn, filterBtn;
     public static ImageView searchImg;
+
+    private List<Transaction> crList = new ArrayList<>(TransactionList.mainList);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +53,7 @@ public class SearchEngine extends BaseActivity {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this,1);
         rcvTransList.setLayoutManager(gridLayoutManager);
 
-        transactionAdapter = new TransactionAdapter(getList(searchValue),this);
+        transactionAdapter = new TransactionAdapter(crList,this);
         rcvTransList.setAdapter(transactionAdapter);
 
         homeBtn = findViewById(R.id.HomeBtn);
@@ -67,7 +63,7 @@ public class SearchEngine extends BaseActivity {
         filterBtn = findViewById(R.id.FilterBtn);
         filterBtn.setTransformationMethod(null);
 
-        searchText = (EditText) findViewById(R.id.edit_text_search);
+        searchText = findViewById(R.id.edit_text_search);
         searchText.addTextChangedListener(searchValueWatcher);
         searchImg = findViewById(R.id.imageSearch);
 
@@ -83,10 +79,17 @@ public class SearchEngine extends BaseActivity {
             }
         });
 
+        assert submit != null;
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                bottomSheetDialog.dismiss();
+                if(endDayText != null && startDayText != null && !endDayText.getText().toString().isEmpty() && !startDayText.getText().toString().isEmpty()) {
+                    filter.setChecktoFilter(true);
+                    getListByFilter(filter);
+                    startDayText.setText(null);
+                    endDayText.setText(null);
+                    bottomSheetDialog.dismiss();
+                }
             }
         });
 
@@ -97,9 +100,10 @@ public class SearchEngine extends BaseActivity {
                 int year = cal.get(Calendar.YEAR);
                 int month = cal.get(Calendar.MONTH);
                 int day = cal.get(Calendar.DAY_OF_MONTH);
+                Filter filterDay = new Filter(endDayText);
                 DatePickerDialog dialog = new DatePickerDialog(
                         SearchEngine.this,
-                        mEndDateSetListener,
+                        filterDay.mDateSetListener,
                         year,
                         month,
                         day);
@@ -114,9 +118,10 @@ public class SearchEngine extends BaseActivity {
                 int year = cal.get(Calendar.YEAR);
                 int month = cal.get(Calendar.MONTH);
                 int day = cal.get(Calendar.DAY_OF_MONTH);
+                Filter filterDay = new Filter(startDayText);
                 DatePickerDialog dialog = new DatePickerDialog(
                         SearchEngine.this,
-                        mStartDateSetListener,
+                        filterDay.mDateSetListener,
                         year,
                         month,
                         day);
@@ -155,55 +160,45 @@ public class SearchEngine extends BaseActivity {
             }
         });
     }
-    private List<Transaction> getList(String keyword) {
-        List<Transaction> res = new ArrayList<>();
+    private List<Transaction> getListBySearch(String keyword) {
+        List<Transaction> resSearch = new ArrayList<>();
         if (keyword != null && !keyword.isEmpty()) {
-            for (Transaction transaction : TransactionList.mainList) {
-                System.out.println(endDayText + " " + startDayText);
-                if(endDayText != null && startDayText != null && !endDayText.getText().toString().isEmpty() && !startDayText.getText().toString().isEmpty()) {
-                    try {
-                        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-                        Date startDate = format.parse(startDayText.getText().toString());
-                        Date endDate = format.parse(endDayText.getText().toString());
-                        if (transaction.getTransactionCategory() != null &&
-                                transaction.getTransactionCategory().getCategoryName() != null &&
-                                transaction.getTransactionCategory().getCategoryName().contains(keyword) && transaction.getTransactionTime().after(startDate) &&
-                                transaction.getTransactionTime().before(endDate)) {
-                            res.add(transaction);
-                        }
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
-                } else {
-                    if (transaction.getTransactionCategory() != null &&
-                            transaction.getTransactionCategory().getCategoryName() != null &&
-                            transaction.getTransactionCategory().getCategoryName().contains(keyword)) {
-                        res.add(transaction);
-                    }
+            for (Transaction transaction : crList) {
+                if (transaction.getTransactionCategory() != null &&
+                        transaction.getTransactionCategory().getCategoryName() != null &&
+                        transaction.getTransactionCategory().getCategoryName().contains(keyword)) {
+                    resSearch.add(transaction);
                 }
             }
         } else {
-            System.out.println(endDayText + " " + startDayText);
-            if (endDayText != null && startDayText != null && !endDayText.getText().toString().isEmpty() && !startDayText.getText().toString().isEmpty()) {
-                for (Transaction transaction : TransactionList.mainList) {
-                    try {
-                        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-                        Date startDate = format.parse(startDayText.getText().toString());
-                        Date endDate = format.parse(endDayText.getText().toString());
-                        if (transaction.getTransactionTime().after(startDate) && transaction.getTransactionTime().before(endDate)) {
-                            res.add(transaction);
-                        }
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
-                }
-            } else {
-                res = TransactionList.mainList;
-            }
+            resSearch = crList;
         }
-        return res;
+        return resSearch;
     }
 
+    private List<Transaction> getListByFilter(Filter filter) {
+        List<Transaction> resFilter = new ArrayList<>();
+        if(filter.isChecktoFilter()) {
+            for (Transaction transaction : crList) {
+                try {
+                    SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+                    Date startDate = format.parse(startDayText.getText().toString());
+                    Date endDate = format.parse(endDayText.getText().toString());
+                    if(transaction.getTransactionTime().after(startDate) && transaction.getTransactionTime().before(endDate)) {
+                        resFilter.add(transaction);
+                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+            filter.setChecktoFilter(false);
+        } else {
+            resFilter = crList;
+        }
+        setCrList(resFilter);
+        transactionAdapter.updateList(crList);
+        return resFilter;
+    }
     private TextWatcher searchValueWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -212,7 +207,8 @@ public class SearchEngine extends BaseActivity {
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             searchValue = s.toString();
-            transactionAdapter.updateList(getList(searchValue));
+            setCrList(getListBySearch(searchValue));
+            transactionAdapter.updateList(crList);
         }
 
         @Override
@@ -220,22 +216,11 @@ public class SearchEngine extends BaseActivity {
         }
     };
 
-    private DatePickerDialog.OnDateSetListener mEndDateSetListener =
-            new DatePickerDialog.OnDateSetListener() {
-                @Override
-                public void onDateSet(DatePicker view, int year, int monthOfYear,
-                                      int dayOfMonth) {
-                    String selectedDate = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
-                    endDayText.setText(selectedDate);
-                }
-            };
-    private DatePickerDialog.OnDateSetListener mStartDateSetListener =
-            new DatePickerDialog.OnDateSetListener() {
-                @Override
-                public void onDateSet(DatePicker view, int year, int monthOfYear,
-                                      int dayOfMonth) {
-                    String selectedDate = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
-                    startDayText.setText(selectedDate);
-                }
-            };
+    public List<Transaction> getCrList() {
+        return crList;
+    }
+
+    public void setCrList(List<Transaction> crList) {
+        this.crList = crList;
+    }
 }
