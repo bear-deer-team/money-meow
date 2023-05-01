@@ -1,5 +1,7 @@
 package com.example.money_meow.transaction;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -27,7 +29,8 @@ public class TransactionList {
     public static void update(Transaction transaction){
         for (int i = 0; i < mainList.size(); i++) {
             if (mainList.get(i).getId().equals(transaction.getId())) {
-                mainList.set(i, transaction);
+                mainList.set(i,transaction);
+                break;
             }
         }
         updateList.add(transaction);

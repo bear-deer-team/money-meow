@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -56,6 +57,10 @@ public class MainActivity extends AppCompatActivity {
                     LoginAccount.account = new Account(name,userName,email,password,amount);
                     // Lấy danh sách các Category từ cơ sở dữ liệu Realm
                     CategoryList.categories = RealmQuery.getDB(Category.class);
+                    CategoryList.categories = CategoryList.removeDuplicate();
+                    for(int i=0;i<CategoryList.categories.size();i++){
+                        //Log.v(CategoryList.categories.get(i).getCategoryName(),CategoryList.categories.get(i).getCategoryType());
+                    }
                     TransactionList.mainList = RealmQuery.getDB(Transaction.class);
                     TransactionList.sortDatesDescending();
                     LoginAccount.account.setBalance(Calculation.balanceCalc(LoginAccount.account.getBalance(),TransactionList.mainList));

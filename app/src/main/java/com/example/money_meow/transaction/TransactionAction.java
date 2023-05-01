@@ -23,8 +23,11 @@ import com.example.money_meow.account.LoginAccount;
 import com.example.money_meow.category.Category;
 import com.example.money_meow.category.CategoryList;
 import com.example.money_meow.home.Home;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.util.Date;
+
+import io.realm.com_example_money_meow_transaction_TransactionRealmProxy;
 
 
 public class TransactionAction extends BaseActivity {
@@ -34,8 +37,12 @@ public class TransactionAction extends BaseActivity {
     public static Category category;
     private Transaction transaction;
 
-    private Button returnBtn,close,open;
+    private Button returnBtn;
+    private Button close;
+    private Button open;
+    private Button deleteBtn;
     private Button acptTransBtn;
+    private Button note;
 
     public static ConstraintLayout categoryLayout;
 
@@ -43,6 +50,8 @@ public class TransactionAction extends BaseActivity {
 
     public static ImageView cateImg;
     public static TextView cateName;
+
+    public static Transaction trans;
 
 
 
@@ -71,33 +80,73 @@ public class TransactionAction extends BaseActivity {
         amount = (EditText) findViewById(R.id.edit_text_amount);
         returnBtn = (Button) findViewById(R.id.ReturnHomeBtn);
         acptTransBtn = (Button) findViewById(R.id.AcptTransBtn);
+        deleteBtn = (Button) findViewById(R.id.DeleteBtn);
+        deleteBtn.setVisibility(View.GONE);
+
+        note = (Button) findViewById(R.id.note);
+        note.setTransformationMethod(null);
 
         cateImg = findViewById(R.id.imageView2);
         cateName = findViewById(R.id.categoryText);
         cateImg.setImageResource(category.getImage(this));
         cateName.setText(category.getCategoryName());
 
+        if(trans!=null){
+            deleteBtn.setVisibility(View.VISIBLE);
+            cateImg.setImageResource(trans.getTransactionCategory().getImage(this));
+            cateName.setText(trans.getTransactionCategory().getCategoryName());
+            category = trans.getTransactionCategory();
+            datetime.setText(trans.formatDate());
+            amount.setText(Double.toString(trans.getTransactionAmount()));
+            note.setText(trans.getTransactionNote());
+        }
 
 
         returnBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                trans = null;
                 Intent intent = new Intent(TransactionAction.this, Home.class);
                 startActivity(intent);
+
             }
         });
+
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(TransactionAction.this, R.style.AppBottomSheetDialogTheme);
+        bottomSheetDialog.setContentView(R.layout.transaction_note);
+        EditText noteText = bottomSheetDialog.findViewById(R.id.note);
+        Button submit = bottomSheetDialog.findViewById(R.id.showBtn);
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                note.setText(noteText.getText());
+                bottomSheetDialog.dismiss();
+            }
+        });
+        note.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                bottomSheetDialog.show();
+            }
+        });
+
         acptTransBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Date date = TransactionValidation.getDatetime(datetime);
+                String note = noteText.getText().toString();
                 if(TransactionValidation.isTransactionAmountInvalid(amount, category)
                         | date == null) {
                     return;
                 }
                 double transactionAmount = Double.parseDouble(amount.getText().toString());
-                transaction = new Transaction(category, transactionAmount,
-                        LoginAccount.account.getUserName(), date, "demo");
-
+                if(trans != null){
+                    transaction = new Transaction(trans.getId(),category.getCategoryName(),transactionAmount,
+                            LoginAccount.account.getUserName(),date,note,category.getCategoryType());
+                }else {
+                    transaction = new Transaction(category, transactionAmount,
+                            LoginAccount.account.getUserName(), date, note);
+                }
                 if(transaction.getTransactionType().equals("income")){
                     LoginAccount.account.setBalance(
                             LoginAccount.account.getBalance()+transactionAmount);
@@ -105,11 +154,14 @@ public class TransactionAction extends BaseActivity {
                     LoginAccount.account.setBalance(
                             LoginAccount.account.getBalance()-transactionAmount);
                 }
-                // transaction.saveToDatabase();
-                TransactionList.add(transaction);
-                TransactionList.sortDatesDescending();
-
-                Toast.makeText(getApplicationContext(), "Add Transaction Successfully!", Toast.LENGTH_SHORT).show();
+                if(trans == null) {
+                    TransactionList.add(transaction);
+                    TransactionList.sortDatesDescending();
+                    Toast.makeText(getApplicationContext(), "Add Transaction Successfully!", Toast.LENGTH_SHORT).show();
+                }else{
+                    TransactionList.update(transaction);
+                    Toast.makeText(getApplicationContext(), "Update Transaction Successfully!", Toast.LENGTH_SHORT).show();
+                }
                 Intent intent = new Intent(TransactionAction.this, Home.class);
                 startActivity(intent);
             }
@@ -126,6 +178,17 @@ public class TransactionAction extends BaseActivity {
                         categoryLayout.setVisibility(View.GONE);
                     }
                 });
+            }
+        });
+
+        deleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TransactionList.delete(trans);
+                Toast.makeText(getApplicationContext(), "Delete Transaction Successfully!", Toast.LENGTH_SHORT).show();
+                trans = null;
+                Intent intent = new Intent(TransactionAction.this, Home.class);
+                startActivity(intent);
             }
         });
 

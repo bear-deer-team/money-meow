@@ -13,10 +13,13 @@ import com.example.money_meow.MainActivity;
 import com.example.money_meow.R;
 import com.example.money_meow.account.LoginAccount;
 import com.example.money_meow.account.login.LoginAction;
+import com.example.money_meow.database.delete.TransactionDelete;
+import com.example.money_meow.database.insert.TransactionInsert;
 import com.example.money_meow.home.Home;
 import com.example.money_meow.information.Information;
 import com.example.money_meow.manageEngine.statistic.StatisticsAction;
 import com.example.money_meow.transaction.TransactionAction;
+import com.example.money_meow.transaction.TransactionList;
 
 public class Settings extends BaseActivity {
     Button infor, editAcc, logOut, display;
@@ -72,6 +75,9 @@ public class Settings extends BaseActivity {
         logOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                TransactionDelete.deleteUptoDB();
+                TransactionInsert.insertUptoDB();
+                TransactionList.destroy();
                 LoginAccount.logout();
                 SharedPreferences preferences = getSharedPreferences("login", MODE_PRIVATE);
                 preferences.edit().clear().commit();

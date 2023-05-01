@@ -64,6 +64,20 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.466" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/DeleteBtn"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@drawable/delete"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.951"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.366"
+            android:visibility="gone"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
@@ -217,7 +231,6 @@
 
 
     <TextView
-        android:id="@+id/NoteView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Nhập ghi chú thêm"
@@ -248,17 +261,17 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.272" />
 
-        <EditText
-            android:id="@+id/edit_text_note"
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/note"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginStart="60dp"
-            android:backgroundTint="@android:color/transparent"
+            style="@style/Widget.AppCompat.Button.Borderless"
             android:gravity="center"
             android:hint="optional"
-            android:inputType="text"
             android:maxLines="1"
+
             android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@id/NoteBtn"
@@ -275,6 +288,7 @@
         android:layout_height="0dp"
         android:background="@drawable/category_list"
         android:orientation="vertical"
+        android:visibility="gone"
 
 
         app:layout_constraintBottom_toBottomOf="parent"

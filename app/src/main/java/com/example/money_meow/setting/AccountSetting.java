@@ -6,6 +6,7 @@ import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,11 +17,14 @@ import com.example.money_meow.R;
 import com.example.money_meow.account.LoginAccount;
 import com.example.money_meow.account.PasswordEncryption;
 import com.example.money_meow.account.signup.AccountValidation;
+import com.example.money_meow.database.update.MongoDBUpdate;
 import com.example.money_meow.home.Home;
 import com.example.money_meow.information.Information;
 import com.example.money_meow.transaction.TransactionAction;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.textfield.TextInputLayout;
+
+import org.bson.Document;
 
 public class AccountSetting extends BaseActivity {
     Button addTransBtn, homeBtn, historyBtn, transactionBtn, settingBtn;
@@ -65,23 +69,37 @@ public class AccountSetting extends BaseActivity {
             }
         });
 
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(AccountSetting.this, R.style.AppBottomSheetDialogTheme);
+        bottomSheetDialog.setContentView(R.layout.bottom_setting);
+        TextInputLayout oldPassword = (TextInputLayout) bottomSheetDialog.findViewById(R.id.pwd_box);
+        TextInputLayout newPwd = (TextInputLayout) bottomSheetDialog.findViewById(R.id.newpwd_box);
+        TextInputLayout cfNewPwd = (TextInputLayout) bottomSheetDialog.findViewById(R.id.cf_newpwd_box);
+        Button submit = bottomSheetDialog.findViewById(R.id.sumbitBtn);
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!isConfirmed(oldPassword, newPwd, cfNewPwd)) {
+                    return;
+                }
+                MongoDBUpdate.update("MoneyMeow", "users",
+                        new Document("password", LoginAccount.account.getPassword()),
+                        new Document()
+                                .append("name", LoginAccount.account.getName())
+                                .append("userName", LoginAccount.account.getUserName())
+                                .append("email", LoginAccount.account.getEmail())
+                                .append("password", PasswordEncryption.encrypt(newPwd.getEditText().getText().toString()))
+                                .append("balance", LoginAccount.account.getBalance()));
+                LoginAccount.account.setPassword(newPwd.getEditText().getText().toString());
+                oldPassword.getEditText().setText("");
+                newPwd.getEditText().setText("");
+                cfNewPwd.getEditText().setText("");
+
+                bottomSheetDialog.dismiss();
+            }
+        });
         showBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(AccountSetting.this, R.style.AppBottomSheetDialogTheme);
-                LayoutInflater inflater = LayoutInflater.from(new ContextThemeWrapper(getApplicationContext(), R.style.Theme_Moneymeow));
-                View bottomView = inflater.inflate(R.layout.bottom_setting, null);
-                bottomView.findViewById(R.id.showBtn).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if(!isConfirmed(bottomView)) {
-                            return;
-                        }
-                        bottomSheetDialog.dismiss();
-                    }
-                });
-
-                bottomSheetDialog.setContentView(bottomView);
                 bottomSheetDialog.show();
             }
         });
@@ -103,13 +121,10 @@ public class AccountSetting extends BaseActivity {
         password.setText(pwd);
     }
 
-    private boolean isConfirmed(View bottomView) {
-        TextInputLayout oldPassword = (TextInputLayout) bottomView.findViewById(R.id.pwd_box);
-        TextInputLayout newPwd = (TextInputLayout) bottomView.findViewById(R.id.newpwd_box);
-        TextInputLayout cfNewPwd = (TextInputLayout) bottomView.findViewById(R.id.cf_newpwd_box);
+    private boolean isConfirmed(TextInputLayout oldPassword, TextInputLayout newPwd, TextInputLayout cfNewPwd) {
 
-        if(!isPwdMatched(oldPassword, newPwd.getEditText().getText().toString())
-                | !isPwdMatched(newPwd, cfNewPwd.getEditText().getText().toString())
+        if(!isPwdMatched(oldPassword, LoginAccount.account.getPassword())
+                | !isPwdMatched(newPwd, PasswordEncryption.encrypt(cfNewPwd.getEditText().getText().toString()))
                 | AccountValidation.isPasswordInvalid(newPwd)) {
             oldPassword.getEditText().setText("");
             newPwd.getEditText().setText("");

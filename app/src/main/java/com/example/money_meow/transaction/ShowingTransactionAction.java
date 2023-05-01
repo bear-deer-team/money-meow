@@ -75,7 +75,7 @@ public class ShowingTransactionAction extends BaseActivity {
         homeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ShowingTransactionAction.this, Home.class);
+                Intent intent = new Intent(ShowingTransactionAction.this, Information.class);
                 startActivity(intent);
             }
         });
