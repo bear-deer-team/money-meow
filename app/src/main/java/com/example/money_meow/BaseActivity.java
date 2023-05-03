@@ -19,9 +19,19 @@ public class BaseActivity extends AppCompatActivity {
         super.onPause();
         TransactionDelete.deleteUptoDB();
         TransactionInsert.insertUptoDB();
-        TransactionUpdate.insertUptoDB();
+        TransactionUpdate.updateUptoDB();
         TransactionList.destroy();
+        System.out.println("Flag");
         overridePendingTransition(0, 0);
+    }
+
+    @Override
+    protected void onDestroy () {
+        super.onDestroy();
+        TransactionDelete.deleteUptoDB();
+        TransactionInsert.insertUptoDB();
+        TransactionUpdate.updateUptoDB();
+        TransactionList.destroy();
     }
 
 }

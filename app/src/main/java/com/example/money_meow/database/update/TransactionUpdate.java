@@ -10,10 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TransactionUpdate {
-    public static void insertUptoDB() {
+    public static void updateUptoDB() {
         if (!TransactionList.updateList.isEmpty()) {
             List<Transaction> updateList = TransactionList.updateList;
             for (int i = 0; i < updateList.size(); i++) {
+                Document document = updateList.get(i).toDocument();
+                Document query = new Document("id", updateList.get(i).getId());
+                MongoDBUpdate.update("MoneyMeow", "transactions", query, document);
                 RealmDBUpdate.updateRealm(updateList.get(i));
             }
         }

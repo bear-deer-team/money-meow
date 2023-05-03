@@ -10,6 +10,7 @@ import java.util.List;
 
 public class TransactionInsert {
     public static void insertUptoDB() {
+        System.out.println(TransactionList.addList.size());
         if (!TransactionList.addList.isEmpty()) {
             List<Transaction> insertList = TransactionList.addList;
             RealmInsert.insertMany(insertList);
