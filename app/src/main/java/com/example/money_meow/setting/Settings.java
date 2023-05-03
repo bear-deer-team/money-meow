@@ -30,7 +30,7 @@ public class Settings extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.setting);
 
-        infor = (Button) findViewById(R.id.account);
+        infor = (Button) findViewById(R.id.infor);
         editAcc = (Button) findViewById(R.id.editAcc);
         logOut = (Button) findViewById(R.id.logout);
         display = (Button) findViewById(R.id.display);

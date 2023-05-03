@@ -48,14 +48,23 @@ public class SignUpUITest {
     public void tearDown() {
     }
 
+    // Test set error when form is empty
     @Test
     public void emptySignUpForm () {
         onView(withId(R.id.signup_btn)).perform(click());
 
         onView(withId(R.id.user_name)).check
                 (matches(hasTextInputLayoutErrorText("This field mustn't be empty!")));
-
+        onView(withId(R.id.name)).check
+                (matches(hasTextInputLayoutErrorText("This field mustn't be empty!")));
+        onView(withId(R.id.email)).check
+                (matches(hasTextInputLayoutErrorText("This field mustn't be empty!")));
+        onView(withId(R.id.password)).check
+                (matches(hasTextInputLayoutErrorText("This field mustn't be empty!")));
+        onView(withId(R.id.cf_password)).check
+                (matches(hasTextInputLayoutErrorText("This field mustn't be empty!")));
     }
+
 
     private Matcher<? super View> hasTextInputLayoutErrorText(String s) {
         return new TypeSafeMatcher<View>() {
@@ -83,6 +92,7 @@ public class SignUpUITest {
         };
     }
 
+    // test when confirm password doesn't match with password
     @Test
     public void signUpNotMatchesPasswordTest() {
         onView(allOf(
@@ -100,6 +110,7 @@ public class SignUpUITest {
         onView(withText("Confirm Password doesn't match password.")).check(matches(isDisplayed()));
     }
 
+    // Test login navigation button
     @Test
     public void signUpToLoginTest() {
         Intents.init();

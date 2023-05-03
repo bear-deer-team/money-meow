@@ -31,14 +31,7 @@ public class LoginUITest {
     public final ActivityTestRule<LoginAction> activityTestRule =
             new ActivityTestRule<>(LoginAction.class);
 
-    @Before
-    public void setUp () {
-    }
-
-    @After
-    public void tearDown() {
-    }
-
+    // Test type in TextInputLayout
     @Test
     public void loginTest() {
         onView(allOf(
@@ -53,6 +46,7 @@ public class LoginUITest {
         //onView(withId(R.id.login_btn)).perform(click());
     }
 
+    // Test click sign up navigation button
     @Test
     public void loginToSignupTest() {
         Intents.init();

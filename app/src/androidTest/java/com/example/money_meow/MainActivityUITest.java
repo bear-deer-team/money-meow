@@ -31,11 +31,14 @@ public class MainActivityUITest {
     public void tearDown() {
 
     }
+
+    // Test app icon display on screen
     @Test
     public void iconDisplay() {
         onView(withId(R.id.wellcome_image)).check(matches(isDisplayed()));
     }
 
+    // Test click navigation button to login/signup activity
     @Test
     public void isStartBtnClicked() {
         Intents.init();

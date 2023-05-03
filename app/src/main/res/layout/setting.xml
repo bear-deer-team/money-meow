@@ -139,7 +139,7 @@
 
                 >
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/account"
+                android:id="@+id/infor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Information"
@@ -165,7 +165,7 @@
 
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/account" />
+                    app:layout_constraintTop_toBottomOf="@id/infor" />
 
                 <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/display"
