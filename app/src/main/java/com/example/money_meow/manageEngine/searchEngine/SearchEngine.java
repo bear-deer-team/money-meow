@@ -160,44 +160,15 @@ public class SearchEngine extends BaseActivity {
             }
         });
     }
-    private List<Transaction> getListBySearch(String keyword) {
-        List<Transaction> resSearch = new ArrayList<>();
-        if (keyword != null && !keyword.isEmpty()) {
-            for (Transaction transaction : crList) {
-                if (transaction.getTransactionCategory() != null &&
-                        transaction.getTransactionCategory().getCategoryName() != null &&
-                        transaction.getTransactionCategory().getCategoryName().contains(keyword)) {
-                    resSearch.add(transaction);
-                }
-            }
-        } else {
-            resSearch = crList;
-        }
+    private List<Transaction> getListBySearch(Filter filter, String keyword) {
+        List<Transaction> resSearch = filter.getListBySearch(keyword,crList);
         return resSearch;
     }
 
-    private List<Transaction> getListByFilter(Filter filter) {
-        List<Transaction> resFilter = new ArrayList<>();
-        if(filter.isChecktoFilter()) {
-            for (Transaction transaction : crList) {
-                try {
-                    SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-                    Date startDate = format.parse(startDayText.getText().toString());
-                    Date endDate = format.parse(endDayText.getText().toString());
-                    if(transaction.getTransactionTime().after(startDate) && transaction.getTransactionTime().before(endDate)) {
-                        resFilter.add(transaction);
-                    }
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-            }
-            filter.setChecktoFilter(false);
-        } else {
-            resFilter = crList;
-        }
+    private void getListByFilter(Filter filter) {
+        List<Transaction> resFilter = filter.getListByFilter(filter, crList, startDayText, endDayText);
         setCrList(resFilter);
         transactionAdapter.updateList(crList);
-        return resFilter;
     }
     private TextWatcher searchValueWatcher = new TextWatcher() {
         @Override
@@ -207,18 +178,13 @@ public class SearchEngine extends BaseActivity {
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             searchValue = s.toString();
-            setCrList(getListBySearch(searchValue));
-            transactionAdapter.updateList(crList);
+            transactionAdapter.updateList(getListBySearch(filter,searchValue));
         }
 
         @Override
         public void afterTextChanged(Editable s) {
         }
     };
-
-    public List<Transaction> getCrList() {
-        return crList;
-    }
 
     public void setCrList(List<Transaction> crList) {
         this.crList = crList;
