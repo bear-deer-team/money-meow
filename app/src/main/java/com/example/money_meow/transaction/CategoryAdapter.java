@@ -14,7 +14,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.money_meow.R;
 import com.example.money_meow.category.Category;
+import com.example.money_meow.category.CategoryList;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>{
@@ -75,5 +77,19 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
             nameCate = itemView.findViewById(R.id.categoryItemName);
             item = itemView.findViewById(R.id.categotyItem);
         }
+    }
+    public void filterCategoryList(String type) {
+        List<Category> filteredList = new ArrayList<>();
+        for (Category category : CategoryList.categories) {
+            if (category.getCategoryType().equals(type)) {
+                filteredList.add(category);
+            }
+        }
+        setList(filteredList);
+        notifyDataSetChanged();
+    }
+
+    public void setList(List<Category> list) {
+        this.list = list;
     }
 }

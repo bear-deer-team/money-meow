@@ -169,8 +169,10 @@
             android:layout_marginStart="60dp"
             android:backgroundTint="@android:color/transparent"
             android:gravity="center"
-            android:hint="DD/MM/YYYY"
-            android:inputType="datetime"
+            android:hint="DD/MM/YY"
+            android:inputType="none"
+            android:clickable="true"
+            android:focusable="false"
             android:maxLines="1"
             android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -235,9 +237,10 @@
         android:layout_height="wrap_content"
         android:text="Nhập ghi chú thêm"
         android:textSize="15dp"
-
         app:layout_constraintStart_toStartOf = "@id/NoteBtn"
-        app:layout_constraintBottom_toTopOf="@+id/NoteBtn"></TextView>
+        app:layout_constraintBottom_toTopOf="@+id/NoteBtn">
+
+    </TextView>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/NoteBtn"
         android:layout_width="272dp"
@@ -271,7 +274,6 @@
             android:gravity="center"
             android:hint="optional"
             android:maxLines="1"
-
             android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@id/NoteBtn"
@@ -284,7 +286,7 @@
         app:layout_constraintWidth_default="percent"
         app:layout_constraintWidth_percent="0.85"
         app:layout_constraintHeight_default="percent"
-        app:layout_constraintHeight_percent="0.6"
+        app:layout_constraintHeight_percent="0.65"
         android:layout_height="0dp"
         android:background="@drawable/category_list"
         android:orientation="vertical"
@@ -296,6 +298,40 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.6">
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/background_color_1"
+            app:tabIndicatorColor="@color/background_color_2"
+            app:tabIndicatorHeight="4dp"
+            app:tabMode="fixed"
+            app:tabSelectedTextColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/categoryLayout"
+            app:layout_constraintEnd_toEndOf="@+id/categoryLayout"
+            app:layout_constraintStart_toStartOf="@+id/categoryLayout"
+            app:layout_constraintTop_toBottomOf="@+id/closeBtn"
+            app:layout_constraintVertical_bias="1">
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabIncome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/tab_background"
+                android:text="income"
+                android:textColor="@android:color/black"
+                android:textSize="14sp" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabExpense"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/tab_background"
+                android:text="expense"
+                android:textColor="@android:color/black"
+                android:textSize="14sp" />
+
+        </com.google.android.material.tabs.TabLayout>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/closeBtn"
@@ -316,16 +352,13 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/CategoryList"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="60dp"
-
+            app:layout_constraintBottom_toTopOf="@+id/tabLayout"
             app:layout_constraintTop_toBottomOf="@id/closeBtn"
+            app:layout_constraintHeight_percent="0.8"
             />
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

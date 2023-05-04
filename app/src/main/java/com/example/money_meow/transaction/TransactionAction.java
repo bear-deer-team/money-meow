@@ -1,18 +1,17 @@
 package com.example.money_meow.transaction;
 
-
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,10 +23,11 @@ import com.example.money_meow.category.Category;
 import com.example.money_meow.category.CategoryList;
 import com.example.money_meow.home.Home;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.tabs.TabItem;
+import com.google.android.material.tabs.TabLayout;
 
+import java.util.Calendar;
 import java.util.Date;
-
-import io.realm.com_example_money_meow_transaction_TransactionRealmProxy;
 
 
 public class TransactionAction extends BaseActivity {
@@ -45,6 +45,8 @@ public class TransactionAction extends BaseActivity {
     private Button note;
 
     public static ConstraintLayout categoryLayout;
+
+    public TabLayout categoryTabLayout;
 
     private RecyclerView rcvCategory;
 
@@ -65,13 +67,15 @@ public class TransactionAction extends BaseActivity {
         open = findViewById(R.id.categoryBtn);
         close = findViewById(R.id.closeBtn);
 
+        categoryTabLayout = categoryLayout.findViewById(R.id.tabLayout);
+        TabLayout.Tab incomeTab = categoryTabLayout.getTabAt(0);
+        TabLayout.Tab expenseTab = categoryTabLayout.getTabAt(1);
+
         rcvCategory = categoryLayout.findViewById(R.id.CategoryList);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this ,3);
         rcvCategory.setLayoutManager(gridLayoutManager);
 
         CategoryAdapter categoryAdapter = new CategoryAdapter(CategoryList.categories,this);
-        rcvCategory.setAdapter(categoryAdapter);
-
 
 
         // tạm thời khởi tạo một category mặc định, chờ Vi hoàn thiện category
@@ -101,7 +105,44 @@ public class TransactionAction extends BaseActivity {
             note.setText(trans.getTransactionNote());
         }
 
+        categoryAdapter.filterCategoryList("income");
+        rcvCategory.setAdapter(categoryAdapter);
+        if (incomeTab != null) {
+            incomeTab.select();
+            incomeTab.view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    categoryAdapter.filterCategoryList("income");
+                }
+            });
+        }
 
+        if (expenseTab != null) {
+            expenseTab.view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    categoryAdapter.filterCategoryList("extense");
+                }
+            });
+        }
+        rcvCategory.setAdapter(categoryAdapter);
+
+        datetime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar cal = Calendar.getInstance();
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
+                DatePickerDialog dialog = new DatePickerDialog(
+                        TransactionAction.this,
+                        mDateSetListener,
+                        year,
+                        month,
+                        day);
+                dialog.show();
+            }
+        });
         returnBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -193,4 +234,13 @@ public class TransactionAction extends BaseActivity {
         });
 
     }
+    public DatePickerDialog.OnDateSetListener mDateSetListener =
+            new DatePickerDialog.OnDateSetListener() {
+                @Override
+                public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                      int dayOfMonth) {
+                    String selectedDate = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
+                    datetime.setText(selectedDate);
+                }
+            };
 }
