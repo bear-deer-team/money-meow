@@ -1,26 +1,27 @@
 package com.example.money_meow.manageEngine.statistic;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ViewFlipper;
 
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.money_meow.BaseActivity;
 import com.example.money_meow.R;
 import com.example.money_meow.home.Home;
 import com.example.money_meow.setting.Settings;
 import com.example.money_meow.transaction.TransactionAction;
+import com.github.mikephil.charting.charts.PieChart;
 
 public class StatisticsAction extends BaseActivity {
     private Button addTransBtn, homeBtn, historyBtn, transactionBtn, settingBtn;
     private Button byTimeBtn, byCategoryBtn, byBothBtn;
 
-    ViewFlipper viewFlipper1;
+    ViewFlipper viewFlipper1, viewFlipper2;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,10 +39,16 @@ public class StatisticsAction extends BaseActivity {
         viewFlipper1 = findViewById(R.id.view_flipper1);
         viewFlipper1.setDisplayedChild(0);
 
+        viewFlipper2 = findViewById(R.id.view_flipper2);
+        PieChart pieChart = findViewById(R.id.piechart);
+        Graphic.setDataForPieChart(pieChart);
+        viewFlipper2.setDisplayedChild(0);
+
         byCategoryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 viewFlipper1.setDisplayedChild(0);
+
             }
         });
 

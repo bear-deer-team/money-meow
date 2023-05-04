@@ -101,12 +101,13 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_begin="136dp" />
+
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.67"/>
+            app:layout_constraintGuide_begin="276dp" />
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/ByTimeBtn"
             android:layout_width="70dp"
@@ -142,10 +143,24 @@
             app:layout_constraintStart_toEndOf="@+id/guideline2"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="MissingConstraints" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <ViewFlipper
+        android:id="@+id/view_flipper2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/piechart"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
 
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ViewFlipper>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
