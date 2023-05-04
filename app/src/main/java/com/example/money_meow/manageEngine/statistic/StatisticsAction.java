@@ -13,6 +13,7 @@ import com.example.money_meow.R;
 import com.example.money_meow.home.Home;
 import com.example.money_meow.setting.Settings;
 import com.example.money_meow.transaction.TransactionAction;
+import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.PieChart;
 
 public class StatisticsAction extends BaseActivity {
@@ -48,7 +49,9 @@ public class StatisticsAction extends BaseActivity {
             @Override
             public void onClick(View view) {
                 viewFlipper1.setDisplayedChild(0);
-
+                PieChart pieChart = findViewById(R.id.piechart);
+                Graphic.setDataForPieChart(pieChart);
+                viewFlipper2.setDisplayedChild(0);
             }
         });
 
@@ -56,6 +59,9 @@ public class StatisticsAction extends BaseActivity {
             @Override
             public void onClick(View view) {
                 viewFlipper1.setDisplayedChild(1);
+                LineChart lineChart = findViewById(R.id.linechart);
+                Graphic.setDataForLineChart(lineChart);
+                viewFlipper2.setDisplayedChild(1);
             }
         });
 
