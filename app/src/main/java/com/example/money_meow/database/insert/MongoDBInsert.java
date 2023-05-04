@@ -6,6 +6,7 @@ import com.example.money_meow.database.MongoDBConnection;
 
 import org.bson.Document;
 
+import java.net.UnknownHostException;
 import java.util.List;
 
 import io.realm.mongodb.User;
@@ -19,13 +20,10 @@ public class MongoDBInsert {
 
         mongoCollection.insertOne(document)
                 .getAsync(result -> {
-                    if(result.isSuccess())
-                    {
-                        Log.v("Data","Data Inserted Successfully");
-                    }
-                    else
-                    {
-                        Log.v("Data","Error:"+result.getError().toString());
+                    if (result.isSuccess()) {
+                        Log.v("Data", "Data Inserted Successfully");
+                    } else {
+                        Log.v("Data", "Error:" + result.getError().toString());
                     }
                 });
 
