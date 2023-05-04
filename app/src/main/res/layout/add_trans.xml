@@ -303,7 +303,7 @@
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/background_color_1"
+            android:background="@drawable/tab_background"
             app:tabIndicatorColor="@color/background_color_2"
             app:tabIndicatorHeight="4dp"
             app:tabMode="fixed"
@@ -317,7 +317,6 @@
                 android:id="@+id/tabIncome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/tab_background"
                 android:text="income"
                 android:textColor="@android:color/black"
                 android:textSize="14sp" />
@@ -326,7 +325,6 @@
                 android:id="@+id/tabExpense"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/tab_background"
                 android:text="expense"
                 android:textColor="@android:color/black"
                 android:textSize="14sp" />

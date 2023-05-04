@@ -134,8 +134,10 @@ public class TransactionAction extends BaseActivity {
                 int year = cal.get(Calendar.YEAR);
                 int month = cal.get(Calendar.MONTH);
                 int day = cal.get(Calendar.DAY_OF_MONTH);
+                int customStyle = R.style.CustomDatePickerDialog;
                 DatePickerDialog dialog = new DatePickerDialog(
                         TransactionAction.this,
+                        customStyle,
                         mDateSetListener,
                         year,
                         month,

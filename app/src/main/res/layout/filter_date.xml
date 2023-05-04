@@ -26,7 +26,6 @@
                 android:layout_width="100dp"
                 android:layout_height="10dp"
                 android:background="@drawable/drawn_btn"
-
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -39,7 +38,6 @@
                 android:id="@+id/linearLayout1"
                 android:layout_width="350dp"
                 android:layout_height="300dp"
-
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

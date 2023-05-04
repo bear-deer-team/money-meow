@@ -21,6 +21,8 @@ import com.example.money_meow.account.signup.AccountValidation;
 import com.example.money_meow.database.update.MongoDBUpdate;
 import com.example.money_meow.home.Home;
 import com.example.money_meow.information.Information;
+import com.example.money_meow.manageEngine.searchEngine.SearchEngine;
+import com.example.money_meow.manageEngine.statistic.StatisticsAction;
 import com.example.money_meow.transaction.TransactionAction;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.textfield.TextInputLayout;
@@ -28,7 +30,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import org.bson.Document;
 
 public class AccountSetting extends BaseActivity {
-    Button addTransBtn, homeBtn, historyBtn, transactionBtn, settingBtn;
+    Button addTransBtn, homeBtn, historyBtn, searchBtn, settingBtn;
     Button returnBtn, showBtn;
 
     TextView username, name, email, password;
@@ -43,7 +45,7 @@ public class AccountSetting extends BaseActivity {
         addTransBtn = findViewById(R.id.AddTransBtn);
         homeBtn = findViewById(R.id.HomeBtn);
         historyBtn = findViewById(R.id.HistoryBtn);
-        transactionBtn = findViewById(R.id.transactionBtn);
+        searchBtn = findViewById(R.id.searchBtn);
         settingBtn = findViewById(R.id.SettingBtn);
         showBtn = findViewById(R.id.showBtn);
         returnBtn = findViewById(R.id.returnBtn);
@@ -66,6 +68,14 @@ public class AccountSetting extends BaseActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(AccountSetting.this, TransactionAction.class);
+                startActivity(intent);
+            }
+        });
+
+        searchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AccountSetting.this, SearchEngine.class);
                 startActivity(intent);
             }
         });

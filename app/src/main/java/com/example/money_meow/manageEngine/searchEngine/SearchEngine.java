@@ -101,8 +101,10 @@ public class SearchEngine extends BaseActivity {
                 int month = cal.get(Calendar.MONTH);
                 int day = cal.get(Calendar.DAY_OF_MONTH);
                 Filter filterDay = new Filter(endDayText);
+                int customStyle = R.style.CustomDatePickerDialog;
                 DatePickerDialog dialog = new DatePickerDialog(
                         SearchEngine.this,
+                        customStyle,
                         filterDay.mDateSetListener,
                         year,
                         month,
@@ -119,8 +121,10 @@ public class SearchEngine extends BaseActivity {
                 int month = cal.get(Calendar.MONTH);
                 int day = cal.get(Calendar.DAY_OF_MONTH);
                 Filter filterDay = new Filter(startDayText);
+                int customStyle = R.style.CustomDatePickerDialog;
                 DatePickerDialog dialog = new DatePickerDialog(
                         SearchEngine.this,
+                        customStyle,
                         filterDay.mDateSetListener,
                         year,
                         month,

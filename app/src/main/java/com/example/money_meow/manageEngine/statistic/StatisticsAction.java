@@ -11,13 +11,14 @@ import android.widget.ViewFlipper;
 import com.example.money_meow.BaseActivity;
 import com.example.money_meow.R;
 import com.example.money_meow.home.Home;
+import com.example.money_meow.manageEngine.searchEngine.SearchEngine;
 import com.example.money_meow.setting.Settings;
 import com.example.money_meow.transaction.TransactionAction;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.PieChart;
 
 public class StatisticsAction extends BaseActivity {
-    private Button addTransBtn, homeBtn, historyBtn, transactionBtn, settingBtn;
+    private Button addTransBtn, homeBtn, historyBtn, searchBtn, settingBtn;
     private Button byTimeBtn, byCategoryBtn, byBothBtn;
 
     ViewFlipper viewFlipper1, viewFlipper2;
@@ -30,7 +31,7 @@ public class StatisticsAction extends BaseActivity {
         homeBtn = (Button) findViewById(R.id.HomeBtn);
         historyBtn = (Button) findViewById(R.id.HistoryBtn);
         addTransBtn = (Button) findViewById(R.id.AddTransBtn);
-        transactionBtn = (Button) findViewById(R.id.transactionBtn);
+        searchBtn = (Button) findViewById(R.id.searchBtn);
         settingBtn = (Button) findViewById(R.id.SettingBtn);
 
         byTimeBtn = (Button) findViewById(R.id.ByTimeBtn);
@@ -84,6 +85,14 @@ public class StatisticsAction extends BaseActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(StatisticsAction.this, TransactionAction.class);
+                startActivity(intent);
+            }
+        });
+
+        searchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(StatisticsAction.this, SearchEngine.class);
                 startActivity(intent);
             }
         });
