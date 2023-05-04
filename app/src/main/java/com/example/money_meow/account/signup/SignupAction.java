@@ -14,6 +14,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.money_meow.MainActivity;
 import com.example.money_meow.R;
+import com.example.money_meow.account.LoginAccount;
 import com.example.money_meow.account.PasswordEncryption;
 import com.example.money_meow.account.login.LoginAction;
 import com.example.money_meow.database.MongoDBConnection;
@@ -94,6 +95,7 @@ public class SignupAction extends AppCompatActivity {
                                 account = new Account(name.getEditText().getText().toString(), userName.getEditText().getText().toString(),
                                         email.getEditText().getText().toString(), PasswordEncryption.encrypt(password.getEditText().getText().toString()));
                                 account.addNewUserToDB();
+                                LoginAccount.account = account;
 
                                 Toast.makeText(getApplicationContext(), "Sign Up Successfully!", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(SignupAction.this, Home.class).putExtra("from", "Signup");

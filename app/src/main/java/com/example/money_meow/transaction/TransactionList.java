@@ -2,6 +2,8 @@ package com.example.money_meow.transaction;
 
 import android.util.Log;
 
+import com.example.money_meow.database.query.TransactionQuery;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -42,7 +44,7 @@ public class TransactionList {
         addList.clear();
     }
 
-    public static void sortDatesDescending() {
+    public static void sortDatesDescending(List<Transaction> mainList) {
         Collections.sort(mainList, new Comparator<Transaction>() {
             @Override
             public int compare(Transaction t1, Transaction t2) {

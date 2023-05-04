@@ -111,7 +111,7 @@ public class LoginAction extends AppCompatActivity {
                                 RealmDB.configFile();
                                 CategoryList.categories = CategoryQuery.getCategoryList();
                                 TransactionList.mainList = TransactionQuery.FindByUserName(userName);
-                                TransactionList.sortDatesDescending();
+                                TransactionList.sortDatesDescending(TransactionList.mainList);
                                 RealmInsert.insertMany(CategoryList.categories);
                                 RealmInsert.insertMany(TransactionList.mainList);
                                 LoginAccount.account.setBalance(Calculation.balanceCalc(LoginAccount.account.getBalance(),TransactionList.mainList));
@@ -130,7 +130,6 @@ public class LoginAction extends AppCompatActivity {
                     throw new RuntimeException(e);
                 }
                 mainThread.start();
-
             }
         });
 

@@ -156,7 +156,7 @@ public class TransactionAction extends BaseActivity {
                 }
                 if(trans == null) {
                     TransactionList.add(transaction);
-                    TransactionList.sortDatesDescending();
+                    TransactionList.sortDatesDescending(TransactionList.mainList);
                     Toast.makeText(getApplicationContext(), "Add Transaction Successfully!", Toast.LENGTH_SHORT).show();
                 }else{
                     TransactionList.update(transaction);

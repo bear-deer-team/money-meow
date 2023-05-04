@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
                         //Log.v(CategoryList.categories.get(i).getCategoryName(),CategoryList.categories.get(i).getCategoryType());
                     }
                     TransactionList.mainList = RealmQuery.getDB(Transaction.class);
-                    TransactionList.sortDatesDescending();
+                    TransactionList.sortDatesDescending(TransactionList.mainList);
                     LoginAccount.account.setBalance(Calculation.balanceCalc(LoginAccount.account.getBalance(),TransactionList.mainList));
 
                     intent.setClass(MainActivity.this, Home.class);
