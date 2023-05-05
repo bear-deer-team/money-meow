@@ -17,14 +17,15 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 public class Graphic {
-    public List<Transaction> sourceList;
-    public List<Transaction> expenseList;
-    public List<Transaction> incomeList;
-    public Set<String> categorySet;
+    public List<Transaction> sourceList = new ArrayList<>();
+    public List<Transaction> expenseList = new ArrayList<>();
+    public List<Transaction> incomeList = new ArrayList<>();
+    public Set<String> categorySet = new HashSet<>();
 
     public Graphic() {
         sourceList = Filter.getListByCurrentMonth();
@@ -46,10 +47,6 @@ public class Graphic {
             }
             entries.add(new PieEntry((float) sum, categoryName));
         }
-//        entries.add(new PieEntry(18.5f, "Green"));
-//        entries.add(new PieEntry(26.7f, "Yellow"));
-//        entries.add(new PieEntry(24.0f, "Red"));
-//        entries.add(new PieEntry(30.8f, "Blue"));
 
         PieDataSet set = new PieDataSet(entries, "Election Results");
         set.setColors(ColorTemplate.MATERIAL_COLORS);
