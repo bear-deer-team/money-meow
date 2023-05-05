@@ -2,6 +2,8 @@ package com.example.money_meow.manageEngine.statistic;
 
 import android.graphics.Color;
 
+import com.example.money_meow.manageEngine.filter.Filter;
+import com.example.money_meow.transaction.Transaction;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.YAxis;
@@ -16,15 +18,38 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class Graphic {
-    public static void setDataForPieChart(PieChart pieChart) {
+    public List<Transaction> sourceList;
+    public List<Transaction> expenseList;
+    public List<Transaction> incomeList;
+    public Set<String> categorySet;
+
+    public Graphic() {
+        sourceList = Filter.getListByCurrentMonth();
+        expenseList = Filter.getExpenseList(sourceList);
+        incomeList = Filter.getIncomeList(sourceList);
+        for (Transaction transaction : sourceList) {
+            categorySet.add(transaction.getTransactionCategory().getCategoryName());
+        }
+    }
+    public void setDataForPieChart(PieChart pieChart) {
+
         List<PieEntry> entries = new ArrayList<>();
 
-        entries.add(new PieEntry(18.5f, "Green"));
-        entries.add(new PieEntry(26.7f, "Yellow"));
-        entries.add(new PieEntry(24.0f, "Red"));
-        entries.add(new PieEntry(30.8f, "Blue"));
+        for (String categoryName : categorySet) {
+            double sum = 0;
+            List<Transaction> listByCategory = Filter.getListByCategory(expenseList, categoryName);
+            for (Transaction transaction : listByCategory) {
+                sum += transaction.getTransactionAmount();
+            }
+            entries.add(new PieEntry((float) sum, categoryName));
+        }
+//        entries.add(new PieEntry(18.5f, "Green"));
+//        entries.add(new PieEntry(26.7f, "Yellow"));
+//        entries.add(new PieEntry(24.0f, "Red"));
+//        entries.add(new PieEntry(30.8f, "Blue"));
 
         PieDataSet set = new PieDataSet(entries, "Election Results");
         set.setColors(ColorTemplate.MATERIAL_COLORS);

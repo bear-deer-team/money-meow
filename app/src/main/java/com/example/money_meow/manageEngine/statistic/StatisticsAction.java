@@ -21,6 +21,8 @@ public class StatisticsAction extends BaseActivity {
     private Button addTransBtn, homeBtn, historyBtn, searchBtn, settingBtn;
     private Button byTimeBtn, byCategoryBtn, byBothBtn;
 
+    private Graphic graphic;
+
     ViewFlipper viewFlipper1, viewFlipper2;
 
     @SuppressLint("MissingInflatedId")
@@ -28,6 +30,8 @@ public class StatisticsAction extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.statistics);
+        graphic = new Graphic();
+
         homeBtn = (Button) findViewById(R.id.HomeBtn);
         historyBtn = (Button) findViewById(R.id.HistoryBtn);
         addTransBtn = (Button) findViewById(R.id.AddTransBtn);
@@ -43,7 +47,7 @@ public class StatisticsAction extends BaseActivity {
 
         viewFlipper2 = findViewById(R.id.view_flipper2);
         PieChart pieChart = findViewById(R.id.piechart);
-        Graphic.setDataForPieChart(pieChart);
+        graphic.setDataForPieChart(pieChart);
         viewFlipper2.setDisplayedChild(0);
 
         byCategoryBtn.setOnClickListener(new View.OnClickListener() {
@@ -51,7 +55,7 @@ public class StatisticsAction extends BaseActivity {
             public void onClick(View view) {
                 viewFlipper1.setDisplayedChild(0);
                 PieChart pieChart = findViewById(R.id.piechart);
-                Graphic.setDataForPieChart(pieChart);
+                graphic.setDataForPieChart(pieChart);
                 viewFlipper2.setDisplayedChild(0);
             }
         });

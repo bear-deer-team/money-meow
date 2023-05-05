@@ -4,11 +4,15 @@ import android.app.DatePickerDialog;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
+import com.example.money_meow.account.LoginAccount;
+import com.example.money_meow.category.Category;
 import com.example.money_meow.transaction.Transaction;
+import com.example.money_meow.transaction.TransactionList;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -80,4 +84,50 @@ public class Filter {
         }
         return resSearch;
     }
+
+    public static List<Transaction> getListByCurrentMonth() {
+        List<Transaction> resFilter = new ArrayList<>();
+        Date endDate = Calendar.getInstance().getTime();
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DATE, -30);
+        Date startDate = calendar.getTime();
+        for (Transaction transaction : TransactionList.mainList) {
+            if(transaction.getTransactionTime().after(startDate) && transaction.getTransactionTime().before(endDate)) {
+                resFilter.add(transaction);
+            }
+        }
+        return resFilter;
+    }
+
+    public static List<Transaction> getExpenseList(List<Transaction> sourceList) {
+        List<Transaction> resFilter = new ArrayList<>();
+        for (Transaction transaction : sourceList) {
+            if(transaction.getTransactionType().equals("extense")) {
+                resFilter.add(transaction);
+            }
+        }
+        return resFilter;
+    }
+
+    public static List<Transaction> getIncomeList(List<Transaction> sourceList) {
+        List<Transaction> resFilter = new ArrayList<>();
+        for (Transaction transaction : sourceList) {
+            if(transaction.getTransactionType().equals("income")) {
+                resFilter.add(transaction);
+            }
+        }
+        return resFilter;
+    }
+
+    public static List<Transaction> getListByCategory(List<Transaction> sourceList, String sampleCategory) {
+        List<Transaction> resFilter = new ArrayList<>();
+        for (Transaction transaction : sourceList) {
+            if(transaction.getTransactionCategory().getCategoryName().equals(sampleCategory)) {
+                resFilter.add(transaction);
+            }
+        }
+        return resFilter;
+    }
+
+
 }
