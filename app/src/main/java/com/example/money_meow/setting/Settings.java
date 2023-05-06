@@ -83,6 +83,7 @@ public class Settings extends BaseActivity {
                 preferences.edit().clear().commit();
                 Intent intent = new Intent(Settings.this, MainActivity.class);
                 startActivity(intent);
+
             }
         });
 
