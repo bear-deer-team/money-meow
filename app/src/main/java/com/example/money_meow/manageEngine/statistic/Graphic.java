@@ -86,7 +86,7 @@ public class Graphic {
         pieChart.invalidate();
     }
 
-    public static void setDataForLineChart(LineChart lineChart) {
+    public void setDataForLineChart(LineChart lineChart) {
         List<Entry> valsComp1 = new ArrayList<Entry>();
         List<Entry> valsComp2 = new ArrayList<Entry>();
 
@@ -104,7 +104,7 @@ public class Graphic {
         setComp1.setAxisDependency(YAxis.AxisDependency.LEFT);
         setComp1.setColors(Color.GREEN);
         setComp1.setValueTextSize(10f);
-        LineDataSet setComp2 = new LineDataSet(valsComp2, "Extense");
+        LineDataSet setComp2 = new LineDataSet(valsComp2, "Expense");
         setComp2.setAxisDependency(YAxis.AxisDependency.LEFT);
         setComp2.setColors(Color.RED);
         setComp2.setValueTextSize(10f);

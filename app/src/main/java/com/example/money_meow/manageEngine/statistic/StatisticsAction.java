@@ -65,7 +65,7 @@ public class StatisticsAction extends BaseActivity {
             public void onClick(View view) {
                 viewFlipper1.setDisplayedChild(1);
                 LineChart lineChart = findViewById(R.id.linechart);
-                Graphic.setDataForLineChart(lineChart);
+                graphic.setDataForLineChart(lineChart);
                 viewFlipper2.setDisplayedChild(1);
             }
         });
