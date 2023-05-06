@@ -102,15 +102,30 @@ public class Filter {
     public static  List<Transaction> getListByMonth(int month, int year) {
         List<Transaction> resFilter = new ArrayList<>();
         Date endDate = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, year);
+        calendar.set(Calendar.MONTH, month - 1);
+        calendar.set(Calendar.HOUR, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.AM_PM, Calendar.PM);
         if (month == 1 || month == 3 || month == 5 || month == 7
                 || month == 8 || month == 10 || month == 12) {
-            endDate.setDate(31);
+            calendar.set(Calendar.DAY_OF_MONTH, 30);
         } else if (month == 2) {
-
+            if (year % 4 == 0 && year % 100 != 0) {
+                calendar.set(Calendar.DAY_OF_MONTH, 28);
+            } else {
+                calendar.set(Calendar.DAY_OF_MONTH, 27);
+            }
+        } else {
+            calendar.set(Calendar.DAY_OF_MONTH, 29);
         }
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DATE, -30);
-        Date startDate = calendar.getTime();
+        endDate = calendar.getTime();
+        Date startDate = new Date();
+        calendar.set(Calendar.DAY_OF_MONTH, 0);
+        startDate = calendar.getTime();
+        System.out.println(startDate + " " + endDate);
         for (Transaction transaction : TransactionList.mainList) {
             if(transaction.getTransactionTime().after(startDate) && transaction.getTransactionTime().before(endDate)) {
                 resFilter.add(transaction);

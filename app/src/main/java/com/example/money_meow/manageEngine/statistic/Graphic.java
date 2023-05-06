@@ -46,7 +46,7 @@ public class Graphic {
     };
 
     public Graphic() {
-        sourceList = Filter.getListByCurrentMonth();
+        sourceList = Filter.getListByMonth(5, 2023);
         expenseList = Filter.getExpenseList(sourceList);
         incomeList = Filter.getIncomeList(sourceList);
         for (Transaction transaction : sourceList) {
@@ -123,23 +123,17 @@ public class Graphic {
         for (int i = 1; i < expenseByDay.size(); i++) {
             double presum = expenseByDay.get(i - 1);
             expenseByDay.set(i, expenseByDay.get(i) + presum);
-
         }
 
-        for (int i = 0; i < maxDay; i++) {
+        for (int i = 0; i <= maxDay; i++) {
             valsComp1.add(new Entry(i, incomeByDay.get(i).floatValue()));
         }
 
-        for (int i = 0; i < maxDay; i++) {
+        for (int i = 0; i <= maxDay; i++) {
             valsComp2.add(new Entry(i, expenseByDay.get(i).floatValue()));
         }
 
-        List<String> xAxisValues = new ArrayList<>();
-        for (int i = 0; i <= maxDay + 1; i++) {
-            xAxisValues.add(Integer.toString(i));
-        }
-
-        System.out.println(maxDay);
+        System.out.println(maxDay + " " + sourceList.size());
 
 
         LineDataSet setComp1 = new LineDataSet(valsComp1, "Income");
@@ -165,18 +159,12 @@ public class Graphic {
         lineChart.getXAxis().setDrawAxisLine(false); // Disable X axis bar
         lineChart.getAxisLeft().setDrawAxisLine(false); // Disable Y axis bar
 
+        lineChart.getXAxis().setGranularity(1f/maxDay);
+
         lineChart.getAxisLeft().setEnabled(false);
         lineChart.getAxisRight().setEnabled(false);
         lineChart.getXAxis().setEnabled(false);
         lineChart.invalidate();
-
-        XAxis xAxis = lineChart.getXAxis();
-        xAxis.setCenterAxisLabels(true);
-        xAxis.setEnabled(true);
-        xAxis.setDrawGridLines(false);
-        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-
-        lineChart.getXAxis().setValueFormatter(new com.github.mikephil.charting.formatter.IndexAxisValueFormatter(xAxisValues));
 
     }
 }
