@@ -99,6 +99,26 @@ public class Filter {
         return resFilter;
     }
 
+    public static  List<Transaction> getListByMonth(int month, int year) {
+        List<Transaction> resFilter = new ArrayList<>();
+        Date endDate = new Date();
+        if (month == 1 || month == 3 || month == 5 || month == 7
+                || month == 8 || month == 10 || month == 12) {
+            endDate.setDate(31);
+        } else if (month == 2) {
+
+        }
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DATE, -30);
+        Date startDate = calendar.getTime();
+        for (Transaction transaction : TransactionList.mainList) {
+            if(transaction.getTransactionTime().after(startDate) && transaction.getTransactionTime().before(endDate)) {
+                resFilter.add(transaction);
+            }
+        }
+        return resFilter;
+    }
+
     public static List<Transaction> getExpenseList(List<Transaction> sourceList) {
         List<Transaction> resFilter = new ArrayList<>();
         for (Transaction transaction : sourceList) {

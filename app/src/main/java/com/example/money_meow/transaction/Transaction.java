@@ -55,6 +55,10 @@ public class Transaction extends RealmObject implements Comparable{
         return name;
     }
 
+    public Date getTime() {
+        return transactionTime;
+    }
+
     public Transaction() {
     }
 

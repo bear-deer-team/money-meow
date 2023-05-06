@@ -22,6 +22,7 @@ public class BaseActivity extends AppCompatActivity {
         TransactionUpdate.updateUptoDB();
         TransactionList.destroy();
         System.out.println("Flag");
+        TransactionList.sortDatesDescending(TransactionList.mainList);
         overridePendingTransition(0, 0);
     }
 

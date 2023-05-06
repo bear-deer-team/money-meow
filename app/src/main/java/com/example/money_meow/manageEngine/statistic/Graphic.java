@@ -1,5 +1,7 @@
 package com.example.money_meow.manageEngine.statistic;
 
+import static java.lang.Math.max;
+
 import android.graphics.Color;
 
 import com.example.money_meow.manageEngine.filter.Filter;
@@ -7,6 +9,7 @@ import com.example.money_meow.transaction.Transaction;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.LegendEntry;
+import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
@@ -22,8 +25,11 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class Graphic {
@@ -87,23 +93,60 @@ public class Graphic {
     }
 
     public void setDataForLineChart(LineChart lineChart) {
-        List<Entry> valsComp1 = new ArrayList<Entry>();
-        List<Entry> valsComp2 = new ArrayList<Entry>();
+        List<Entry> valsComp1 = new ArrayList<Entry>(31);
+        List<Entry> valsComp2 = new ArrayList<Entry>(31);
 
-        Entry c1e1 = new Entry(0f, 100000f); // 0 == quarter 1
-        valsComp1.add(c1e1);
-        Entry c1e2 = new Entry(1f, 140000f); // 1 == quarter 2 ...
-        valsComp1.add(c1e2);
+        List<Double> incomeByDay = new ArrayList<>(Collections.nCopies(31, 0.0));
+        List<Double> expenseByDay = new ArrayList<>(Collections.nCopies(31, 0.0));
 
-        Entry c2e1 = new Entry(0f, 130000f); // 0 == quarter 1
-        valsComp2.add(c2e1);
-        Entry c2e2 = new Entry(1f, 115000f); // 1 == quarter 2 ...
-        valsComp2.add(c2e2);
+
+
+        int maxDay = 0;
+        for (int i = 1; i < incomeList.size(); i++) {
+            Date time = incomeList.get(i).getTime();
+            incomeByDay.set(time.getDay(), incomeList.get(i).getTransactionAmount());
+            maxDay = max(maxDay, time.getDay());
+        }
+
+        for (int i = 1; i < incomeByDay.size(); i++) {
+            double presum = incomeByDay.get(i - 1);
+            incomeByDay.set(i, incomeByDay.get(i) + presum);
+
+        }
+
+        for (int i = 1; i < expenseList.size(); i++) {
+            Date time = expenseList.get(i).getTime();
+            expenseByDay.set(time.getDay(), expenseList.get(i).getTransactionAmount());
+            maxDay = max(maxDay, time.getDay());
+        }
+
+        for (int i = 1; i < expenseByDay.size(); i++) {
+            double presum = expenseByDay.get(i - 1);
+            expenseByDay.set(i, expenseByDay.get(i) + presum);
+
+        }
+
+        for (int i = 0; i < maxDay; i++) {
+            valsComp1.add(new Entry(i, incomeByDay.get(i).floatValue()));
+        }
+
+        for (int i = 0; i < maxDay; i++) {
+            valsComp2.add(new Entry(i, expenseByDay.get(i).floatValue()));
+        }
+
+        List<String> xAxisValues = new ArrayList<>();
+        for (int i = 0; i <= maxDay + 1; i++) {
+            xAxisValues.add(Integer.toString(i));
+        }
+
+        System.out.println(maxDay);
+
 
         LineDataSet setComp1 = new LineDataSet(valsComp1, "Income");
         setComp1.setAxisDependency(YAxis.AxisDependency.LEFT);
         setComp1.setColors(Color.GREEN);
         setComp1.setValueTextSize(10f);
+
         LineDataSet setComp2 = new LineDataSet(valsComp2, "Expense");
         setComp2.setAxisDependency(YAxis.AxisDependency.LEFT);
         setComp2.setColors(Color.RED);
@@ -115,11 +158,25 @@ public class Graphic {
 
         LineData data = new LineData(dataSets);
         lineChart.setData(data);
+
         lineChart.getDescription().setEnabled(false);
         lineChart.getXAxis().setDrawGridLines(false); // Disable grid lines on X axis
         lineChart.getAxisLeft().setDrawGridLines(false); // Disable grid lines on Y axis
         lineChart.getXAxis().setDrawAxisLine(false); // Disable X axis bar
         lineChart.getAxisLeft().setDrawAxisLine(false); // Disable Y axis bar
+
+        lineChart.getAxisLeft().setEnabled(false);
+        lineChart.getAxisRight().setEnabled(false);
+        lineChart.getXAxis().setEnabled(false);
         lineChart.invalidate();
+
+        XAxis xAxis = lineChart.getXAxis();
+        xAxis.setCenterAxisLabels(true);
+        xAxis.setEnabled(true);
+        xAxis.setDrawGridLines(false);
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+
+        lineChart.getXAxis().setValueFormatter(new com.github.mikephil.charting.formatter.IndexAxisValueFormatter(xAxisValues));
+
     }
 }
