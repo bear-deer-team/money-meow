@@ -23,6 +23,7 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -46,13 +47,24 @@ public class Graphic {
     };
 
     public Graphic() {
-        sourceList = Filter.getListByMonth(4, 2023);
+        Calendar calendar = Calendar.getInstance();
+        sourceList = Filter.getListByMonth(calendar.getTime().getMonth() + 1, calendar.getTime().getYear() + 1900);
         expenseList = Filter.getExpenseList(sourceList);
         incomeList = Filter.getIncomeList(sourceList);
         for (Transaction transaction : sourceList) {
             categorySet.add(transaction.getTransactionCategory().getCategoryName());
         }
     }
+
+    public Graphic(int month, int year) {
+        sourceList = Filter.getListByMonth(month, year);
+        expenseList = Filter.getExpenseList(sourceList);
+        incomeList = Filter.getIncomeList(sourceList);
+        for (Transaction transaction : sourceList) {
+            categorySet.add(transaction.getTransactionCategory().getCategoryName());
+        }
+    }
+
     public void setDataForPieChart(PieChart pieChart) {
 
         List<PieEntry> entries = new ArrayList<>();

@@ -1,6 +1,7 @@
 package com.example.money_meow.manageEngine.filter;
 
 import android.app.DatePickerDialog;
+import android.util.Pair;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
@@ -13,7 +14,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 
 public class Filter {
@@ -163,6 +167,22 @@ public class Filter {
         }
         return resFilter;
     }
+
+    public static List<String> getRangeTime(List<Transaction> transactionList) {
+        HashSet<Pair<Integer, Integer>> timeRange = new HashSet<>();
+        for (int i = 0; i < transactionList.size(); i++) {
+            timeRange.add(new Pair<>(transactionList.get(i).getTime().getYear() + 1900, transactionList.get(i).getTime().getMonth() + 1));
+        }
+        List<String> result = new ArrayList<>();
+        for(Pair<Integer, Integer> i: timeRange) {
+            String time = Integer.toString(i.first) + '/' + Integer.toString(i.second);
+            result.add(time);
+        }
+        Collections.sort(result, Collections.reverseOrder());
+        return result;
+    }
+
+
 
 
 }

@@ -4,20 +4,31 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.ViewFlipper;
 
+
+import androidx.core.util.Pair;
 
 import com.example.money_meow.BaseActivity;
 import com.example.money_meow.R;
 import com.example.money_meow.home.Home;
+import com.example.money_meow.manageEngine.filter.Filter;
 import com.example.money_meow.manageEngine.searchEngine.SearchEngine;
 import com.example.money_meow.setting.Settings;
 import com.example.money_meow.transaction.TransactionAction;
+import com.example.money_meow.transaction.TransactionList;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.PieChart;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class StatisticsAction extends BaseActivity {
+    private final String DEFALT_CHOOSE = "Choose your time";
     private Button addTransBtn, homeBtn, historyBtn, searchBtn, settingBtn;
     private Button byTimeBtn, byCategoryBtn, byBothBtn;
 
@@ -47,8 +58,40 @@ public class StatisticsAction extends BaseActivity {
 
         viewFlipper2 = findViewById(R.id.view_flipper2);
         PieChart pieChart = findViewById(R.id.piechart);
+        LineChart lineChart = findViewById(R.id.linechart);
         graphic.setDataForPieChart(pieChart);
         viewFlipper2.setDisplayedChild(0);
+
+        List<String> items = Filter.getRangeTime(TransactionList.mainList);
+        items.add(DEFALT_CHOOSE);
+
+        Spinner timeList = (Spinner) findViewById(R.id.timeList);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                R.layout.time_list_item, items);
+
+        timeList.setAdapter(adapter);
+        timeList.setSelection(items.size() - 1);
+
+        timeList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+
+                String time = timeList.getSelectedItem().toString();
+                if (!time.equals(DEFALT_CHOOSE)) {
+                    int year = Integer.parseInt(time.substring(0, 4));
+                    int month = Integer.parseInt(time.substring(5));
+                    graphic = new Graphic(month, year);
+                    graphic.setDataForPieChart(pieChart);
+                    graphic.setDataForLineChart(lineChart);
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // TODO Auto-generated method stub
+
+            }
+        });
 
         byCategoryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,7 +107,6 @@ public class StatisticsAction extends BaseActivity {
             @Override
             public void onClick(View view) {
                 viewFlipper1.setDisplayedChild(1);
-                LineChart lineChart = findViewById(R.id.linechart);
                 graphic.setDataForLineChart(lineChart);
                 viewFlipper2.setDisplayedChild(1);
             }
@@ -109,4 +151,5 @@ public class StatisticsAction extends BaseActivity {
             }
         });
     }
+
 }
