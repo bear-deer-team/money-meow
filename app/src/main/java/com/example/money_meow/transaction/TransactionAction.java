@@ -1,6 +1,7 @@
 package com.example.money_meow.transaction;
 
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,6 +24,7 @@ import com.example.money_meow.account.LoginAccount;
 import com.example.money_meow.category.Category;
 import com.example.money_meow.category.CategoryList;
 import com.example.money_meow.home.Home;
+import com.example.money_meow.manageEngine.searchEngine.SearchEngine;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
@@ -142,6 +145,15 @@ public class TransactionAction extends BaseActivity {
                         year,
                         month,
                         day);
+                dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                    @Override
+                    public void onShow(DialogInterface dialogInterface) {
+                        Button positiveButton = ((DatePickerDialog) dialogInterface).getButton(DatePickerDialog.BUTTON_POSITIVE);
+                        positiveButton.setTextColor(ContextCompat.getColor(TransactionAction.this, R.color.background_color_1));
+                        Button negativeButton = ((DatePickerDialog) dialogInterface).getButton(DatePickerDialog.BUTTON_NEGATIVE);
+                        negativeButton.setTextColor(ContextCompat.getColor(TransactionAction.this, R.color.background_color_1));
+                    }
+                });
                 dialog.show();
             }
         });
