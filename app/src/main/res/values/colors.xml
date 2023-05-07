@@ -16,4 +16,5 @@
     <color name="helper_text">#FF000000</color>
     <color name="red">#FA4848</color>
     <color name="green">#1CDD24</color>
+    <color name="grey">#989898</color>
 </resources>

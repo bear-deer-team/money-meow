@@ -69,9 +69,10 @@ public class StatisticsAction extends BaseActivity {
         viewFlipper1.setDisplayedChild(0);
 
         viewFlipper2 = findViewById(R.id.view_flipper2);
-        PieChart pieChart = findViewById(R.id.piechart);
+        PieChart pieChartIncome = findViewById(R.id.piechartIncome);
+        PieChart pieChartExpense = findViewById(R.id.piechartExpense);
         LineChart lineChart = findViewById(R.id.linechart);
-        graphic.setDataForPieChart(pieChart);
+        graphic.setDataForPieChart(pieChartExpense, pieChartIncome);
         graphic.setDataForLineChart(lineChart);
         viewFlipper2.setDisplayedChild(0);
 
@@ -102,7 +103,7 @@ public class StatisticsAction extends BaseActivity {
                     int year = Integer.parseInt(time.substring(0, 4));
                     int month = Integer.parseInt(time.substring(5));
                     graphic = new Graphic(month, year);
-                    graphic.setDataForPieChart(pieChart);
+                    graphic.setDataForPieChart(pieChartExpense, pieChartIncome);
                     graphic.setDataForLineChart(lineChart);
 
                     categoryAdapter = new ByCategoryAdapter(Graphic.totalByCategory,StatisticsAction.this);
@@ -123,8 +124,9 @@ public class StatisticsAction extends BaseActivity {
             @Override
             public void onClick(View view) {
                 viewFlipper1.setDisplayedChild(0);
-                PieChart pieChart = findViewById(R.id.piechart);
-                graphic.setDataForPieChart(pieChart);
+                PieChart pieChartIncome = findViewById(R.id.piechartIncome);
+                PieChart pieChartExpense = findViewById(R.id.piechartExpense);
+                graphic.setDataForPieChart(pieChartExpense, pieChartIncome);
                 viewFlipper2.setDisplayedChild(0);
 
                 categoryAdapter = new ByCategoryAdapter(Graphic.totalByCategory,StatisticsAction.this);

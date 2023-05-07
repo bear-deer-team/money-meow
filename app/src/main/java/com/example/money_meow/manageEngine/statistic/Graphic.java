@@ -75,10 +75,11 @@ public class Graphic {
         }
     }
 
-    public void setDataForPieChart(PieChart pieChart) {
+    public void setDataForPieChart(PieChart pieChartExpense, PieChart pieChartIncome) {
         totalByCategory.clear();
 
-        List<PieEntry> entries = new ArrayList<>();
+        List<PieEntry> entriesExpense = new ArrayList<>();
+        List<PieEntry> entriesIncome = new ArrayList<>();
 
         for (String categoryName : categorySet) {
             double sum = 0;
@@ -87,7 +88,16 @@ public class Graphic {
                 sum += transaction.getTransactionAmount();
             }
             if (sum != 0) {
-                entries.add(new PieEntry((float) sum, categoryName));
+                entriesExpense.add(new PieEntry((float) sum, categoryName));
+            }
+
+            sum = 0;
+            listByCategory = Filter.getListByCategory(incomeList, categoryName);
+            for (Transaction transaction : listByCategory) {
+                sum += transaction.getTransactionAmount();
+            }
+            if (sum != 0) {
+                entriesIncome.add(new PieEntry((float) sum, categoryName));
             }
         }
 
@@ -108,7 +118,7 @@ public class Graphic {
                 return Double.compare(transaction2.getTransactionAmount(), transaction1.getTransactionAmount());
             }
         });
-        Collections.sort(entries, new Comparator<PieEntry>() {
+        Collections.sort(entriesExpense, new Comparator<PieEntry>() {
             @Override
             public int compare(PieEntry entry1, PieEntry entry2) {
                 // Sort entries in descending order by value percentage
@@ -116,21 +126,43 @@ public class Graphic {
             }
         });
 
-        PieDataSet set = new PieDataSet(entries, "Election Results");
-        set.setColors(GRAYTONE_COLORS);
-        set.setValueTextSize(10f);
-        set.setValueFormatter(new PercentFormatter(new DecimalFormat("#.#")));
-        set.setSliceSpace(3f);
-        set.setValueLinePart1OffsetPercentage(80f);
-        set.setValueLinePart2Length(0.5f);
-        PieData data = new PieData(set);
+        PieDataSet setIncome = new PieDataSet(entriesIncome, "Election Results");
+        setIncome.setColors(GRAYTONE_COLORS);
+        setIncome.setValueTextSize(10f);
+        setIncome.setValueFormatter(new PercentFormatter(new DecimalFormat("#.#")));
+        setIncome.setSliceSpace(3f);
+        setIncome.setValueLinePart1OffsetPercentage(80f);
+        setIncome.setValueLinePart2Length(0.5f);
 
-        pieChart.setData(data);
-        pieChart.setDrawEntryLabels(false);
-        pieChart.setUsePercentValues(true);
-        pieChart.getDescription().setEnabled(false);
-        pieChart.getLegend().setEnabled(false);
-        pieChart.invalidate();
+        PieData dataIncome = new PieData(setIncome);
+
+        pieChartIncome.setCenterText("Income");
+        pieChartIncome.setData(dataIncome);
+        pieChartIncome.setDrawEntryLabels(false);
+        pieChartIncome.setUsePercentValues(true);
+        pieChartIncome.getDescription().setEnabled(false);
+        pieChartIncome.getLegend().setEnabled(false);
+        pieChartIncome.invalidate();
+
+        PieDataSet setExpense = new PieDataSet(entriesExpense, "Election Results");
+        setExpense.setColors(GRAYTONE_COLORS);
+        setExpense.setValueTextSize(10f);
+        setExpense.setValueFormatter(new PercentFormatter(new DecimalFormat("#.#")));
+        setExpense.setSliceSpace(3f);
+        setExpense.setValueLinePart1OffsetPercentage(80f);
+        setExpense.setValueLinePart2Length(0.5f);
+
+        PieData dataExpense = new PieData(setExpense);
+
+        pieChartExpense.setCenterText("Expense");
+        pieChartExpense.setData(dataExpense);
+        pieChartExpense.setDrawEntryLabels(false);
+        pieChartExpense.setUsePercentValues(true);
+        pieChartExpense.getDescription().setEnabled(false);
+        pieChartExpense.getLegend().setEnabled(false);
+        pieChartExpense.invalidate();
+
+
     }
 
     public void setDataForLineChart(LineChart lineChart) {
