@@ -49,7 +49,7 @@ public class ByTimeAdapter extends RecyclerView.Adapter<ByTimeAdapter.TimeViewHo
             if (time.getTotal() >= 0) {
                 total = "+$" + Double.toString(time.getTotal());
             } else {
-                total = "-$" + Double.toString(time.getTotal());
+                total = "-$" + Double.toString(Math.abs(time.getTotal()));
             }
             holder.total.setText(total);
 
