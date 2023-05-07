@@ -40,6 +40,10 @@ public class Graphic {
     public List<Transaction> incomeList = new ArrayList<>();
     public Set<String> categorySet = new HashSet<>();
     public static List<Transaction> totalByCategory = new ArrayList<>();
+    public static List<Time> totalByTime = new ArrayList<>();
+
+    private int month;
+    private int year;
 
     public static final int[] GRAYTONE_COLORS = {
             Color.rgb(116, 161, 142), Color.rgb(129, 173, 181), Color.rgb(178, 200, 145),
@@ -50,6 +54,8 @@ public class Graphic {
 
     public Graphic() {
         Calendar calendar = Calendar.getInstance();
+        month = calendar.getTime().getMonth() + 1;
+        year = calendar.getTime().getYear() + 1900;
         sourceList = Filter.getListByMonth(calendar.getTime().getMonth() + 1, calendar.getTime().getYear() + 1900);
         expenseList = Filter.getExpenseList(sourceList);
         incomeList = Filter.getIncomeList(sourceList);
@@ -59,6 +65,8 @@ public class Graphic {
     }
 
     public Graphic(int month, int year) {
+        this.month = month;
+        this.year = year;
         sourceList = Filter.getListByMonth(month, year);
         expenseList = Filter.getExpenseList(sourceList);
         incomeList = Filter.getIncomeList(sourceList);
@@ -126,50 +134,48 @@ public class Graphic {
     }
 
     public void setDataForLineChart(LineChart lineChart) {
-        List<Entry> valsComp1 = new ArrayList<Entry>(31);
-        List<Entry> valsComp2 = new ArrayList<Entry>(31);
+        totalByTime.clear();
+        List<Entry> valsComp1 = new ArrayList<Entry>(32);
+        List<Entry> valsComp2 = new ArrayList<Entry>(32);
 
-        List<Double> incomeByDay = new ArrayList<>(Collections.nCopies(31, 0.0));
-        List<Double> expenseByDay = new ArrayList<>(Collections.nCopies(31, 0.0));
-
-
+        List<Double> incomeByDay = new ArrayList<>(Collections.nCopies(32, 0.0));
+        List<Double> expenseByDay = new ArrayList<>(Collections.nCopies(32, 0.0));
 
         float maxDay = 0;
-        for (int i = 1; i < incomeList.size(); i++) {
+        for (int i = 0; i < incomeList.size(); i++) {
             Date time = incomeList.get(i).getTime();
             incomeByDay.set(time.getDate(), incomeList.get(i).getTransactionAmount());
             maxDay = max(maxDay, time.getDate());
         }
 
-        for (int i = 1; i < incomeByDay.size(); i++) {
-            double presum = incomeByDay.get(i - 1);
-            incomeByDay.set(i, incomeByDay.get(i) + presum);
-
-        }
-
-        for (int i = 1; i < expenseList.size(); i++) {
+        for (int i = 0; i < expenseList.size(); i++) {
             Date time = expenseList.get(i).getTime();
             expenseByDay.set(time.getDate(), expenseList.get(i).getTransactionAmount());
             maxDay = max(maxDay, time.getDate());
         }
 
-        for (int i = 1; i < expenseByDay.size(); i++) {
-            double presum = expenseByDay.get(i - 1);
-            expenseByDay.set(i, expenseByDay.get(i) + presum);
-        }
 
+        float preIncome = 0;
+        float preExpense = 0;
         for (int i = 1; i <= maxDay; i++) {
-            valsComp1.add(new Entry(i / maxDay, incomeByDay.get(i).floatValue()));
-        }
-
-        for (int i = 1; i <= maxDay; i++) {
-            valsComp2.add(new Entry(i / maxDay, expenseByDay.get(i).floatValue()));
+            float income = preIncome + incomeByDay.get(i).floatValue();
+            float expense = preExpense + expenseByDay.get(i).floatValue();
+            valsComp1.add(new Entry(i, income));
+            valsComp2.add(new Entry(i, expense));
+            if (incomeByDay.get(i) != 0 || expenseByDay.get(i) != 0) {
+                totalByTime.add(new Time(Integer.toString(i) + "/"
+                        + Integer.toString(month) + "/" + Integer.toString(year),
+                        incomeByDay.get(i), expenseByDay.get(i)));
+            }
+            preIncome += incomeByDay.get(i);
+            preExpense += expenseByDay.get(i);
         }
 
         LineDataSet setComp1 = new LineDataSet(valsComp1, "Income");
         setComp1.setAxisDependency(YAxis.AxisDependency.LEFT);
         setComp1.setColors(Color.GREEN);
         setComp1.setValueTextSize(0f);
+
 
         LineDataSet setComp2 = new LineDataSet(valsComp2, "Expense");
         setComp2.setAxisDependency(YAxis.AxisDependency.LEFT);
@@ -182,9 +188,10 @@ public class Graphic {
 
         LineData data = new LineData(dataSets);
         lineChart.setData(data);
+        lineChart.getXAxis().setGranularity(1/maxDay);
 
         lineChart.setTouchEnabled(true);
-        lineChart.setScaleEnabled(false);
+        lineChart.setScaleEnabled(true);
         lineChart.setPinchZoom(true);
 
         lineChart.getDescription().setEnabled(false);

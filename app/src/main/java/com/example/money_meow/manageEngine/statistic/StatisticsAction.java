@@ -11,7 +11,6 @@ import android.widget.Spinner;
 import android.widget.ViewFlipper;
 
 
-import androidx.core.util.Pair;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,20 +19,19 @@ import com.example.money_meow.R;
 import com.example.money_meow.home.Home;
 import com.example.money_meow.manageEngine.filter.Filter;
 import com.example.money_meow.manageEngine.searchEngine.SearchEngine;
-import com.example.money_meow.manageEngine.searchEngine.TransactionAdapter;
 import com.example.money_meow.setting.Settings;
 import com.example.money_meow.transaction.TransactionAction;
 import com.example.money_meow.transaction.TransactionList;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.PieChart;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class StatisticsAction extends BaseActivity {
     private final String DEFALT_CHOOSE = "Choose your time";
-    private RecyclerView rcvTransList;
-    private CategoryAdapter categoryAdapter;
+    private RecyclerView rcvCategoryList, rcvTimeList;
+    private ByCategoryAdapter categoryAdapter;
+    private ByTimeAdapter timeAdapter;
     private Button addTransBtn, homeBtn, historyBtn, searchBtn, settingBtn;
     private Button byTimeBtn, byCategoryBtn, byBothBtn;
 
@@ -58,9 +56,13 @@ public class StatisticsAction extends BaseActivity {
         byCategoryBtn = (Button) findViewById(R.id.ByCategoryBtn);
         byBothBtn = (Button) findViewById(R.id.ByBothBtn);
 
-        rcvTransList = findViewById(R.id.c_details_list);
+        rcvCategoryList = findViewById(R.id.c_details_list);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this,1);
-        rcvTransList.setLayoutManager(gridLayoutManager);
+        rcvCategoryList.setLayoutManager(gridLayoutManager);
+
+        rcvTimeList = findViewById(R.id.t_details_list);
+        GridLayoutManager gridLayoutManager1 = new GridLayoutManager(this,1);
+        rcvTimeList.setLayoutManager(gridLayoutManager1);
 
 
         viewFlipper1 = findViewById(R.id.view_flipper1);
@@ -70,10 +72,15 @@ public class StatisticsAction extends BaseActivity {
         PieChart pieChart = findViewById(R.id.piechart);
         LineChart lineChart = findViewById(R.id.linechart);
         graphic.setDataForPieChart(pieChart);
+        graphic.setDataForLineChart(lineChart);
         viewFlipper2.setDisplayedChild(0);
 
-        categoryAdapter = new CategoryAdapter(Graphic.totalByCategory,this);
-        rcvTransList.setAdapter(categoryAdapter);
+        categoryAdapter = new ByCategoryAdapter(Graphic.totalByCategory,this);
+        rcvCategoryList.setAdapter(categoryAdapter);
+
+        System.out.println(Graphic.totalByTime.size());
+        timeAdapter = new ByTimeAdapter(Graphic.totalByTime, this);
+        rcvTimeList.setAdapter(timeAdapter);
 
         List<String> items = Filter.getRangeTime(TransactionList.mainList);
         items.add(DEFALT_CHOOSE);
@@ -98,8 +105,11 @@ public class StatisticsAction extends BaseActivity {
                     graphic.setDataForPieChart(pieChart);
                     graphic.setDataForLineChart(lineChart);
 
-                    categoryAdapter = new CategoryAdapter(Graphic.totalByCategory,StatisticsAction.this);
-                    rcvTransList.setAdapter(categoryAdapter);
+                    categoryAdapter = new ByCategoryAdapter(Graphic.totalByCategory,StatisticsAction.this);
+                    rcvCategoryList.setAdapter(categoryAdapter);
+
+                    timeAdapter = new ByTimeAdapter(Graphic.totalByTime, StatisticsAction.this);
+                    rcvTimeList.setAdapter(timeAdapter);
                 }
             }
             @Override
@@ -116,6 +126,10 @@ public class StatisticsAction extends BaseActivity {
                 PieChart pieChart = findViewById(R.id.piechart);
                 graphic.setDataForPieChart(pieChart);
                 viewFlipper2.setDisplayedChild(0);
+
+                categoryAdapter = new ByCategoryAdapter(Graphic.totalByCategory,StatisticsAction.this);
+                rcvCategoryList.setAdapter(categoryAdapter);
+
             }
         });
 
@@ -125,6 +139,9 @@ public class StatisticsAction extends BaseActivity {
                 viewFlipper1.setDisplayedChild(1);
                 graphic.setDataForLineChart(lineChart);
                 viewFlipper2.setDisplayedChild(1);
+
+                timeAdapter = new ByTimeAdapter(Graphic.totalByTime, StatisticsAction.this);
+                rcvTimeList.setAdapter(timeAdapter);
             }
         });
 
