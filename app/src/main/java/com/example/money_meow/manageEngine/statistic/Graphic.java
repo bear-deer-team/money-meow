@@ -46,7 +46,7 @@ public class Graphic {
     };
 
     public Graphic() {
-        sourceList = Filter.getListByMonth(5, 2023);
+        sourceList = Filter.getListByMonth(4, 2023);
         expenseList = Filter.getExpenseList(sourceList);
         incomeList = Filter.getIncomeList(sourceList);
         for (Transaction transaction : sourceList) {
@@ -101,11 +101,11 @@ public class Graphic {
 
 
 
-        int maxDay = 0;
+        float maxDay = 0;
         for (int i = 1; i < incomeList.size(); i++) {
             Date time = incomeList.get(i).getTime();
-            incomeByDay.set(time.getDay(), incomeList.get(i).getTransactionAmount());
-            maxDay = max(maxDay, time.getDay());
+            incomeByDay.set(time.getDate(), incomeList.get(i).getTransactionAmount());
+            maxDay = max(maxDay, time.getDate());
         }
 
         for (int i = 1; i < incomeByDay.size(); i++) {
@@ -116,8 +116,8 @@ public class Graphic {
 
         for (int i = 1; i < expenseList.size(); i++) {
             Date time = expenseList.get(i).getTime();
-            expenseByDay.set(time.getDay(), expenseList.get(i).getTransactionAmount());
-            maxDay = max(maxDay, time.getDay());
+            expenseByDay.set(time.getDate(), expenseList.get(i).getTransactionAmount());
+            maxDay = max(maxDay, time.getDate());
         }
 
         for (int i = 1; i < expenseByDay.size(); i++) {
@@ -125,26 +125,23 @@ public class Graphic {
             expenseByDay.set(i, expenseByDay.get(i) + presum);
         }
 
-        for (int i = 0; i <= maxDay; i++) {
-            valsComp1.add(new Entry(i, incomeByDay.get(i).floatValue()));
+        for (int i = 1; i <= maxDay; i++) {
+            valsComp1.add(new Entry(i / maxDay, incomeByDay.get(i).floatValue()));
         }
 
-        for (int i = 0; i <= maxDay; i++) {
-            valsComp2.add(new Entry(i, expenseByDay.get(i).floatValue()));
+        for (int i = 1; i <= maxDay; i++) {
+            valsComp2.add(new Entry(i / maxDay, expenseByDay.get(i).floatValue()));
         }
-
-        System.out.println(maxDay + " " + sourceList.size());
-
 
         LineDataSet setComp1 = new LineDataSet(valsComp1, "Income");
         setComp1.setAxisDependency(YAxis.AxisDependency.LEFT);
         setComp1.setColors(Color.GREEN);
-        setComp1.setValueTextSize(10f);
+        setComp1.setValueTextSize(0f);
 
         LineDataSet setComp2 = new LineDataSet(valsComp2, "Expense");
         setComp2.setAxisDependency(YAxis.AxisDependency.LEFT);
         setComp2.setColors(Color.RED);
-        setComp2.setValueTextSize(10f);
+        setComp2.setValueTextSize(0f);
 
         List<ILineDataSet> dataSets = new ArrayList<ILineDataSet>();
         dataSets.add(setComp1);
@@ -153,18 +150,21 @@ public class Graphic {
         LineData data = new LineData(dataSets);
         lineChart.setData(data);
 
+        lineChart.setTouchEnabled(true);
+        lineChart.setScaleEnabled(false);
+        lineChart.setPinchZoom(true);
+
         lineChart.getDescription().setEnabled(false);
         lineChart.getXAxis().setDrawGridLines(false); // Disable grid lines on X axis
         lineChart.getAxisLeft().setDrawGridLines(false); // Disable grid lines on Y axis
         lineChart.getXAxis().setDrawAxisLine(false); // Disable X axis bar
         lineChart.getAxisLeft().setDrawAxisLine(false); // Disable Y axis bar
 
-        lineChart.getXAxis().setGranularity(1f/maxDay);
-
-        lineChart.getAxisLeft().setEnabled(false);
         lineChart.getAxisRight().setEnabled(false);
         lineChart.getXAxis().setEnabled(false);
         lineChart.invalidate();
+
+
 
     }
 }

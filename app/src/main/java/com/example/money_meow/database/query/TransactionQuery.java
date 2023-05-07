@@ -17,7 +17,7 @@ public class TransactionQuery {
         List<Document> transactionDocs = new ArrayList<>(MongoDBQuery.find("MoneyMeow","transactions",new Document("userName",userName)));
         List<Transaction> transactions = new ArrayList<>();
         for(int i=0;i<transactionDocs.size();i++) {
-            String id = transactionDocs.get(i).getObjectId("_id").toString();
+            String id = transactionDocs.get(i).getString("id");
             String name = transactionDocs.get(i).getString("name");
             String type = transactionDocs.get(i).getString("type");
             Double amount = transactionDocs.get(i).getDouble("amount");

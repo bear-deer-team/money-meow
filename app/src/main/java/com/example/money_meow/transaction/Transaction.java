@@ -9,6 +9,7 @@ import com.example.money_meow.category.CategoryList;
 import com.example.money_meow.database.insert.MongoDBInsert;
 
 import org.bson.Document;
+import org.bson.types.ObjectId;
 
 
 import java.text.SimpleDateFormat;
@@ -58,6 +59,7 @@ public class Transaction extends RealmObject implements Comparable{
     public Date getTime() {
         return transactionTime;
     }
+
 
     public Transaction() {
     }
