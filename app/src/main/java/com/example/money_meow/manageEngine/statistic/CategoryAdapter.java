@@ -1,4 +1,4 @@
-package com.example.money_meow.manageEngine.searchEngine;
+package com.example.money_meow.manageEngine.statistic;
 
 import android.content.Context;
 import android.content.Intent;
@@ -19,16 +19,12 @@ import com.example.money_meow.transaction.TransactionAction;
 
 import java.util.List;
 
-public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.TransactionViewHolder> {
+public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.TransactionViewHolder> {
     List<Transaction> transactionListSearch;
     Context context;
-    public TransactionAdapter(List<Transaction> transactionListSearch, Context context) {
+    public CategoryAdapter(List<Transaction> transactionListSearch, Context context) {
         this.context = context;
         this.transactionListSearch = transactionListSearch;
-    }
-
-    public TransactionAdapter() {
-
     }
 
     public void updateList(List<Transaction> transactionListSearch) {
@@ -38,20 +34,19 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
     @NonNull
     @Override
-    public TransactionAdapter.TransactionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.transaction,parent,false);
+    public CategoryAdapter.TransactionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.category_total,parent,false);
 
-        return new TransactionAdapter.TransactionViewHolder(view);
+        return new CategoryAdapter.TransactionViewHolder(view);
     }
     @Override
-    public void onBindViewHolder(@NonNull TransactionAdapter.TransactionViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CategoryAdapter.TransactionViewHolder holder, int position) {
         Transaction transaction = transactionListSearch.get(position);
         if (transaction == null) {
             return;
         } else {
             holder.categoryImg.setImageResource(transaction.getTransactionCategory().getImage(this.context));
             holder.name.setText(transaction.getTransactionCategory().getCategoryName());
-            holder.date.setText(transaction.formatDate());
             String amountColor = new String();
             if(transaction.getTransactionType().equals("income")){
                 amountColor += "+$" + Double.toString(transaction.getTransactionAmount());
@@ -89,7 +84,6 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
     public class TransactionViewHolder extends RecyclerView.ViewHolder{
         private ImageView categoryImg;
         private TextView name;
-        private TextView date;
         private TextView amount;
 
         private CardView cardView;
@@ -99,7 +93,6 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
             categoryImg = itemView.findViewById(R.id.categoryImg);
             name = itemView.findViewById(R.id.name);
             amount = itemView.findViewById(R.id.amount);
-            date = itemView.findViewById(R.id.date);
         }
     }
 }

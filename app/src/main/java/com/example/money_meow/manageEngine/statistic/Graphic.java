@@ -4,6 +4,7 @@ import static java.lang.Math.max;
 
 import android.graphics.Color;
 
+import com.example.money_meow.category.Category;
 import com.example.money_meow.manageEngine.filter.Filter;
 import com.example.money_meow.transaction.Transaction;
 import com.github.mikephil.charting.charts.LineChart;
@@ -23,6 +24,7 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -37,6 +39,7 @@ public class Graphic {
     public List<Transaction> expenseList = new ArrayList<>();
     public List<Transaction> incomeList = new ArrayList<>();
     public Set<String> categorySet = new HashSet<>();
+    public static List<Transaction> totalByCategory = new ArrayList<>();
 
     public static final int[] GRAYTONE_COLORS = {
             Color.rgb(116, 161, 142), Color.rgb(129, 173, 181), Color.rgb(178, 200, 145),
@@ -46,14 +49,26 @@ public class Graphic {
     };
 
     public Graphic() {
-        sourceList = Filter.getListByMonth(5, 2023);
+        Calendar calendar = Calendar.getInstance();
+        sourceList = Filter.getListByMonth(calendar.getTime().getMonth() + 1, calendar.getTime().getYear() + 1900);
         expenseList = Filter.getExpenseList(sourceList);
         incomeList = Filter.getIncomeList(sourceList);
         for (Transaction transaction : sourceList) {
             categorySet.add(transaction.getTransactionCategory().getCategoryName());
         }
     }
+
+    public Graphic(int month, int year) {
+        sourceList = Filter.getListByMonth(month, year);
+        expenseList = Filter.getExpenseList(sourceList);
+        incomeList = Filter.getIncomeList(sourceList);
+        for (Transaction transaction : sourceList) {
+            categorySet.add(transaction.getTransactionCategory().getCategoryName());
+        }
+    }
+
     public void setDataForPieChart(PieChart pieChart) {
+        totalByCategory.clear();
 
         List<PieEntry> entries = new ArrayList<>();
 
@@ -67,6 +82,24 @@ public class Graphic {
                 entries.add(new PieEntry((float) sum, categoryName));
             }
         }
+
+        for (String categoryName : categorySet) {
+            double sum = 0;
+            List<Transaction> listByCategory = Filter.getListByCategory(sourceList, categoryName);
+            for (Transaction transaction : listByCategory) {
+                sum += transaction.getTransactionAmount();
+            }
+            if (sum != 0) {
+                totalByCategory.add(new Transaction(sum, new Category(categoryName)));
+            }
+        }
+        Collections.sort(totalByCategory, new Comparator<Transaction>() {
+            @Override
+            public int compare(Transaction transaction1, Transaction transaction2) {
+                // Sort entries in descending order by value percentage
+                return Double.compare(transaction2.getTransactionAmount(), transaction1.getTransactionAmount());
+            }
+        });
         Collections.sort(entries, new Comparator<PieEntry>() {
             @Override
             public int compare(PieEntry entry1, PieEntry entry2) {
@@ -77,7 +110,7 @@ public class Graphic {
 
         PieDataSet set = new PieDataSet(entries, "Election Results");
         set.setColors(GRAYTONE_COLORS);
-        set.setValueTextSize(20f);
+        set.setValueTextSize(10f);
         set.setValueFormatter(new PercentFormatter(new DecimalFormat("#.#")));
         set.setSliceSpace(3f);
         set.setValueLinePart1OffsetPercentage(80f);
@@ -101,11 +134,11 @@ public class Graphic {
 
 
 
-        int maxDay = 0;
+        float maxDay = 0;
         for (int i = 1; i < incomeList.size(); i++) {
             Date time = incomeList.get(i).getTime();
-            incomeByDay.set(time.getDay(), incomeList.get(i).getTransactionAmount());
-            maxDay = max(maxDay, time.getDay());
+            incomeByDay.set(time.getDate(), incomeList.get(i).getTransactionAmount());
+            maxDay = max(maxDay, time.getDate());
         }
 
         for (int i = 1; i < incomeByDay.size(); i++) {
@@ -116,8 +149,8 @@ public class Graphic {
 
         for (int i = 1; i < expenseList.size(); i++) {
             Date time = expenseList.get(i).getTime();
-            expenseByDay.set(time.getDay(), expenseList.get(i).getTransactionAmount());
-            maxDay = max(maxDay, time.getDay());
+            expenseByDay.set(time.getDate(), expenseList.get(i).getTransactionAmount());
+            maxDay = max(maxDay, time.getDate());
         }
 
         for (int i = 1; i < expenseByDay.size(); i++) {
@@ -125,26 +158,23 @@ public class Graphic {
             expenseByDay.set(i, expenseByDay.get(i) + presum);
         }
 
-        for (int i = 0; i <= maxDay; i++) {
-            valsComp1.add(new Entry(i, incomeByDay.get(i).floatValue()));
+        for (int i = 1; i <= maxDay; i++) {
+            valsComp1.add(new Entry(i / maxDay, incomeByDay.get(i).floatValue()));
         }
 
-        for (int i = 0; i <= maxDay; i++) {
-            valsComp2.add(new Entry(i, expenseByDay.get(i).floatValue()));
+        for (int i = 1; i <= maxDay; i++) {
+            valsComp2.add(new Entry(i / maxDay, expenseByDay.get(i).floatValue()));
         }
-
-        System.out.println(maxDay + " " + sourceList.size());
-
 
         LineDataSet setComp1 = new LineDataSet(valsComp1, "Income");
         setComp1.setAxisDependency(YAxis.AxisDependency.LEFT);
         setComp1.setColors(Color.GREEN);
-        setComp1.setValueTextSize(10f);
+        setComp1.setValueTextSize(0f);
 
         LineDataSet setComp2 = new LineDataSet(valsComp2, "Expense");
         setComp2.setAxisDependency(YAxis.AxisDependency.LEFT);
         setComp2.setColors(Color.RED);
-        setComp2.setValueTextSize(10f);
+        setComp2.setValueTextSize(0f);
 
         List<ILineDataSet> dataSets = new ArrayList<ILineDataSet>();
         dataSets.add(setComp1);
@@ -153,18 +183,21 @@ public class Graphic {
         LineData data = new LineData(dataSets);
         lineChart.setData(data);
 
+        lineChart.setTouchEnabled(true);
+        lineChart.setScaleEnabled(false);
+        lineChart.setPinchZoom(true);
+
         lineChart.getDescription().setEnabled(false);
         lineChart.getXAxis().setDrawGridLines(false); // Disable grid lines on X axis
         lineChart.getAxisLeft().setDrawGridLines(false); // Disable grid lines on Y axis
         lineChart.getXAxis().setDrawAxisLine(false); // Disable X axis bar
         lineChart.getAxisLeft().setDrawAxisLine(false); // Disable Y axis bar
 
-        lineChart.getXAxis().setGranularity(1f/maxDay);
-
-        lineChart.getAxisLeft().setEnabled(false);
         lineChart.getAxisRight().setEnabled(false);
         lineChart.getXAxis().setEnabled(false);
         lineChart.invalidate();
+
+
 
     }
 }
