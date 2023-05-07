@@ -1,15 +1,18 @@
 package com.example.money_meow.manageEngine.searchEngine;
 
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,6 +27,7 @@ import com.example.money_meow.transaction.TransactionAction;
 import com.example.money_meow.transaction.TransactionList;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
+import java.lang.reflect.Field;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -109,6 +113,15 @@ public class SearchEngine extends BaseActivity {
                         year,
                         month,
                         day);
+                dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                    @Override
+                    public void onShow(DialogInterface dialogInterface) {
+                        Button positiveButton = ((DatePickerDialog) dialogInterface).getButton(DatePickerDialog.BUTTON_POSITIVE);
+                        positiveButton.setTextColor(ContextCompat.getColor(SearchEngine.this, R.color.background_color_1));
+                        Button negativeButton = ((DatePickerDialog) dialogInterface).getButton(DatePickerDialog.BUTTON_NEGATIVE);
+                        negativeButton.setTextColor(ContextCompat.getColor(SearchEngine.this, R.color.background_color_1));
+                    }
+                });
                 dialog.show();
             }
         });
@@ -129,6 +142,15 @@ public class SearchEngine extends BaseActivity {
                         year,
                         month,
                         day);
+                dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                    @Override
+                    public void onShow(DialogInterface dialogInterface) {
+                        Button positiveButton = ((DatePickerDialog) dialogInterface).getButton(DatePickerDialog.BUTTON_POSITIVE);
+                        positiveButton.setTextColor(ContextCompat.getColor(SearchEngine.this, R.color.background_color_1));
+                        Button negativeButton = ((DatePickerDialog) dialogInterface).getButton(DatePickerDialog.BUTTON_NEGATIVE);
+                        negativeButton.setTextColor(ContextCompat.getColor(SearchEngine.this, R.color.background_color_1));
+                    }
+                });
                 dialog.show();
             }
         });

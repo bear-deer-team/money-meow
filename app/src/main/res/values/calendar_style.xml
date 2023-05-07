@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="CustomDatePickerDialog" parent="@android:style/Theme.Material.Light.Dialog">
-        <item name="android:colorPrimary">#008080</item>
         <item name="android:colorAccent">#CD9B9B</item>
         <item name="android:windowBackground">@drawable/calendar_backgroud</item>
     </style>
