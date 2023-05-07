@@ -104,6 +104,12 @@ public class Transaction extends RealmObject implements Comparable{
         this.transactionType = transactionType;
     }
 
+    public Transaction(double transactionAmount, Category category) {
+        this.transactionAmount = transactionAmount;
+        this.transactionCategory = category;
+        this.transactionType = transactionCategory.getCategoryType();
+    }
+
     //Hien thi thong tin trong transaction
     public void display(Transaction a) {
         // Lấy các thành phần giao diện

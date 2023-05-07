@@ -12,12 +12,15 @@ import android.widget.ViewFlipper;
 
 
 import androidx.core.util.Pair;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.money_meow.BaseActivity;
 import com.example.money_meow.R;
 import com.example.money_meow.home.Home;
 import com.example.money_meow.manageEngine.filter.Filter;
 import com.example.money_meow.manageEngine.searchEngine.SearchEngine;
+import com.example.money_meow.manageEngine.searchEngine.TransactionAdapter;
 import com.example.money_meow.setting.Settings;
 import com.example.money_meow.transaction.TransactionAction;
 import com.example.money_meow.transaction.TransactionList;
@@ -29,6 +32,8 @@ import java.util.List;
 
 public class StatisticsAction extends BaseActivity {
     private final String DEFALT_CHOOSE = "Choose your time";
+    private RecyclerView rcvTransList;
+    private CategoryAdapter categoryAdapter;
     private Button addTransBtn, homeBtn, historyBtn, searchBtn, settingBtn;
     private Button byTimeBtn, byCategoryBtn, byBothBtn;
 
@@ -53,6 +58,11 @@ public class StatisticsAction extends BaseActivity {
         byCategoryBtn = (Button) findViewById(R.id.ByCategoryBtn);
         byBothBtn = (Button) findViewById(R.id.ByBothBtn);
 
+        rcvTransList = findViewById(R.id.c_details_list);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this,1);
+        rcvTransList.setLayoutManager(gridLayoutManager);
+
+
         viewFlipper1 = findViewById(R.id.view_flipper1);
         viewFlipper1.setDisplayedChild(0);
 
@@ -61,6 +71,9 @@ public class StatisticsAction extends BaseActivity {
         LineChart lineChart = findViewById(R.id.linechart);
         graphic.setDataForPieChart(pieChart);
         viewFlipper2.setDisplayedChild(0);
+
+        categoryAdapter = new CategoryAdapter(Graphic.totalByCategory,this);
+        rcvTransList.setAdapter(categoryAdapter);
 
         List<String> items = Filter.getRangeTime(TransactionList.mainList);
         items.add(DEFALT_CHOOSE);
@@ -84,6 +97,9 @@ public class StatisticsAction extends BaseActivity {
                     graphic = new Graphic(month, year);
                     graphic.setDataForPieChart(pieChart);
                     graphic.setDataForLineChart(lineChart);
+
+                    categoryAdapter = new CategoryAdapter(Graphic.totalByCategory,StatisticsAction.this);
+                    rcvTransList.setAdapter(categoryAdapter);
                 }
             }
             @Override

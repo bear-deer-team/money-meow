@@ -4,6 +4,7 @@ import static java.lang.Math.max;
 
 import android.graphics.Color;
 
+import com.example.money_meow.category.Category;
 import com.example.money_meow.manageEngine.filter.Filter;
 import com.example.money_meow.transaction.Transaction;
 import com.github.mikephil.charting.charts.LineChart;
@@ -38,6 +39,7 @@ public class Graphic {
     public List<Transaction> expenseList = new ArrayList<>();
     public List<Transaction> incomeList = new ArrayList<>();
     public Set<String> categorySet = new HashSet<>();
+    public static List<Transaction> totalByCategory = new ArrayList<>();
 
     public static final int[] GRAYTONE_COLORS = {
             Color.rgb(116, 161, 142), Color.rgb(129, 173, 181), Color.rgb(178, 200, 145),
@@ -66,6 +68,7 @@ public class Graphic {
     }
 
     public void setDataForPieChart(PieChart pieChart) {
+        totalByCategory.clear();
 
         List<PieEntry> entries = new ArrayList<>();
 
@@ -79,6 +82,24 @@ public class Graphic {
                 entries.add(new PieEntry((float) sum, categoryName));
             }
         }
+
+        for (String categoryName : categorySet) {
+            double sum = 0;
+            List<Transaction> listByCategory = Filter.getListByCategory(sourceList, categoryName);
+            for (Transaction transaction : listByCategory) {
+                sum += transaction.getTransactionAmount();
+            }
+            if (sum != 0) {
+                totalByCategory.add(new Transaction(sum, new Category(categoryName)));
+            }
+        }
+        Collections.sort(totalByCategory, new Comparator<Transaction>() {
+            @Override
+            public int compare(Transaction transaction1, Transaction transaction2) {
+                // Sort entries in descending order by value percentage
+                return Double.compare(transaction2.getTransactionAmount(), transaction1.getTransactionAmount());
+            }
+        });
         Collections.sort(entries, new Comparator<PieEntry>() {
             @Override
             public int compare(PieEntry entry1, PieEntry entry2) {
@@ -89,7 +110,7 @@ public class Graphic {
 
         PieDataSet set = new PieDataSet(entries, "Election Results");
         set.setColors(GRAYTONE_COLORS);
-        set.setValueTextSize(20f);
+        set.setValueTextSize(10f);
         set.setValueFormatter(new PercentFormatter(new DecimalFormat("#.#")));
         set.setSliceSpace(3f);
         set.setValueLinePart1OffsetPercentage(80f);
