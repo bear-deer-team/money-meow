@@ -22,7 +22,7 @@ import com.example.money_meow.transaction.TransactionAction;
 import com.example.money_meow.transaction.TransactionList;
 
 public class Settings extends BaseActivity {
-    Button infor, editAcc, logOut, display;
+    Button infor, editAcc, logOut;
     Button addTransBtn, homeBtn, historyBtn, transactionBtn, settingBtn;
 
     @Override
@@ -33,7 +33,6 @@ public class Settings extends BaseActivity {
         infor = (Button) findViewById(R.id.infor);
         editAcc = (Button) findViewById(R.id.editAcc);
         logOut = (Button) findViewById(R.id.logout);
-        display = (Button) findViewById(R.id.display);
 
         addTransBtn = findViewById(R.id.AddTransBtn);
         homeBtn = findViewById(R.id.HomeBtn);

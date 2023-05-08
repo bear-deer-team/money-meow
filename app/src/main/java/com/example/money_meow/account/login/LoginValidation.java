@@ -11,7 +11,7 @@ public class LoginValidation {
         String val = valInput.getEditText().getText().toString();
 
         if (!MongoDBQuery.isExist("MoneyMeow", "users", new Document().append("userName", val))) {
-            valInput.setError("User Name is not existed!");
+            valInput.setError("User Name is not exist!");
             return true;
         } else {
             valInput.setError(null);
