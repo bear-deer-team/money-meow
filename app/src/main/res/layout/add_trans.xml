@@ -84,7 +84,7 @@
         android:id="@+id/ChooseCategoryTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Chọn phân loại"
+        android:text="Category:"
         android:textSize="15dp"
         app:layout_constraintStart_toStartOf = "@id/ChooseCategoryBtn"
         app:layout_constraintBottom_toTopOf = "@id/ChooseCategoryBtn" />
@@ -134,7 +134,7 @@
         android:id="@+id/ChooseTimeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Chọn thời gian"
+        android:text="Date:"
         android:textSize="15dp"
         app:layout_constraintStart_toStartOf = "@id/ChooseTimeBtn"
         app:layout_constraintBottom_toTopOf = "@id/ChooseTimeBtn" />
@@ -186,7 +186,7 @@
         android:id="@+id/EnterAmountTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nhập số tiền"
+        android:text="Amount:"
         android:textSize="15dp"
         app:layout_constraintStart_toStartOf = "@id/EnterAmountBtn"
         app:layout_constraintBottom_toTopOf = "@id/EnterAmountBtn" />
@@ -235,7 +235,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nhập ghi chú thêm"
+        android:text="Note:"
         android:textSize="15dp"
         app:layout_constraintStart_toStartOf = "@id/NoteBtn"
         app:layout_constraintBottom_toTopOf="@+id/NoteBtn">
