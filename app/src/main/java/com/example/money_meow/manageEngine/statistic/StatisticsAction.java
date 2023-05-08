@@ -33,7 +33,7 @@ public class StatisticsAction extends BaseActivity {
     private ByCategoryAdapter incomeCategoryAdapter, expenseCategoryAdapter;
     private ByTimeAdapter timeAdapter;
     private Button addTransBtn, homeBtn, historyBtn, searchBtn, settingBtn;
-    private Button byTimeBtn, byCategoryBtn, byBothBtn;
+    private Button byTimeBtn, byCategoryBtn;
 
     private Graphic graphic;
 
@@ -54,7 +54,6 @@ public class StatisticsAction extends BaseActivity {
 
         byTimeBtn = (Button) findViewById(R.id.ByTimeBtn);
         byCategoryBtn = (Button) findViewById(R.id.ByCategoryBtn);
-        byBothBtn = (Button) findViewById(R.id.ByBothBtn);
 
         rcvIncomeCategoryList = findViewById(R.id.income_details_list);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this,1);
@@ -154,13 +153,6 @@ public class StatisticsAction extends BaseActivity {
 
                 timeAdapter = new ByTimeAdapter(Graphic.totalByTime, StatisticsAction.this);
                 rcvTimeList.setAdapter(timeAdapter);
-            }
-        });
-
-        byBothBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                viewFlipper1.setDisplayedChild(2);
             }
         });
 
