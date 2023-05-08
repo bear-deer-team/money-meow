@@ -29,8 +29,8 @@ import java.util.List;
 
 public class StatisticsAction extends BaseActivity {
     private final String DEFALT_CHOOSE = "Choose your time";
-    private RecyclerView rcvCategoryList, rcvTimeList;
-    private ByCategoryAdapter categoryAdapter;
+    private RecyclerView rcvIncomeCategoryList, rcvExpenseCategoryList, rcvTimeList;
+    private ByCategoryAdapter incomeCategoryAdapter, expenseCategoryAdapter;
     private ByTimeAdapter timeAdapter;
     private Button addTransBtn, homeBtn, historyBtn, searchBtn, settingBtn;
     private Button byTimeBtn, byCategoryBtn, byBothBtn;
@@ -56,9 +56,13 @@ public class StatisticsAction extends BaseActivity {
         byCategoryBtn = (Button) findViewById(R.id.ByCategoryBtn);
         byBothBtn = (Button) findViewById(R.id.ByBothBtn);
 
-        rcvCategoryList = findViewById(R.id.c_details_list);
+        rcvIncomeCategoryList = findViewById(R.id.income_details_list);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this,1);
-        rcvCategoryList.setLayoutManager(gridLayoutManager);
+        rcvIncomeCategoryList.setLayoutManager(gridLayoutManager);
+
+        rcvExpenseCategoryList = findViewById(R.id.expense_details_list);
+        GridLayoutManager gridLayoutManager_expense = new GridLayoutManager(this,1);
+        rcvExpenseCategoryList.setLayoutManager(gridLayoutManager_expense);
 
         rcvTimeList = findViewById(R.id.t_details_list);
         GridLayoutManager gridLayoutManager1 = new GridLayoutManager(this,1);
@@ -76,8 +80,10 @@ public class StatisticsAction extends BaseActivity {
         graphic.setDataForLineChart(lineChart);
         viewFlipper2.setDisplayedChild(0);
 
-        categoryAdapter = new ByCategoryAdapter(Graphic.totalByCategory,this);
-        rcvCategoryList.setAdapter(categoryAdapter);
+        incomeCategoryAdapter = new ByCategoryAdapter(Graphic.totalIncomeByCategory,this);
+        rcvIncomeCategoryList.setAdapter(incomeCategoryAdapter);
+        expenseCategoryAdapter = new ByCategoryAdapter(Graphic.totalExpenseByCategory,this);
+        rcvExpenseCategoryList.setAdapter(expenseCategoryAdapter);
 
         System.out.println(Graphic.totalByTime.size());
         timeAdapter = new ByTimeAdapter(Graphic.totalByTime, this);
@@ -106,8 +112,10 @@ public class StatisticsAction extends BaseActivity {
                     graphic.setDataForPieChart(pieChartExpense, pieChartIncome);
                     graphic.setDataForLineChart(lineChart);
 
-                    categoryAdapter = new ByCategoryAdapter(Graphic.totalByCategory,StatisticsAction.this);
-                    rcvCategoryList.setAdapter(categoryAdapter);
+                    incomeCategoryAdapter = new ByCategoryAdapter(Graphic.totalIncomeByCategory,StatisticsAction.this);
+                    rcvIncomeCategoryList.setAdapter(incomeCategoryAdapter);
+                    expenseCategoryAdapter = new ByCategoryAdapter(Graphic.totalExpenseByCategory,StatisticsAction.this);
+                    rcvExpenseCategoryList.setAdapter(expenseCategoryAdapter);
 
                     timeAdapter = new ByTimeAdapter(Graphic.totalByTime, StatisticsAction.this);
                     rcvTimeList.setAdapter(timeAdapter);
@@ -129,8 +137,10 @@ public class StatisticsAction extends BaseActivity {
                 graphic.setDataForPieChart(pieChartExpense, pieChartIncome);
                 viewFlipper2.setDisplayedChild(0);
 
-                categoryAdapter = new ByCategoryAdapter(Graphic.totalByCategory,StatisticsAction.this);
-                rcvCategoryList.setAdapter(categoryAdapter);
+                incomeCategoryAdapter = new ByCategoryAdapter(Graphic.totalIncomeByCategory,StatisticsAction.this);
+                rcvIncomeCategoryList.setAdapter(incomeCategoryAdapter);
+                expenseCategoryAdapter = new ByCategoryAdapter(Graphic.totalExpenseByCategory,StatisticsAction.this);
+                rcvExpenseCategoryList.setAdapter(expenseCategoryAdapter);
 
             }
         });

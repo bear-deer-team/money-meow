@@ -213,13 +213,30 @@
                         android:text="Details"
                         android:textSize="20dp"
                         android:padding="20dp">
-
                     </TextView>
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/c_details_list"
+
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-                    </androidx.recyclerview.widget.RecyclerView>
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/income_details_list"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+                        </androidx.recyclerview.widget.RecyclerView>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/expense_details_list"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+                        </androidx.recyclerview.widget.RecyclerView>
+
+                    </LinearLayout>
+
+
                 </LinearLayout>
 
                 <LinearLayout

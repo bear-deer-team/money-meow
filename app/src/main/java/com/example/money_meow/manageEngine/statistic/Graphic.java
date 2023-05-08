@@ -39,7 +39,8 @@ public class Graphic {
     public List<Transaction> expenseList = new ArrayList<>();
     public List<Transaction> incomeList = new ArrayList<>();
     public Set<String> categorySet = new HashSet<>();
-    public static List<Transaction> totalByCategory = new ArrayList<>();
+    public static List<Transaction> totalIncomeByCategory = new ArrayList<>();
+    public static List<Transaction> totalExpenseByCategory = new ArrayList<>();
     public static List<Time> totalByTime = new ArrayList<>();
 
     private int month;
@@ -76,8 +77,11 @@ public class Graphic {
     }
 
     public void setDataForPieChart(PieChart pieChartExpense, PieChart pieChartIncome) {
-        totalByCategory.clear();
+        totalIncomeByCategory.clear();
+        totalExpenseByCategory.clear();
 
+        double totalExpense = 0;
+        double totalIncome = 0;
         List<PieEntry> entriesExpense = new ArrayList<>();
         List<PieEntry> entriesIncome = new ArrayList<>();
 
@@ -89,6 +93,7 @@ public class Graphic {
             }
             if (sum != 0) {
                 entriesExpense.add(new PieEntry((float) sum, categoryName));
+                totalExpense += sum;
             }
 
             sum = 0;
@@ -98,26 +103,47 @@ public class Graphic {
             }
             if (sum != 0) {
                 entriesIncome.add(new PieEntry((float) sum, categoryName));
+                totalIncome += sum;
             }
         }
 
         for (String categoryName : categorySet) {
             double sum = 0;
-            List<Transaction> listByCategory = Filter.getListByCategory(sourceList, categoryName);
+            List<Transaction> listByCategory = Filter.getListByCategory(incomeList, categoryName);
             for (Transaction transaction : listByCategory) {
                 sum += transaction.getTransactionAmount();
             }
             if (sum != 0) {
-                totalByCategory.add(new Transaction(sum, new Category(categoryName)));
+                double rate = (double) sum / totalIncome;
+                totalIncomeByCategory.add(new Transaction(((double) Math.round(rate * 1000) / 10), new Category(categoryName)));
+            }
+
+            sum = 0;
+            listByCategory = Filter.getListByCategory(expenseList, categoryName);
+            for (Transaction transaction : listByCategory) {
+                sum += transaction.getTransactionAmount();
+            }
+            if (sum != 0) {
+                double rate = (double) sum / totalExpense;
+                totalExpenseByCategory.add(new Transaction(((double) Math.round(rate * 1000) / 10), new Category(categoryName)));
             }
         }
-        Collections.sort(totalByCategory, new Comparator<Transaction>() {
+        Collections.sort(totalIncomeByCategory, new Comparator<Transaction>() {
             @Override
             public int compare(Transaction transaction1, Transaction transaction2) {
                 // Sort entries in descending order by value percentage
                 return Double.compare(transaction2.getTransactionAmount(), transaction1.getTransactionAmount());
             }
         });
+
+        Collections.sort(totalExpenseByCategory, new Comparator<Transaction>() {
+            @Override
+            public int compare(Transaction transaction1, Transaction transaction2) {
+                // Sort entries in descending order by value percentage
+                return Double.compare(transaction2.getTransactionAmount(), transaction1.getTransactionAmount());
+            }
+        });
+
         Collections.sort(entriesExpense, new Comparator<PieEntry>() {
             @Override
             public int compare(PieEntry entry1, PieEntry entry2) {
@@ -136,7 +162,8 @@ public class Graphic {
 
         PieData dataIncome = new PieData(setIncome);
 
-        pieChartIncome.setCenterText("Income");
+        pieChartIncome.setCenterText("Income\n+ " + Double.toString(totalIncome) + "$");
+        pieChartIncome.setCenterTextColor(Color.GREEN);
         pieChartIncome.setData(dataIncome);
         pieChartIncome.setDrawEntryLabels(false);
         pieChartIncome.setUsePercentValues(true);
@@ -144,7 +171,7 @@ public class Graphic {
         pieChartIncome.getLegend().setEnabled(false);
         pieChartIncome.invalidate();
 
-        PieDataSet setExpense = new PieDataSet(entriesExpense, "Election Results");
+        PieDataSet setExpense = new PieDataSet(entriesExpense, "Results");
         setExpense.setColors(GRAYTONE_COLORS);
         setExpense.setValueTextSize(10f);
         setExpense.setValueFormatter(new PercentFormatter(new DecimalFormat("#.#")));
@@ -154,7 +181,8 @@ public class Graphic {
 
         PieData dataExpense = new PieData(setExpense);
 
-        pieChartExpense.setCenterText("Expense");
+        pieChartExpense.setCenterText("Expense\n- " + Double.toString(totalExpense) + "$");
+        pieChartExpense.setCenterTextColor(Color.RED);
         pieChartExpense.setData(dataExpense);
         pieChartExpense.setDrawEntryLabels(false);
         pieChartExpense.setUsePercentValues(true);

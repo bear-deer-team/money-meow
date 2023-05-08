@@ -11,7 +11,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="92dp"
+        android:layout_height="50dp"
         android:background="@drawable/rectangle"
 
         app:layout_constraintStart_toStartOf="parent"
@@ -19,26 +19,26 @@
 
         <ImageView
             android:id="@+id/categoryImg"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:src="@drawable/food"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.026"
+            app:layout_constraintHorizontal_bias="0.016"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.34" />
+            app:layout_constraintVertical_bias="0.24" />
 
         <TextView
             android:id="@+id/name"
             android:layout_width="wrap_content"
-            android:layout_height="32dp"
+            android:layout_height="21dp"
             android:text="food"
             android:textColor="@color/black"
-            android:textSize="25dp"
+            android:textSize="14dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.05"
+            app:layout_constraintHorizontal_bias="0.02"
             app:layout_constraintStart_toEndOf="@+id/categoryImg"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.35" />
@@ -54,14 +54,14 @@
             android:text="-$ 90"
             android:maxLines="1"
             android:textColor="@color/red"
-            android:textSize="30dp"
+            android:textSize="14dp"
 
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.35"
             app:layout_constraintStart_toEndOf="@id/name"
-            app:layout_constraintHorizontal_bias="1"/>
+            app:layout_constraintHorizontal_bias="1.025"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

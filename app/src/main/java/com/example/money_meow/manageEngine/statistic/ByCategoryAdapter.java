@@ -46,12 +46,12 @@ public class ByCategoryAdapter extends RecyclerView.Adapter<ByCategoryAdapter.Tr
             holder.name.setText(transaction.getTransactionCategory().getCategoryName());
             String amountColor = new String();
             if(transaction.getTransactionType().equals("income")){
-                amountColor += "+$" + Double.toString(transaction.getTransactionAmount());
+                amountColor += Double.toString(transaction.getTransactionAmount()) + "%";
                 holder.amount.setText(amountColor);
                 holder.amount.setTextColor(Color.rgb(0,255,0));
             }
             else {
-                amountColor += "-$" + Double.toString(transaction.getTransactionAmount());
+                amountColor += Double.toString(transaction.getTransactionAmount()) + "%";
                 holder.amount.setText(amountColor);
                 holder.amount.setTextColor(Color.rgb(255,0,0));
             }
