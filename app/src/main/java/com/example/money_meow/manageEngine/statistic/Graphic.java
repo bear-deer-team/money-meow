@@ -76,15 +76,25 @@ public class Graphic {
         }
     }
 
+    public double totalAmount(List<Transaction> transactions) {
+        double rs = 0;
+        for (Transaction i: transactions) {
+            rs += i.getTransactionAmount();
+        }
+        return rs;
+    }
+
     public void setDataForPieChart(PieChart pieChartExpense, PieChart pieChartIncome) {
         totalIncomeByCategory.clear();
         totalExpenseByCategory.clear();
 
-        double totalExpense = 0;
-        double totalIncome = 0;
+        double totalExpense = totalAmount(expenseList);
+        double totalIncome = totalAmount(incomeList);
         List<PieEntry> entriesExpense = new ArrayList<>();
         List<PieEntry> entriesIncome = new ArrayList<>();
 
+        double anotherIncome = 0;
+        double anotherExpense = 0;
         for (String categoryName : categorySet) {
             double sum = 0;
             List<Transaction> listByCategory = Filter.getListByCategory(expenseList, categoryName);
@@ -92,9 +102,13 @@ public class Graphic {
                 sum += transaction.getTransactionAmount();
             }
             if (sum != 0) {
-                entriesExpense.add(new PieEntry((float) sum, categoryName));
-                totalExpense += sum;
+                if (sum / totalExpense > 0.02) {
+                    entriesExpense.add(new PieEntry((float) sum, categoryName));
+                } else {
+                    anotherExpense += sum;
+                }
             }
+
 
             sum = 0;
             listByCategory = Filter.getListByCategory(incomeList, categoryName);
@@ -102,9 +116,20 @@ public class Graphic {
                 sum += transaction.getTransactionAmount();
             }
             if (sum != 0) {
-                entriesIncome.add(new PieEntry((float) sum, categoryName));
-                totalIncome += sum;
+                if (sum / totalIncome > 0.02) {
+                    entriesIncome.add(new PieEntry((float) sum, categoryName));
+                } else {
+                    anotherIncome += sum;
+                }
             }
+        }
+
+        if (anotherExpense != 0) {
+            entriesExpense.add(new PieEntry((float) anotherExpense, "Another"));
+        }
+
+        if (anotherIncome != 0) {
+            entriesIncome.add(new PieEntry((float) anotherIncome, "Another"));
         }
 
         for (String categoryName : categorySet) {
@@ -156,7 +181,7 @@ public class Graphic {
         setIncome.setColors(GRAYTONE_COLORS);
         setIncome.setValueTextSize(10f);
         setIncome.setValueFormatter(new PercentFormatter(new DecimalFormat("#.#")));
-        setIncome.setSliceSpace(3f);
+        setIncome.setSliceSpace(1f);
         setIncome.setValueLinePart1OffsetPercentage(80f);
         setIncome.setValueLinePart2Length(0.5f);
 
@@ -175,7 +200,7 @@ public class Graphic {
         setExpense.setColors(GRAYTONE_COLORS);
         setExpense.setValueTextSize(10f);
         setExpense.setValueFormatter(new PercentFormatter(new DecimalFormat("#.#")));
-        setExpense.setSliceSpace(3f);
+        setExpense.setSliceSpace(1f);
         setExpense.setValueLinePart1OffsetPercentage(80f);
         setExpense.setValueLinePart2Length(0.5f);
 
