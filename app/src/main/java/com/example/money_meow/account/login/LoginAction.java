@@ -13,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.money_meow.R;
-import com.example.money_meow.account.Account;
 import com.example.money_meow.account.LoginAccount;
 import com.example.money_meow.account.signup.SignupAction;
 import com.example.money_meow.category.CategoryList;
@@ -28,9 +27,6 @@ import com.example.money_meow.transaction.TransactionList;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class LoginAction extends AppCompatActivity {
-
-    private Account account;
-
     TextInputLayout username;
     TextInputLayout password;
 

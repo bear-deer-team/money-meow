@@ -2,7 +2,6 @@ package com.example.money_meow.account.signup;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -12,12 +11,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import com.example.money_meow.MainActivity;
+
 import com.example.money_meow.R;
 import com.example.money_meow.account.LoginAccount;
 import com.example.money_meow.account.PasswordEncryption;
 import com.example.money_meow.account.login.LoginAction;
-import com.example.money_meow.database.MongoDBConnection;
 import com.example.money_meow.account.Account;
 import com.example.money_meow.home.Home;
 import com.google.android.material.textfield.TextInputLayout;
