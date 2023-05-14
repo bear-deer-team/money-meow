@@ -1,6 +1,8 @@
 package com.example.money_meow.account.signup;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -17,8 +19,18 @@ import com.example.money_meow.account.LoginAccount;
 import com.example.money_meow.account.PasswordEncryption;
 import com.example.money_meow.account.login.LoginAction;
 import com.example.money_meow.account.Account;
+import com.example.money_meow.category.CategoryList;
+import com.example.money_meow.database.RealmDB;
+import com.example.money_meow.database.insert.RealmInsert;
+import com.example.money_meow.database.query.CategoryQuery;
+import com.example.money_meow.database.query.TransactionQuery;
 import com.example.money_meow.home.Home;
+import com.example.money_meow.manageEngine.calculation.Calculation;
+import com.example.money_meow.transaction.Transaction;
+import com.example.money_meow.transaction.TransactionList;
 import com.google.android.material.textfield.TextInputLayout;
+
+import java.util.ArrayList;
 
 
 public class SignupAction extends AppCompatActivity {
@@ -94,6 +106,26 @@ public class SignupAction extends AppCompatActivity {
                                         email.getEditText().getText().toString(), PasswordEncryption.encrypt(password.getEditText().getText().toString()));
                                 account.addNewUserToDB();
                                 LoginAccount.account = account;
+
+                                SharedPreferences sharedPreferences = getSharedPreferences("login", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                                editor.putBoolean("isLoggedIn", true);
+                                editor.putString("name",LoginAccount.account.getName());
+                                editor.putString("userName",LoginAccount.account.getUserName());
+                                editor.putString("email",LoginAccount.account.getEmail());
+                                editor.putString("password",LoginAccount.account.getPassword());
+                                editor.putFloat("balance",LoginAccount.account.getBalance().floatValue());
+                                editor.apply();
+
+                                Toast.makeText(getApplicationContext(), "Login Successfully!", Toast.LENGTH_SHORT).show();
+
+                                RealmDB.configFile();
+                                CategoryList.categories = CategoryQuery.getCategoryList();
+                                TransactionList.mainList = new ArrayList<Transaction>();
+                                RealmInsert.insertMany(CategoryList.categories);
+                                RealmInsert.insertMany(TransactionList.mainList);
+                                //LoginAccount.account.setBalance(Calculation.balanceCalc(LoginAccount.account.getBalance(),TransactionList.mainList));
 
                                 Toast.makeText(getApplicationContext(), "Sign Up Successfully!", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(SignupAction.this, Home.class).putExtra("from", "Signup");
