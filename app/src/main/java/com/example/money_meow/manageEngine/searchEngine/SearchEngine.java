@@ -80,6 +80,8 @@ public class SearchEngine extends BaseActivity {
             @Override
             public void onClick(View view) {
                 bottomSheetDialog.show();
+                setCrList(TransactionList.mainList);
+                transactionAdapter.updateList(crList);
             }
         });
 
